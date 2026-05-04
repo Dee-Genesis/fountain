@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="assets/icons/fountain-professional-training-services-logo.png">
+  <title>Testimonials – Fountain Professional Training Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Source+Sans+3:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ──────────────────────────────────────────────────── */
+    :root {
+      --red:        #CC0000;
+      --red-dk:     #A00000;
+      --red-lt:     #E53030;
+      --gold:       #C9A227;
+      --gold-lt:    #E8C04A;
+      --gold-pale:  #FFF8E7;
+      --white:      #FFFFFF;
+      --off-white:  #F5F5F5;
+      --light-grey: #EBEBEB;
+      --mid-grey:   #6B7280;
+      --dark:       #1A1A1A;
+      --dark-2:     #111111;
+      --charcoal:   #2D2D2D;
+      --border:     rgba(0,0,0,.1);
+      --shadow-sm:  0 2px 10px rgba(0,0,0,.08);
+      --shadow-md:  0 8px 30px rgba(0,0,0,.14);
+      --shadow-lg:  0 20px 60px rgba(0,0,0,.2);
+      --trans:      .25s cubic-bezier(.4,0,.2,1);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Source Sans 3', system-ui, sans-serif;
+      --font-impact:  'Bebas Neue', 'Arial Narrow', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--white); color: var(--dark); overflow-x: hidden; padding-top: calc(40px + 36px + 72px); }
+    body.bar-hidden { padding-top: calc(36px + 72px); }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-label { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: .75rem; letter-spacing: .22em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; font-weight: 700; }
+    .section-label::before { content: ''; display: block; width: 28px; height: 3px; background: var(--red); border-radius: 2px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 4px; font-family: var(--font-body); font-size: .88rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; transition: var(--trans); cursor: pointer; border: none; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(204,0,0,.35); }
+    .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.5); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+    .btn-outline-red { background: transparent; color: var(--red); border: 2px solid var(--red); }
+    .btn-outline-red:hover { background: var(--red); color: #fff; }
+
+    /* ─── CTA BAR ─────────────────────────────────────────────────── */
+    .cta-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 2100; background: var(--dark-2); height: 40px; overflow: hidden; border-bottom: 2px solid var(--red); transition: transform .4s ease; }
+    .cta-bar.hidden { transform: translateY(-100%); }
+    .cta-bar-inner { height: 100%; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; padding: 0 16px; }
+    .cta-slides-wrap { flex: 1; overflow: hidden; height: 100%; position: relative; }
+    .cta-slide { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 10px; opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; pointer-events: none; }
+    .cta-slide.active { opacity: 1; transform: none; pointer-events: auto; }
+    .cta-slide .cta-text { font-family: var(--font-body); font-size: .82rem; letter-spacing: .06em; color: rgba(255,255,255,.82); text-transform: uppercase; white-space: nowrap; }
+    .cta-slide .cta-text strong { color: var(--gold-lt); }
+    .cta-slide .cta-pill { display: inline-flex; align-items: center; background: var(--red); color: #fff; border-radius: 100px; font-family: var(--font-body); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; padding: 3px 12px; font-weight: 700; flex-shrink: 0; transition: var(--trans); white-space: nowrap; }
+    .cta-slide .cta-pill:hover { background: var(--red-lt); }
+    .cta-bar-dots { display: flex; gap: 6px; align-items: center; margin-left: 12px; flex-shrink: 0; }
+    .cta-bar-dots span { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.25); cursor: pointer; transition: var(--trans); }
+    .cta-bar-dots span.active { background: var(--red); width: 14px; border-radius: 3px; }
+    .cta-bar-close { margin-left: 12px; background: none; border: none; color: rgba(255,255,255,.4); cursor: pointer; font-size: .95rem; padding: 2px 4px; transition: color var(--trans); flex-shrink: 0; }
+    .cta-bar-close:hover { color: #fff; }
+
+    /* ─── TOP BAR ─────────────────────────────────────────────────── */
+    .topbar { position: fixed; top: 40px; left: 0; right: 0; z-index: 1100; background: var(--off-white); color: var(--mid-grey); font-size: .8rem; padding: 7px 0; border-bottom: 1px solid var(--border); transition: top .4s ease; }
+    body.bar-hidden .topbar { top: 0; }
+    .topbar .container { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .topbar-left { display: flex; gap: 20px; align-items: center; }
+    .topbar-left a { color: var(--mid-grey); transition: color var(--trans); display: flex; align-items: center; gap: 5px; }
+    .topbar-left a:hover { color: var(--red); }
+    .topbar-social { display: flex; gap: 6px; align-items: center; }
+    .topbar-social a { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(0,0,0,.07); color: var(--charcoal); transition: var(--trans); }
+    .topbar-social a:hover { background: var(--red); color: #fff; }
+    .topbar-social svg { width: 13px; height: 13px; }
+
+    /* ─── HEADER ──────────────────────────────────────────────────── */
+    header { position: fixed; top: calc(40px + 36px); left: 0; right: 0; z-index: 1000; background: #fff; box-shadow: 0 2px 0 var(--border), var(--shadow-sm); transition: top .4s ease; }
+    body.bar-hidden header { top: 36px; }
+    nav { display: flex; align-items: center; padding: 0 24px; max-width: 1200px; margin: 0 auto; height: 72px; gap: 6px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .nav-logo-text .main { font-family: var(--font-display); font-size: .95rem; font-weight: 700; color: var(--dark); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a, .nav-links > li > span { display: flex; align-items: center; gap: 4px; padding: 8px 12px; font-size: .84rem; font-weight: 600; color: var(--dark); cursor: pointer; border-radius: 4px; transition: var(--trans); white-space: nowrap; font-family: var(--font-body); letter-spacing: .02em; text-transform: uppercase; }
+    .nav-links > li > a:hover, .nav-links > li > span:hover, .nav-links > li.active > a { color: var(--red); }
+    .nav-links > li > span .arrow { transition: transform var(--trans); }
+    .nav-links > li:hover > span .arrow { transform: rotate(180deg); }
+    .dropdown { position: absolute; top: calc(100% + 4px); left: 0; background: #fff; border-radius: 6px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); border-top: 3px solid var(--red); min-width: 240px; padding: 6px; opacity: 0; pointer-events: none; transform: translateY(8px); transition: var(--trans); z-index: 100; }
+    .nav-links > li:hover .dropdown { opacity: 1; pointer-events: all; transform: none; }
+    .dropdown a { display: flex; align-items: center; gap: 8px; padding: 10px 12px; font-size: .84rem; border-radius: 4px; transition: var(--trans); color: var(--charcoal); }
+    .dropdown a:hover { background: rgba(204,0,0,.06); color: var(--red); padding-left: 16px; }
+    .nav-cta { margin-left: 10px; padding: 9px 20px; font-size: .78rem; white-space: nowrap; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; border: none; background: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: var(--trans); }
+
+    /* ─── PAGE HERO ───────────────────────────────────────────────── */
+    .page-hero { position: relative; height: 62vh; min-height: 480px; overflow: hidden; background: var(--dark-2); display: flex; align-items: center; }
+    .page-hero-bg { position: absolute; inset: 0; }
+    .page-hero-bg img { width: 100%; height: 100%; object-fit: cover; animation: heroZoom 8s ease forwards; }
+    @keyframes heroZoom { from { transform: scale(1.04); } to { transform: scale(1); } }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(108deg, rgba(10,10,10,.88) 0%, rgba(10,10,10,.52) 52%, rgba(201,162,39,.14) 100%); }
+    .page-hero-stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 7px; background: linear-gradient(to bottom, var(--red), var(--gold)); z-index: 5; }
+    .page-hero-content { position: relative; z-index: 4; width: 100%; }
+    .page-hero-inner { max-width: 780px; padding-left: 24px; }
+    .page-hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: .75rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 20px; background: rgba(204,0,0,.3); padding: 6px 14px; border-left: 3px solid var(--gold); animation: fadeUp .7s ease .2s both; }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 5.5vw, 4.8rem); line-height: 1.06; color: #fff; margin-bottom: 22px; font-weight: 900; animation: fadeUp .7s ease .35s both; }
+    .page-hero h1 em { font-style: italic; color: var(--gold-lt); }
+    .page-hero-desc { font-size: 1.06rem; color: rgba(255,255,255,.78); line-height: 1.8; max-width: 580px; margin-bottom: 36px; animation: fadeUp .7s ease .5s both; }
+    .page-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp .7s ease .65s both; }
+    .page-hero-breadcrumb { position: absolute; bottom: 28px; left: 0; right: 0; z-index: 6; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+    .breadcrumb a { color: rgba(255,255,255,.45); transition: color var(--trans); }
+    .breadcrumb a:hover { color: var(--gold-lt); }
+    .breadcrumb .sep { color: rgba(255,255,255,.25); }
+    .breadcrumb .current { color: var(--gold-lt); font-weight: 700; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
+    /* ─── TRUST STRIP ─────────────────────────────────────────────── */
+    .trust-strip { background: var(--dark-2); padding: 0; border-bottom: 4px solid var(--red); }
+    .trust-strip-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .trust-item { padding: 28px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,.07); position: relative; }
+    .trust-item:last-child { border-right: none; }
+    .trust-item::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: var(--trans); }
+    .trust-item:hover::after { transform: scaleX(1); }
+    .trust-item .t-val { font-family: var(--font-impact); font-size: 2.6rem; color: var(--gold-lt); line-height: 1; }
+    .trust-item .t-lbl { font-size: .75rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .1em; margin-top: 5px; }
+
+    /* ─── FEATURED TESTIMONIAL ────────────────────────────────────── */
+    .featured-testi { padding: 96px 0; background: var(--gold-pale); position: relative; overflow: hidden; }
+    .featured-testi::before { content: '\201C'; position: absolute; top: -60px; left: -10px; font-family: var(--font-display); font-size: 30rem; color: rgba(201,162,39,.08); line-height: 1; pointer-events: none; }
+    .featured-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .featured-text-col {}
+    .featured-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.4vw, 1.85rem);
+      line-height: 1.55; color: var(--dark);
+      font-style: italic; margin-bottom: 36px;
+      position: relative; padding-left: 28px;
+    }
+    .featured-quote::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 4px; background: linear-gradient(to bottom, var(--red), var(--gold)); border-radius: 2px; }
+    .featured-author { display: flex; align-items: center; gap: 18px; }
+    .featured-avatar {
+      width: 58px; height: 58px; background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-impact); font-size: 1.4rem; color: #fff; flex-shrink: 0;
+      border-bottom: 3px solid var(--gold);
+    }
+    .featured-author-info .name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--dark); }
+    .featured-author-info .role { font-size: .82rem; color: var(--mid-grey); margin-top: 2px; }
+    .featured-author-info .org { font-size: .78rem; color: var(--red); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-top: 3px; }
+    .featured-stat-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .feat-stat { background: var(--dark-2); padding: 32px 24px; text-align: center; position: relative; overflow: hidden; }
+    .feat-stat::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: var(--trans); }
+    .feat-stat:hover::before { transform: scaleX(1); }
+    .feat-stat .fs-val { font-family: var(--font-impact); font-size: 3rem; color: var(--gold-lt); line-height: 1; }
+    .feat-stat .fs-lbl { font-size: .76rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .08em; margin-top: 8px; }
+
+    /* ─── TESTIMONIALS GRID ───────────────────────────────────────── */
+    .testimonials-section { padding: 100px 0; background: var(--white); }
+    .testi-section-header { text-align: center; margin-bottom: 70px; }
+    .testi-section-header .lead { font-size: 1.03rem; color: var(--mid-grey); line-height: 1.85; max-width: 620px; margin: 16px auto 0; }
+
+    .testi-masonry { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+
+    .testi-card {
+      background: var(--off-white); border: 1px solid rgba(201,162,39,.18);
+      padding: 34px 28px; position: relative; overflow: hidden;
+      transition: var(--trans); display: flex; flex-direction: column; gap: 18px;
+    }
+    .testi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 0; background: var(--red); transition: height .4s ease; }
+    .testi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); background: var(--white); }
+    .testi-card:hover::before { height: 100%; }
+
+    /* accent variant */
+    .testi-card.accent { background: var(--dark-2); border-color: rgba(204,0,0,.25); }
+    .testi-card.accent .testi-quote-text { color: rgba(255,255,255,.82); }
+    .testi-card.accent .testi-title { color: var(--gold-lt); }
+    .testi-card.accent .testi-name { color: #fff; }
+    .testi-card.accent .testi-role { color: rgba(255,255,255,.5); }
+    .testi-card.accent .testi-org { color: rgba(255,255,255,.35); }
+    .testi-card.accent::before { background: var(--gold); }
+
+    .testi-title {
+      font-family: var(--font-display); font-size: 1rem;
+      font-weight: 700; color: var(--dark); font-style: italic; line-height: 1.3;
+    }
+    .quote-mark-icon {
+      font-family: var(--font-display); font-size: 3.2rem;
+      color: var(--red); line-height: 1; margin-bottom: -10px; display: block;
+    }
+    .testi-quote-text {
+      font-size: .9rem; color: var(--mid-grey); line-height: 1.82; font-style: italic;
+      flex: 1;
+    }
+    .testi-divider { height: 1px; background: rgba(201,162,39,.25); }
+    .testi-author-row { display: flex; align-items: center; gap: 14px; }
+    .testi-avatar {
+      width: 44px; height: 44px; background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-impact); font-size: 1.1rem; color: #fff;
+      flex-shrink: 0; border-bottom: 2px solid var(--gold);
+    }
+    .testi-card.accent .testi-avatar { background: rgba(204,0,0,.5); }
+    .testi-name { font-weight: 700; color: var(--dark); font-size: .88rem; font-family: var(--font-body); }
+    .testi-role { font-size: .78rem; color: var(--mid-grey); margin-top: 1px; }
+    .testi-org { font-size: .74rem; color: var(--red); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+
+    /* ─── PULL QUOTE BAND ─────────────────────────────────────────── */
+    .pull-quote-band { padding: 80px 0; background: var(--red); position: relative; overflow: hidden; }
+    .pull-quote-band::before { content: '\201C'; position: absolute; top: -80px; right: 40px; font-family: var(--font-display); font-size: 28rem; color: rgba(255,255,255,.07); line-height: 1; pointer-events: none; }
+    .pull-quote-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+    .pull-quote-inner blockquote { font-family: var(--font-display); font-size: clamp(1.4rem, 2.8vw, 2.1rem); color: #fff; line-height: 1.55; font-style: italic; margin-bottom: 28px; }
+    .pull-quote-inner cite { display: flex; flex-direction: column; align-items: center; gap: 4px; font-style: normal; }
+    .pull-quote-inner cite .cite-name { font-family: var(--font-body); font-size: .88rem; font-weight: 700; color: var(--gold-lt); text-transform: uppercase; letter-spacing: .1em; }
+    .pull-quote-inner cite .cite-role { font-size: .8rem; color: rgba(255,255,255,.65); }
+    .pull-quote-sep { width: 48px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+
+    /* ─── STATS BANNER ────────────────────────────────────────────── */
+    .stats-banner { background: var(--dark-2); padding: 52px 0; border-top: 4px solid var(--gold); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { text-align: center; padding: 16px; border-right: 1px solid rgba(255,255,255,.1); }
+    .stat-item:last-child { border-right: none; }
+    .stat-item .val { font-family: var(--font-impact); font-size: 3.2rem; color: var(--gold-lt); line-height: 1; }
+    .stat-item .lbl { font-size: .82rem; color: rgba(255,255,255,.5); margin-top: 8px; text-transform: uppercase; letter-spacing: .06em; }
+
+    /* ─── CTA ─────────────────────────────────────────────────────── */
+    .cta-full { padding: 100px 0; background: var(--dark-2); position: relative; overflow: hidden; }
+    .cta-full::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--red), var(--gold)); }
+    .cta-full-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .cta-full-text h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.6rem); color: #fff; margin-bottom: 16px; }
+    .cta-full-text h2 em { font-style: italic; color: var(--gold-lt); }
+    .cta-full-text p { font-size: 1rem; color: rgba(255,255,255,.65); line-height: 1.82; margin-bottom: 28px; }
+    .cta-full-text .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .cta-contact-box { background: rgba(204,0,0,.15); border: 1px solid rgba(204,0,0,.3); padding: 36px 30px; }
+    .cta-contact-box h3 { font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-bottom: 22px; }
+    .cta-contact-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+    .cta-contact-item .ci-icon { width: 40px; height: 40px; background: rgba(204,0,0,.2); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .cta-contact-item .ci-label { font-family: var(--font-body); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-lt); font-weight: 700; margin-bottom: 3px; }
+    .cta-contact-item .ci-val { font-size: .88rem; color: rgba(255,255,255,.75); }
+    .cta-contact-item a.ci-val:hover { color: var(--gold-lt); }
+
+    /* ─── FOOTER ──────────────────────────────────────────────────── */
+    footer { background: var(--dark-2); color: rgba(255,255,255,.55); border-top: 4px solid var(--red); }
+    .footer-top { padding: 64px 0 44px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr; gap: 36px; }
+    .footer-brand img { height: 48px; margin-bottom: 14px; }
+    .footer-brand p { font-size: .86rem; line-height: 1.8; color: rgba(255,255,255,.45); max-width: 280px; }
+    .footer-social { display: flex; gap: 8px; margin-top: 16px; }
+    .footer-social a { width: 32px; height: 32px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; transition: var(--trans); color: rgba(255,255,255,.55); }
+    .footer-social a:hover { background: var(--red); color: #fff; }
+    .footer-social svg { width: 14px; height: 14px; }
+    .footer-col h4 { font-family: var(--font-body); font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #fff; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--red); display: inline-block; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: .85rem; color: rgba(255,255,255,.45); transition: color var(--trans); }
+    .footer-col ul li a:hover { color: var(--gold-lt); padding-left: 4px; }
+    .footer-contact-list li { margin-bottom: 12px !important; }
+    .footer-contact-list li a { padding-left: 0 !important; line-height: 1.5; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 18px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: .8rem; color: rgba(255,255,255,.28); }
+    .footer-bottom a { color: rgba(255,255,255,.35); transition: color var(--trans); }
+    .footer-bottom a:hover { color: var(--gold-lt); }
+
+    /* ─── MOBILE NAV ──────────────────────────────────────────────── */
+    .mobile-nav { display: none; position: fixed; top: 0; right: 0; width: 300px; height: 100%; background: #fff; z-index: 3000; flex-direction: column; overflow-y: auto; box-shadow: -4px 0 20px rgba(0,0,0,.2); }
+    .mobile-nav.open { display: flex; }
+    .mob-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 2999; }
+    .mob-overlay.open { display: block; }
+    .mob-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 3px solid var(--red); flex-shrink: 0; }
+    .mob-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark); }
+    .mob-links { flex: 1; }
+    .mob-links li { border-bottom: 1px solid var(--light-grey); }
+    .mob-links li a, .mob-toggle { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; font-size: .95rem; font-weight: 600; color: var(--dark); cursor: pointer; width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); text-transform: uppercase; letter-spacing: .04em; }
+    .mob-links li a:hover, .mob-toggle:hover { color: var(--red); }
+    .mob-sub { display: none; background: var(--off-white); }
+    li.mob-open > .mob-sub { display: block; }
+    .mob-sub a { display: block; padding: 10px 20px 10px 32px; font-size: .87rem; color: var(--mid-grey); text-transform: none; font-weight: 400; }
+    .mob-sub a:hover { color: var(--red); }
+    .mob-toggle .mob-arrow { display: inline-block; transition: transform .25s ease; }
+    li.mob-open > .mob-toggle .mob-arrow { transform: rotate(45deg); }
+    .mob-cta { padding: 20px; border-top: 1px solid var(--light-grey); flex-shrink: 0; }
+
+    /* ─── REVEAL ──────────────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .featured-inner { grid-template-columns: 1fr; gap: 48px; }
+      .featured-stat-col { grid-template-columns: repeat(4, 1fr); }
+      .testi-masonry { grid-template-columns: 1fr 1fr; }
+      .trust-strip-inner { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid .stat-item:nth-child(2) { border-right: none; }
+      .cta-full-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 768px) {
+      .topbar { display: none !important; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; margin-left: auto; }
+      header { top: 40px !important; }
+      body { padding-top: calc(40px + 72px) !important; }
+      body.bar-hidden { padding-top: 72px !important; }
+      body.bar-hidden header { top: 0 !important; }
+      .page-hero { height: 72vh; }
+      .testi-masonry { grid-template-columns: 1fr; }
+      .featured-stat-col { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .cta-bar .cta-pill { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ CTA BAR ══════════ -->
+<div class="cta-bar" id="ctaBar">
+  <div class="cta-bar-inner">
+    <div class="cta-slides-wrap">
+      <div class="cta-slide active">
+        <span class="cta-text">🚀 Enrolment is <strong>Open Now</strong> — Transform Your Career with a Globally Recognised Qualification</span>
+        <a href="apply.html" class="cta-pill">Apply Today</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">🎓 <strong>Certification · Diploma · MBA · Membership</strong> — Over 20 Programmes to Choose From</span>
+        <a href="certification-courses.html" class="cta-pill">Explore All</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">🌍 <strong>6 International Partners</strong> — Qualifications Recognised Across 70+ Countries</span>
+        <a href="index.html#partnerships" class="cta-pill">Learn More</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">📞 Speak to an Advisor — <strong>08034711642</strong> or <strong>info@fountainptserv.com</strong></span>
+        <a href="tel:08034711642" class="cta-pill">Call Now</a>
+      </div>
+    </div>
+    <div class="cta-bar-dots" id="ctaBarDots">
+      <span class="active"></span><span></span><span></span><span></span>
+    </div>
+    <button class="cta-bar-close" id="ctaBarClose" aria-label="Dismiss">&#x2715;</button>
+  </div>
+</div>
+
+<!-- ══════════ TOP BAR ══════════ -->
+<div class="topbar" id="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="mailto:info@fountainptserv.com"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> info@fountainptserv.com</a>
+      <a href="tel:+2348034711642"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24a11.36 11.36 0 003.55.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.18 21 3 13.82 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.01l-2.2 2.21z"/></svg> 08034711642</a>
+      <a href="contact-us.html"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> 8 Ijaiye Street, Lagos, Nigeria</a>
+    </div>
+    <div class="topbar-social">
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#" aria-label="Twitter/X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://wa.me/2348034711642" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header id="mainHeader">
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS Logo" />
+      <div class="nav-logo-text"><span class="main">Fountain</span><span class="main">Professional Training Services</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <span>About Us <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="about-us.html">Who We Are</a></li>
+          <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+          <li><a href="core-values.html">Core Values</a></li>
+          <li><a href="why-choose-us.html">Why Choose Us</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Programmes <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="certification-courses.html">Certification Courses</a></li>
+          <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+          <li><a href="mba.html">MBA</a></li>
+          <li><a href="membership.html">Membership</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Institute Partnership <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business &amp; Administration</a></li>
+          <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership &amp; Governance</a></li>
+          <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management &amp; Leadership</a></li>
+          <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Services <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="our-approach.html">Our Approach</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="iws.html">Industries We Serve</a></li>
+        </ul>
+      </li>
+      <li class="active">
+        <span>Resources <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </li>
+      <li><a href="contact-us.html">Contact</a></li>
+    </ul>
+    <a href="apply.html" class="btn btn-red nav-cta">Apply Now</a>
+    <button class="hamburger" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mob-overlay" id="mobOverlay"></div>
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mob-header">
+    <img src="assets/icons/fountain-professional-training-services-logo.png" height="36" alt="Logo" />
+    <button class="mob-close" id="menuClose" aria-label="Close">&#x2715;</button>
+  </div>
+  <ul class="mob-links">
+    <li><a href="index.html">Home</a></li>
+    <li><button class="mob-toggle" type="button">About <span class="mob-arrow">+</span></button><ul class="mob-sub"><li><a href="about-us.html">Who We Are</a></li><li><a href="vision-mission.html">Vision &amp; Mission</a></li><li><a href="core-values.html">Core Values</a></li><li><a href="why-choose-us.html">Why Choose Us</a></li></ul></li>
+    <li><button class="mob-toggle" type="button">Programmes <span class="mob-arrow">+</span></button><ul class="mob-sub"><li><a href="certification-courses.html">Certification Courses</a></li><li><a href="professional-diplomas.html">Professional Diplomas</a></li><li><a href="mba.html">MBA</a></li><li><a href="membership.html">Membership</a></li></ul></li>
+    <li><button class="mob-toggle" type="button">Partnerships <span class="mob-arrow">+</span></button><ul class="mob-sub"><li><a href="https://aietglobal.us" target="_blank">AIET Global</a></li><li><a href="https://cibiaglobal.org" target="_blank">CIBIA Global</a></li><li><a href="https://cietglobal.us" target="_blank">CIET Global</a></li><li><a href="https://cilgglobal.org" target="_blank">CILG Global</a></li><li><a href="https://cimlglobal.us" target="_blank">CIML Global</a></li><li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li></ul></li>
+    <li><button class="mob-toggle" type="button">Services <span class="mob-arrow">+</span></button><ul class="mob-sub"><li><a href="our-approach.html">Our Approach</a></li><li><a href="services.html">Our Services</a></li><li><a href="iws.html">Industries We Serve</a></li></ul></li>
+    <li><button class="mob-toggle" type="button">Resources <span class="mob-arrow">+</span></button><ul class="mob-sub"><li><a href="testimonials.html">Testimonials</a></li><li><a href="faq.html">FAQs</a></li></ul></li>
+    <li><a href="contact-us.html">Contact Us</a></li>
+  </ul>
+  <div class="mob-cta"><a href="apply.html" class="btn btn-red" style="width:100%;justify-content:center;">Apply Now →</a></div>
+</nav>
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<section class="page-hero">
+  <div class="page-hero-bg">
+    <img src="assets/images/h11.jpg" alt="Testimonials – Fountain Professional Training Services" />
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-stripe"></div>
+  <div class="page-hero-content">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div class="page-hero-eyebrow">Real People · Real Results</div>
+        <h1>What Our Clients<br><em>Say About Us</em></h1>
+        <p class="page-hero-desc">Stories of transformation from graduates, organisations, and institutions who have experienced the Fountain Professional Training Services difference first-hand.</p>
+        <div class="page-hero-actions">
+          <a href="apply.html" class="btn btn-red">Begin Your Journey →</a>
+          <a href="contact-us.html" class="btn btn-outline-white">Talk to an Advisor</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-hero-breadcrumb">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">›</span>
+        <a href="#">Resources</a>
+        <span class="sep">›</span>
+        <span class="current">Testimonials</span>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TRUST STRIP ══════════ -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-strip-inner">
+      <div class="trust-item reveal"><div class="t-val">2,000+</div><div class="t-lbl">Graduates Trained</div></div>
+      <div class="trust-item reveal" style="transition-delay:.06s;"><div class="t-val">7</div><div class="t-lbl">Industries Served</div></div>
+      <div class="trust-item reveal" style="transition-delay:.12s;"><div class="t-val">15+</div><div class="t-lbl">Years of Excellence</div></div>
+      <div class="trust-item reveal" style="transition-delay:.18s;"><div class="t-val">6</div><div class="t-lbl">Global Partners</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FEATURED TESTIMONIAL ══════════ -->
+<section class="featured-testi">
+  <div class="container">
+    <div class="featured-inner">
+      <div class="reveal">
+        <p class="section-label">Featured Voice</p>
+        <blockquote class="featured-quote">
+          "Fountain Professional Training Services has proven to be a reliable partner in capacity building. Their approach is thoughtful, structured, and focused on long-term impact. We highly recommend their services for organisations seeking meaningful transformation."
+        </blockquote>
+        <div class="featured-author">
+          <div class="featured-avatar">FY</div>
+          <div class="featured-author-info">
+            <div class="name">Dr. Fatima Yusuf</div>
+            <div class="role">Programme Coordinator</div>
+            <div class="org">HopeReach Development Foundation</div>
+          </div>
+        </div>
+      </div>
+      <div class="featured-stat-col reveal" style="transition-delay:.1s;">
+        <div class="feat-stat">
+          <div class="fs-val">100%</div>
+          <div class="fs-lbl">Practical &amp; Applicable</div>
+        </div>
+        <div class="feat-stat">
+          <div class="fs-val">20+</div>
+          <div class="fs-lbl">Programmes Delivered</div>
+        </div>
+        <div class="feat-stat">
+          <div class="fs-val">5★</div>
+          <div class="fs-lbl">Client Satisfaction</div>
+        </div>
+        <div class="feat-stat">
+          <div class="fs-val">70+</div>
+          <div class="fs-lbl">Countries Recognised</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONIALS GRID ══════════ -->
+<section class="testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="testi-section-header reveal">
+      <p class="section-label">Client Voices</p>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.9rem,3.5vw,2.8rem);line-height:1.15;color:var(--dark);">Transforming Individuals,<br><em style="font-style:italic;color:var(--red);">Strengthening Institutions</em></h2>
+      <p class="lead">Each engagement is designed not just to train — but to transform individuals, strengthen institutions, and improve organisational outcomes.</p>
+    </div>
+
+    <div class="testi-masonry">
+
+      <!-- Card 1 -->
+      <div class="testi-card reveal">
+        <span class="quote-mark-icon">"</span>
+        <div class="testi-title">"Highly Practical and Impact-Driven Training"</div>
+        <p class="testi-quote-text">Fountain Professional Training Services delivered one of the most practical and impactful training programs our organization has experienced. The sessions were well-structured, engaging, and directly applicable to our HR operations. Our team's efficiency and coordination have improved significantly since the training.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-author-row">
+          <div class="testi-avatar">AB</div>
+          <div>
+            <div class="testi-name">Dr. Amina Bello</div>
+            <div class="testi-role">Human Resource Development Manager</div>
+            <div class="testi-org">Golden Crest Consulting Ltd.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 – accent dark -->
+      <div class="testi-card accent reveal" style="transition-delay:.08s;">
+        <span class="quote-mark-icon" style="color:var(--gold);">"</span>
+        <div class="testi-title">"A Transformational Leadership Experience"</div>
+        <p class="testi-quote-text">The leadership and project management training completely transformed my approach to decision-making and team leadership. The facilitators were highly knowledgeable, and the learning environment encouraged real-world problem-solving. I now lead with greater confidence and clarity.</p>
+        <div class="testi-divider" style="background:rgba(255,255,255,.1);"></div>
+        <div class="testi-author-row">
+          <div class="testi-avatar">TO</div>
+          <div>
+            <div class="testi-name">Mr. Tunde Okafor</div>
+            <div class="testi-role">Senior Project Manager</div>
+            <div class="testi-org" style="color:var(--gold-lt);">Metroline Infrastructure Development Group</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="testi-card reveal" style="transition-delay:.16s;">
+        <span class="quote-mark-icon">"</span>
+        <div class="testi-title">"Excellent Institutional Capacity Building Support"</div>
+        <p class="testi-quote-text">We engaged Fountain Professional Training Services for institutional capacity development, and the results were outstanding. Their recommendations were practical, and the implementation support helped us strengthen our academic systems and quality assurance framework.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-author-row">
+          <div class="testi-avatar">GM</div>
+          <div>
+            <div class="testi-name">Mrs. Grace Mensah</div>
+            <div class="testi-role">Director of Academic Planning</div>
+            <div class="testi-org">Bright Horizon Institute of Technology</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 – accent dark -->
+      <div class="testi-card accent reveal" style="transition-delay:.08s;">
+        <span class="quote-mark-icon" style="color:var(--gold);">"</span>
+        <div class="testi-title">"Professional, Structured, and Result-Oriented"</div>
+        <p class="testi-quote-text">The training delivery was professional, structured, and highly relevant to our operational needs. What impressed me most was their ability to customise content to our industry challenges. We have seen measurable improvements in productivity and workflow efficiency.</p>
+        <div class="testi-divider" style="background:rgba(255,255,255,.1);"></div>
+        <div class="testi-author-row">
+          <div class="testi-avatar">IM</div>
+          <div>
+            <div class="testi-name">Engr. Ibrahim Musa</div>
+            <div class="testi-role">Operations Manager</div>
+            <div class="testi-org" style="color:var(--gold-lt);">Nexora Energy Services Ltd.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="testi-card reveal" style="transition-delay:.16s;">
+        <span class="quote-mark-icon">"</span>
+        <div class="testi-title">"Exceptional Value Through Professional Partnerships"</div>
+        <p class="testi-quote-text">The integration of professional body standards into the training program added significant value for our staff. It provided them with recognised development pathways and enhanced their professional credibility. This partnership approach is highly commendable.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-author-row">
+          <div class="testi-avatar">RJ</div>
+          <div>
+            <div class="testi-name">Ms. Rita Johnson</div>
+            <div class="testi-role">Training and Development Coordinator</div>
+            <div class="testi-org">National Public Service Commission</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="testi-card reveal" style="transition-delay:.24s;">
+        <span class="quote-mark-icon">"</span>
+        <div class="testi-title">"Engaging and Career-Boosting Experience"</div>
+        <p class="testi-quote-text">The training was engaging, practical, and very relevant to my career growth. I gained new skills in strategic communication and business development that have already improved my performance at work.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-author-row">
+          <div class="testi-avatar">SE</div>
+          <div>
+            <div class="testi-name">Mr. Samuel Eze</div>
+            <div class="testi-role">Business Development Executive</div>
+            <div class="testi-org">PrimeEdge Solutions Ltd.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PULL QUOTE BAND ══════════ -->
+<section class="pull-quote-band">
+  <div class="container">
+    <div class="pull-quote-inner reveal">
+      <div class="pull-quote-sep"></div>
+      <blockquote>
+        "A Trusted Partner in Capacity Development — their approach is thoughtful, structured, and focused on long-term impact."
+      </blockquote>
+      <cite>
+        <span class="cite-name">Dr. Fatima Yusuf</span>
+        <span class="cite-role">Programme Coordinator · HopeReach Development Foundation</span>
+      </cite>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STATS ══════════ -->
+<div class="stats-banner">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal"><div class="val">2,000+</div><div class="lbl">Graduates &amp; Counting</div></div>
+      <div class="stat-item reveal" style="transition-delay:.08s;"><div class="val">6</div><div class="lbl">Global Institute Partners</div></div>
+      <div class="stat-item reveal" style="transition-delay:.16s;"><div class="val">20+</div><div class="lbl">Programmes Offered</div></div>
+      <div class="stat-item reveal" style="transition-delay:.24s;"><div class="val">15+</div><div class="lbl">Years of Excellence</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CTA ══════════ -->
+<section class="cta-full">
+  <div class="container">
+    <div class="cta-full-inner">
+      <div class="cta-full-text reveal">
+        <p class="section-label" style="color:var(--gold-lt);">Join Thousands of Professionals</p>
+        <h2>Ready to Write Your Own<br><em>Success Story?</em></h2>
+        <p>Join over 2,000 graduates who have advanced their careers through Fountain's programmes. Whether you are an individual, an organisation, or an institution — your transformation starts here.</p>
+        <div class="btns">
+          <a href="apply.html" class="btn btn-red">Enrol Today →</a>
+          <a href="contact-us.html" class="btn btn-outline-white">Talk to an Advisor</a>
+        </div>
+      </div>
+      <div class="cta-contact-box reveal" style="transition-delay:.1s;">
+        <h3>Get in Touch</h3>
+        <div class="cta-contact-item">
+          <div class="ci-icon">📧</div>
+          <div><div class="ci-label">Email Us</div><a href="mailto:info@fountainptserv.com" class="ci-val">info@fountainptserv.com</a></div>
+        </div>
+        <div class="cta-contact-item">
+          <div class="ci-icon">📞</div>
+          <div><div class="ci-label">Call Us</div><a href="tel:+2348034711642" class="ci-val">08034711642</a></div>
+        </div>
+        <div class="cta-contact-item">
+          <div class="ci-icon">📍</div>
+          <div><div class="ci-label">Visit Us</div><div class="ci-val">8 Ijaiye Street, Off Alayaki, Enilolobo Bus-Stop,<br>Giwa Iju Ishaga Road, Lagos, Nigeria</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS" />
+          <p>Fountain Professional Training Services is a professional training centre dedicated to excellence in Accounting, Business, Management Education and Professionalism — serving professionals across West Africa and beyond.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="https://wa.me/2348034711642" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Programmes</h4>
+          <ul>
+            <li><a href="certification-courses.html">Certification Courses</a></li>
+            <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+            <li><a href="mba.html">MBA</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="apply.html">Apply Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="our-approach.html">Our Approach</a></li>
+            <li><a href="iws.html">Industries We Serve</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+            <li><a href="core-values.html">Core Values</a></li>
+            <li><a href="why-choose-us.html">Why Choose Us</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul class="footer-contact-list">
+            <li><a href="mailto:info@fountainptserv.com" style="display:flex;align-items:flex-start;gap:8px;"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:2px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>info@fountainptserv.com</a></li>
+            <li><a href="tel:+2348034711642" style="display:flex;align-items:flex-start;gap:8px;"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:2px;"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24a11.36 11.36 0 003.55.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.18 21 3 13.82 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.01l-2.2 2.21z"/></svg>08034711642</a></li>
+            <li style="display:flex;align-items:flex-start;gap:8px;color:rgba(255,255,255,.45);font-size:.85rem;line-height:1.6;"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:3px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>8 Ijaiye Street, Off Alayaki, Enilolobo Bus-Stop, Giwa Iju Ishaga Road, Lagos, Nigeria</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>&copy; 2026 Fountain Professional Training Services. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  /* CTA BAR */
+  var ctaSlides=document.querySelectorAll('.cta-slide'),ctaDots=document.querySelectorAll('#ctaBarDots span'),ctaBar=document.getElementById('ctaBar'),ctaCur=0;
+  function goCtaSlide(n){ctaSlides[ctaCur].classList.remove('active');ctaDots[ctaCur].classList.remove('active');ctaCur=n%ctaSlides.length;ctaSlides[ctaCur].classList.add('active');ctaDots[ctaCur].classList.add('active');}
+  ctaDots.forEach(function(d,i){d.addEventListener('click',function(){goCtaSlide(i);});});
+  setInterval(function(){goCtaSlide(ctaCur+1);},4000);
+  document.getElementById('ctaBarClose').addEventListener('click',function(){ctaBar.classList.add('hidden');document.body.classList.add('bar-hidden');});
+  /* MOBILE NAV */
+  var mobileNav=document.getElementById('mobileNav'),mobOverlay=document.getElementById('mobOverlay'),menuBtn=document.getElementById('menuBtn'),menuClose=document.getElementById('menuClose');
+  function openMobileNav(){mobileNav.classList.add('open');mobOverlay.classList.add('open');mobileNav.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeMobileNav(){mobileNav.classList.remove('open');mobOverlay.classList.remove('open');mobileNav.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  if(menuBtn)menuBtn.addEventListener('click',openMobileNav);
+  if(menuClose)menuClose.addEventListener('click',closeMobileNav);
+  if(mobOverlay)mobOverlay.addEventListener('click',closeMobileNav);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMobileNav();});
+  document.querySelectorAll('.mob-toggle').forEach(function(btn){btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var p=btn.closest('li');if(!p)return;var o=p.classList.contains('mob-open');document.querySelectorAll('.mob-links li.mob-open').forEach(function(li){li.classList.remove('mob-open');});if(!o)p.classList.add('mob-open');});});
+  /* REVEAL */
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(function(r){obs.observe(r);});
+}());
+</script>
+</body>
+</html>

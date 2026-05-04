@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="assets/icons/fountain-professional-training-services-logo.png">
+
+  <title>Our Approach – Fountain Professional Training Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Source+Sans+3:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --red:        #CC0000;
+      --red-dk:     #A00000;
+      --red-lt:     #E53030;
+      --gold:       #C9A227;
+      --gold-lt:    #E8C04A;
+      --gold-pale:  #FFF8E7;
+      --white:      #FFFFFF;
+      --off-white:  #F5F5F5;
+      --light-grey: #EBEBEB;
+      --mid-grey:   #6B7280;
+      --dark:       #1A1A1A;
+      --dark-2:     #111111;
+      --charcoal:   #2D2D2D;
+      --border:     rgba(0,0,0,.1);
+      --radius:     6px;
+      --shadow-sm:  0 2px 10px rgba(0,0,0,.08);
+      --shadow-md:  0 8px 30px rgba(0,0,0,.14);
+      --shadow-lg:  0 20px 60px rgba(0,0,0,.2);
+      --trans:      .25s cubic-bezier(.4,0,.2,1);
+      --font-display: 'Playfair Display', 'Times New Roman', Georgia, serif;
+      --font-body:    'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+      --font-impact:  'Bebas Neue', 'Arial Narrow', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--dark);
+      overflow-x: hidden;
+      padding-top: calc(40px + 36px + 72px);
+    }
+    body.bar-hidden { padding-top: calc(36px + 72px); }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-body); font-size: .75rem; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 14px; font-weight: 700;
+    }
+    .section-label::before {
+      content: ''; display: block; width: 28px; height: 3px;
+      background: var(--red); border-radius: 2px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem); line-height: 1.15; color: var(--dark);
+    }
+    .section-title em { font-style: italic; color: var(--red); }
+    .section-title.white { color: #fff; }
+    .section-title.white em { color: var(--gold-lt); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: 4px;
+      font-family: var(--font-body); font-size: .88rem; letter-spacing: .06em;
+      text-transform: uppercase; font-weight: 700; transition: var(--trans); cursor: pointer; border: none;
+    }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(204,0,0,.35); }
+    .btn-outline-red { background: transparent; color: var(--red); border: 2px solid var(--red); }
+    .btn-outline-red:hover { background: var(--red); color: #fff; }
+    .btn-gold { background: var(--gold); color: #fff; }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); }
+    .btn-white { background: #fff; color: var(--dark); }
+    .btn-white:hover { background: var(--gold); color: #fff; }
+    .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.5); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+
+    /* ─── CTA BAR ──────────────────────────────────────────────────── */
+    .cta-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 2100;
+      background: var(--dark-2);
+      height: 40px; overflow: hidden;
+      border-bottom: 2px solid var(--red);
+      transition: transform .4s ease;
+    }
+    .cta-bar.hidden { transform: translateY(-100%); }
+    .cta-bar-inner {
+      height: 100%; max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; padding: 0 16px;
+    }
+    .cta-slides-wrap { flex: 1; overflow: hidden; height: 100%; position: relative; }
+    .cta-slide {
+      position: absolute; inset: 0; display: flex; align-items: center;
+      justify-content: center; gap: 10px;
+      opacity: 0; transform: translateY(14px);
+      transition: opacity .5s ease, transform .5s ease; pointer-events: none;
+    }
+    .cta-slide.active { opacity: 1; transform: none; pointer-events: auto; }
+    .cta-slide .cta-text {
+      font-family: var(--font-body); font-size: .82rem; letter-spacing: .06em;
+      color: rgba(255,255,255,.82); text-transform: uppercase; white-space: nowrap;
+    }
+    .cta-slide .cta-text strong { color: var(--gold-lt); }
+    .cta-slide .cta-pill {
+      display: inline-flex; align-items: center;
+      background: var(--red); color: #fff; border-radius: 100px;
+      font-family: var(--font-body); font-size: .72rem; letter-spacing: .08em;
+      text-transform: uppercase; padding: 3px 12px; font-weight: 700;
+      flex-shrink: 0; transition: var(--trans); white-space: nowrap;
+    }
+    .cta-slide .cta-pill:hover { background: var(--red-lt); }
+    .cta-bar-dots { display: flex; gap: 6px; align-items: center; margin-left: 12px; flex-shrink: 0; }
+    .cta-bar-dots span {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(255,255,255,.25); cursor: pointer; transition: var(--trans);
+    }
+    .cta-bar-dots span.active { background: var(--red); width: 14px; border-radius: 3px; }
+    .cta-bar-close {
+      margin-left: 12px; background: none; border: none;
+      color: rgba(255,255,255,.4); cursor: pointer; font-size: .95rem; line-height: 1;
+      padding: 2px 4px; transition: color var(--trans); flex-shrink: 0;
+    }
+    .cta-bar-close:hover { color: #fff; }
+
+    /* ─── TOP BAR ──────────────────────────────────────────────────── */
+    .topbar {
+      position: fixed; top: 40px; left: 0; right: 0; z-index: 1100;
+      background: var(--off-white); color: var(--mid-grey);
+      font-size: .8rem; padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      transition: top .4s ease;
+    }
+    body.bar-hidden .topbar { top: 0; }
+    .topbar .container { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .topbar-left { display: flex; gap: 20px; align-items: center; }
+    .topbar-left a { color: var(--mid-grey); transition: color var(--trans); display: flex; align-items: center; gap: 5px; }
+    .topbar-left a:hover { color: var(--red); }
+    .topbar-social { display: flex; gap: 6px; align-items: center; }
+    .topbar-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(0,0,0,.07); color: var(--charcoal); transition: var(--trans);
+    }
+    .topbar-social a:hover { background: var(--red); color: #fff; }
+    .topbar-social svg { width: 13px; height: 13px; }
+
+    /* ─── HEADER ───────────────────────────────────────────────────── */
+    header {
+      position: fixed;
+      top: calc(40px + 36px);
+      left: 0; right: 0; z-index: 1000;
+      background: #fff;
+      box-shadow: 0 2px 0 var(--border), var(--shadow-sm);
+      transition: top .4s ease;
+    }
+    body.bar-hidden header { top: 36px; }
+
+    nav { display: flex; align-items: center; padding: 0 24px; max-width: 1200px; margin: 0 auto; height: 72px; gap: 6px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .nav-logo-text .main { font-family: var(--font-display); font-size: .95rem; font-weight: 700; color: var(--dark); }
+    .nav-logo-text .sub { font-size: .7rem; color: var(--mid-grey); letter-spacing: .04em; }
+
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a,
+    .nav-links > li > span {
+      display: flex; align-items: center; gap: 4px; padding: 8px 12px;
+      font-size: .84rem; font-weight: 600; color: var(--dark); cursor: pointer;
+      border-radius: 4px; transition: var(--trans); white-space: nowrap;
+      font-family: var(--font-body); letter-spacing: .02em; text-transform: uppercase;
+    }
+    .nav-links > li > a:hover,
+    .nav-links > li > span:hover,
+    .nav-links > li.active > a { color: var(--red); }
+    .nav-links > li > span .arrow { transition: transform var(--trans); }
+    .nav-links > li:hover > span .arrow { transform: rotate(180deg); }
+    .dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0;
+      background: #fff; border-radius: var(--radius);
+      box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+      border-top: 3px solid var(--red);
+      min-width: 240px; padding: 6px; opacity: 0; pointer-events: none;
+      transform: translateY(8px); transition: var(--trans); z-index: 100;
+    }
+    .nav-links > li:hover .dropdown { opacity: 1; pointer-events: all; transform: none; }
+    .dropdown a {
+      display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+      font-size: .84rem; border-radius: 4px; transition: var(--trans); color: var(--charcoal);
+    }
+    .dropdown a:hover { background: rgba(204,0,0,.06); color: var(--red); padding-left: 16px; }
+    .nav-cta { margin-left: 10px; padding: 9px 20px; font-size: .78rem; white-space: nowrap; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; border: none; background: none;
+    }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: var(--trans); }
+
+    /* ─── PAGE HERO ──────────────────────────────────────────────────── */
+    .page-hero {
+      position: relative;
+      height: 520px;
+      min-height: 400px;
+      overflow: hidden;
+      background: var(--dark-2);
+      display: flex;
+      align-items: center;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+    }
+    .page-hero-bg img {
+      width: 100%; height: 100%; object-fit: cover;
+      transform: scale(1.04);
+      animation: heroZoom 8s ease forwards;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.04); }
+      to   { transform: scale(1); }
+    }
+    .page-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, rgba(10,10,10,.88) 0%, rgba(10,10,10,.55) 55%, rgba(204,0,0,.18) 100%);
+    }
+    /* Left red accent stripe */
+    .page-hero-stripe {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 7px;
+      background: linear-gradient(to bottom, var(--red), var(--gold));
+      z-index: 5;
+    }
+    .page-hero-content {
+      position: relative; z-index: 4; width: 100%;
+    }
+    .page-hero-inner { max-width: 700px; padding-left: 24px; }
+    .page-hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-body); font-size: .75rem; letter-spacing: .28em;
+      text-transform: uppercase; color: var(--gold-lt); margin-bottom: 20px;
+      background: rgba(204,0,0,.3); padding: 6px 14px; border-left: 3px solid var(--gold);
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp .6s ease .2s forwards;
+    }
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.08;
+      color: #fff; font-weight: 900; margin-bottom: 18px;
+      opacity: 0; transform: translateY(22px);
+      animation: fadeUp .7s ease .38s forwards;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--gold-lt); }
+    .page-hero-desc {
+      font-size: 1.05rem; color: rgba(255,255,255,.75); line-height: 1.8; max-width: 560px;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp .7s ease .55s forwards;
+    }
+    .page-hero-actions {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px;
+      opacity: 0; transform: translateY(14px);
+      animation: fadeUp .7s ease .7s forwards;
+    }
+    /* Breadcrumb */
+    .page-hero-breadcrumb {
+      position: absolute; bottom: 22px; left: 0; right: 0; z-index: 5;
+    }
+    .page-hero-breadcrumb .container {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-size: .78rem; color: rgba(255,255,255,.5);
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .page-hero-breadcrumb a { color: rgba(255,255,255,.5); transition: color var(--trans); }
+    .page-hero-breadcrumb a:hover { color: var(--gold-lt); }
+    .page-hero-breadcrumb .sep { color: rgba(255,255,255,.25); }
+    .page-hero-breadcrumb .current { color: var(--gold-lt); }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: none; }
+    }
+
+    /* ─── RED DIVIDER BAR ─────────────────────────────────────────── */
+    .red-bar {
+      height: 6px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--red-lt) 40%, var(--gold) 100%);
+    }
+
+    /* ─── INTRO ──────────────────────────────────────────────────────── */
+    .approach-intro {
+      padding: 80px 0 64px;
+      background: var(--white);
+    }
+    .approach-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .approach-intro-text p {
+      color: var(--mid-grey); line-height: 1.85; font-size: 1rem; margin-bottom: 16px;
+    }
+    .approach-intro-text .principle {
+      background: var(--dark-2); color: #fff;
+      padding: 26px 28px; border-left: 5px solid var(--gold);
+      margin-top: 28px;
+    }
+    .approach-intro-text .principle p {
+      color: rgba(255,255,255,.8); font-size: 1.02rem; font-style: italic; margin: 0; line-height: 1.72;
+    }
+    .approach-intro-text .principle strong { color: var(--gold-lt); font-style: normal; }
+    .approach-intro-visual {
+      position: relative;
+    }
+    .approach-intro-visual img {
+      width: 100%; height: 420px; object-fit: cover;
+    }
+    .approach-intro-visual::before {
+      content: ''; position: absolute; top: -16px; right: -16px; left: 30px; bottom: 30px;
+      border: 3px solid var(--red); z-index: -1;
+    }
+    .approach-badge {
+      position: absolute; bottom: -24px; left: -24px;
+      background: var(--red); color: #fff; padding: 20px 24px; text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+    .approach-badge .num { font-family: var(--font-impact); font-size: 2.4rem; line-height: 1; }
+    .approach-badge .txt { font-size: .76rem; opacity: .85; margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; }
+
+    /* ─── STEPS SECTION ──────────────────────────────────────────────── */
+    .approach-steps {
+      padding: 90px 0;
+      background: var(--off-white);
+    }
+    .steps-header {
+      text-align: center; max-width: 680px; margin: 0 auto 60px;
+    }
+    .steps-header .section-label { justify-content: center; }
+    .steps-header .section-label::before { display: none; }
+    .steps-header .section-label::after { content: ''; display: block; width: 28px; height: 3px; background: var(--red); border-radius: 2px; }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .step-card {
+      background: #fff;
+      padding: 38px 30px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--trans);
+      border-bottom: 4px solid transparent;
+    }
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-bottom-color: var(--red);
+    }
+    .step-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      transform: scaleX(0); transform-origin: left; transition: var(--trans);
+    }
+    .step-card:hover::before { transform: scaleX(1); }
+    .step-number {
+      font-family: var(--font-impact);
+      font-size: 3.8rem; color: rgba(204,0,0,.1);
+      line-height: 1; margin-bottom: 4px;
+      transition: color var(--trans);
+    }
+    .step-card:hover .step-number { color: rgba(204,0,0,.18); }
+    .step-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.12rem; color: var(--dark);
+      margin-bottom: 14px; font-weight: 700;
+    }
+    .step-card > p {
+      font-size: .88rem; color: var(--mid-grey); line-height: 1.75; margin-bottom: 18px;
+    }
+    .step-list {
+      list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px;
+    }
+    .step-list li {
+      font-size: .84rem; color: var(--charcoal); line-height: 1.6;
+      padding-left: 18px; position: relative;
+    }
+    .step-list li::before {
+      content: ''; position: absolute; left: 0; top: 9px;
+      width: 7px; height: 7px; background: var(--red); border-radius: 50%;
+    }
+    .step-highlight {
+      display: inline-block; margin-top: 16px;
+      background: rgba(204,0,0,.07); color: var(--red-dk);
+      font-size: .76rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; padding: 5px 12px;
+      border: 1px solid rgba(204,0,0,.15);
+    }
+
+    /* ─── METHODOLOGY BANNER ─────────────────────────────────────────── */
+    .methodology-banner {
+      background: var(--dark-2); padding: 72px 0;
+      position: relative; overflow: hidden;
+    }
+    .methodology-banner::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+    }
+    .methodology-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .method-item {
+      text-align: center; padding: 28px 20px;
+      border-right: 1px solid rgba(255,255,255,.08);
+      transition: var(--trans);
+    }
+    .method-item:last-child { border-right: none; }
+    .method-item:hover { background: rgba(255,255,255,.04); }
+    .method-icon { font-size: 2rem; margin-bottom: 12px; }
+    .method-item h4 {
+      font-family: var(--font-body); font-size: .88rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em; color: #fff; margin-bottom: 8px;
+    }
+    .method-item p {
+      font-size: .82rem; color: rgba(255,255,255,.5); line-height: 1.66;
+    }
+
+    /* ─── CLOSING STATEMENT ──────────────────────────────────────────── */
+    .closing-section {
+      padding: 90px 0;
+      background: var(--white);
+    }
+    .closing-inner {
+      max-width: 860px; margin: 0 auto; text-align: center;
+    }
+    .closing-inner .section-label { justify-content: center; }
+    .closing-inner .section-label::before { display: none; }
+    .closing-inner .section-title { margin-bottom: 24px; }
+    .closing-inner p {
+      font-size: 1.06rem; color: var(--mid-grey); line-height: 1.85; margin-bottom: 16px;
+    }
+    .closing-inner .closing-lead {
+      font-family: var(--font-display); font-size: 1.18rem;
+      color: var(--dark); line-height: 1.7; font-style: italic;
+      border-left: 5px solid var(--gold); padding: 20px 28px;
+      background: var(--gold-pale); text-align: left; margin: 32px 0;
+    }
+    .closing-inner .closing-lead strong { font-style: normal; color: var(--red); }
+    .closing-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 36px; }
+
+    /* ─── CTA STRIP ──────────────────────────────────────────────────── */
+    .cta-strip {
+      background: var(--red); padding: 52px 0;
+    }
+    .cta-strip-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 32px; flex-wrap: wrap;
+    }
+    .cta-strip-text h3 {
+      font-family: var(--font-display); font-size: 1.7rem; color: #fff; margin-bottom: 6px;
+    }
+    .cta-strip-text p { font-size: .95rem; color: rgba(255,255,255,.78); }
+    .cta-strip-btns { display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────── */
+    footer { background: var(--dark-2); color: rgba(255,255,255,.55); border-top: 4px solid var(--red); }
+    .footer-top { padding: 64px 0 44px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr; gap: 36px; }
+    .footer-brand img { height: 48px; margin-bottom: 14px; }
+    .footer-brand p { font-size: .86rem; line-height: 1.8; color: rgba(255,255,255,.45); max-width: 280px; }
+    .footer-social { display: flex; gap: 8px; margin-top: 16px; }
+    .footer-social a { width: 32px; height: 32px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; transition: var(--trans); color: rgba(255,255,255,.55); }
+    .footer-social a:hover { background: var(--red); color: #fff; }
+    .footer-social svg { width: 14px; height: 14px; }
+    .footer-col h4 { font-family: var(--font-body); font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #fff; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--red); display: inline-block; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: .85rem; color: rgba(255,255,255,.45); transition: color var(--trans); }
+    .footer-col ul li a:hover { color: var(--gold-lt); padding-left: 4px; }
+    .footer-contact-list li { margin-bottom: 12px !important; }
+    .footer-contact-list li a { padding-left: 0 !important; line-height: 1.5; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 18px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: .8rem; color: rgba(255,255,255,.28); }
+    .footer-bottom a { color: rgba(255,255,255,.35); transition: color var(--trans); }
+    .footer-bottom a:hover { color: var(--gold-lt); }
+
+    /* ─── MOBILE NAV ───────────────────────────────────────────────── */
+    .mobile-nav {
+      display: none; position: fixed;
+      top: 0; right: 0; width: 300px; height: 100%;
+      background: #fff; z-index: 3000;
+      flex-direction: column; overflow-y: auto;
+      box-shadow: -4px 0 20px rgba(0,0,0,.2);
+    }
+    .mobile-nav.open { display: flex; }
+    .mob-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); z-index: 2999; }
+    .mob-overlay.open { display: block; }
+    .mob-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 3px solid var(--red); flex-shrink: 0; }
+    .mob-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark); line-height: 1; padding: 4px 8px; }
+    .mob-links { flex: 1; }
+    .mob-links li { border-bottom: 1px solid var(--light-grey); }
+    .mob-links li a, .mob-toggle { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; font-size: .95rem; font-weight: 600; color: var(--dark); cursor: pointer; width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); text-transform: uppercase; letter-spacing: .04em; }
+    .mob-links li a:hover, .mob-toggle:hover { color: var(--red); }
+    .mob-sub { display: none; background: var(--off-white); }
+    li.mob-open > .mob-sub { display: block; }
+    .mob-sub a { display: block; padding: 10px 20px 10px 32px; font-size: .87rem; color: var(--mid-grey); text-transform: none; font-weight: 400; }
+    .mob-sub a:hover { color: var(--red); }
+    .mob-toggle .mob-arrow { display: inline-block; transition: transform .25s ease; }
+    li.mob-open > .mob-toggle .mob-arrow { transform: rotate(45deg); }
+    .mob-cta { padding: 20px; border-top: 1px solid var(--light-grey); flex-shrink: 0; }
+
+    /* ─── SCROLL ANIMATIONS ────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .approach-intro-grid { grid-template-columns: 1fr; gap: 60px; }
+      .approach-intro-visual::before { display: none; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .methodology-grid { grid-template-columns: repeat(2, 1fr); }
+      .methodology-grid .method-item:nth-child(2) { border-right: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 768px) {
+      .topbar { display: none !important; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; margin-left: auto; }
+      header { top: 40px !important; }
+      body { padding-top: calc(40px + 72px) !important; }
+      body.bar-hidden { padding-top: 72px !important; }
+      body.bar-hidden header { top: 0 !important; }
+      .page-hero { height: 420px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .methodology-grid { grid-template-columns: repeat(2, 1fr); }
+      .cta-strip-inner { flex-direction: column; text-align: center; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .cta-bar .cta-pill { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ CTA BAR ══════════ -->
+<div class="cta-bar" id="ctaBar">
+  <div class="cta-bar-inner">
+    <div class="cta-slides-wrap">
+      <div class="cta-slide active">
+        <span class="cta-text">🚀 Enrolment is <strong>Open Now</strong> — Transform Your Career with a Globally Recognised Qualification</span>
+        <a href="apply.html" class="cta-pill">Apply Today</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">🎓 <strong>Certification · Diploma · MBA · Membership</strong> — Over 20 Programmes to Choose From</span>
+        <a href="certification-courses.html" class="cta-pill">Explore All</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">🌍 <strong>6 International Partners</strong> — Qualifications Recognised Across 70+ Countries</span>
+        <a href="#partnerships" class="cta-pill">Learn More</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">📞 Speak to an Advisor — <strong>08034711642</strong> or <strong>info@fountainptserv.com</strong></span>
+        <a href="tel:08034711642" class="cta-pill">Call Now</a>
+      </div>
+    </div>
+    <div class="cta-bar-dots" id="ctaBarDots">
+      <span class="active"></span><span></span><span></span><span></span>
+    </div>
+    <button class="cta-bar-close" id="ctaBarClose" aria-label="Dismiss">&#x2715;</button>
+  </div>
+</div>
+
+<!-- ══════════ TOP BAR ══════════ -->
+<div class="topbar" id="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="mailto:info@fountainptserv.com">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        info@fountainptserv.com
+      </a>
+      <a href="tel:+2348034711642">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24a11.36 11.36 0 003.55.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.18 21 3 13.82 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.01l-2.2 2.21z"/></svg>
+        08034711642
+      </a>
+      <a href="contact-us.html">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        8 Ijaiye Street, Off Alayaki, Enilolobo Bus-Stop, Giwa Iju Ishaga Road, Lagos, Nigeria
+      </a>
+    </div>
+    <div class="topbar-social">
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#" aria-label="Twitter/X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://wa.me/2348034711642" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header id="mainHeader">
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS Logo" />
+      <div class="nav-logo-text">
+        <span class="main">Fountain</span>
+        <span class="main">Professional Training Services</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <span>About Us <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="about-us.html">Who We Are</a></li>
+          <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+          <li><a href="core-values.html">Core Values</a></li>
+          <li><a href="why-choose-us.html">Why Choose Us</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Programmes <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="certification-courses.html">Certification Courses</a></li>
+          <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+          <li><a href="mba.html">MBA</a></li>
+          <li><a href="membership.html">Membership</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Institute Partnership <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business &amp; Administration</a></li>
+          <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership &amp; Governance</a></li>
+          <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management &amp; Leadership</a></li>
+          <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+        </ul>
+      </li>
+      <li class="active">
+        <span>Services <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="our-approach.html">Our Approach</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="iws.html">Industries We Serve</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Resources <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </li>
+      <li><a href="contact-us.html">Contact</a></li>
+    </ul>
+    <a href="apply.html" class="btn btn-red nav-cta">Apply Now</a>
+    <button class="hamburger" id="menuBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ══════════ MOBILE NAV ══════════ -->
+<div class="mob-overlay" id="mobOverlay"></div>
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mob-header">
+    <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS" height="42" />
+    <button class="mob-close" id="menuClose">&#x2715;</button>
+  </div>
+  <ul class="mob-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <button class="mob-toggle" type="button">About <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="about-us.html">Who We Are</a></li>
+        <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+        <li><a href="core-values.html">Core Values</a></li>
+        <li><a href="why-choose-us.html">Why Choose Us</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Programmes <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="certification-courses.html">Certification Courses</a></li>
+        <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+        <li><a href="mba.html">MBA</a></li>
+        <li><a href="membership.html">Membership</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Partnerships <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education and Training</a></li>
+        <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business and Administration</a></li>
+        <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education and Training</a></li>
+        <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership and Governance</a></li>
+        <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management and Leadership</a></li>
+        <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Services <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="our-approach.html">Our Approach</a></li>
+        <li><a href="services.html">Our Services</a></li>
+        <li><a href="iws.html">Industries We Serve</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Resources <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="faq.html">FAQs</a></li>
+      </ul>
+    </li>
+    <li><a href="contact-us.html">Contact Us</a></li>
+  </ul>
+  <div class="mob-cta">
+    <a href="apply.html" class="btn btn-red" style="width:100%;justify-content:center;">Apply Now →</a>
+  </div>
+</nav>
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<section class="page-hero">
+  <div class="page-hero-bg">
+    <!-- Using h21.jpg — the same professional classroom/training image used in the About section -->
+    <img src="assets/images/h24.jpg" alt="Our Approach – Fountain Professional Training Services" />
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-stripe"></div>
+  <div class="page-hero-content">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div class="page-hero-eyebrow">Services · Methodology</div>
+        <h1>Our <em>Approach</em><br>to Transformation</h1>
+        <p class="page-hero-desc">Deliberately structured, highly consultative, and results-oriented — our methodology ensures every engagement moves from diagnosis to sustainable impact.</p>
+        <div class="page-hero-actions">
+          <a href="apply.html" class="btn btn-red">Begin Your Journey →</a>
+          <a href="contact-us.html" class="btn btn-outline-white">Speak to an Advisor</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-hero-breadcrumb">
+    <div class="container">
+      <a href="index.html">Home</a>
+      <span class="sep">›</span>
+      <a href="services.html">Services</a>
+      <span class="sep">›</span>
+      <span class="current">Our Approach</span>
+    </div>
+  </div>
+</section>
+
+<!-- Red divider -->
+<div class="red-bar"></div>
+
+<!-- ══════════ INTRO ══════════ -->
+<section class="approach-intro">
+  <div class="container">
+    <div class="approach-intro-grid">
+      <div class="approach-intro-text reveal">
+        <p class="section-label">Who We Are</p>
+        <h2 class="section-title">Structured. Consultative.<br><em>Results-Oriented.</em></h2>
+        <p style="margin-top:20px;">At Fountain Professional Training Services, our approach is deliberately structured, highly consultative, and results-oriented. We do not apply one-size-fits-all solutions; instead, we engage each client through a systematic process that ensures clarity of needs, precision in delivery, and sustainability of outcomes.</p>
+        <p>Our methodology is built on the principle that effective transformation begins with understanding, is sustained through collaboration, and is measured by impact.</p>
+        <div class="principle">
+          <p>"Effective transformation begins with understanding, is <strong>sustained through collaboration</strong>, and is measured by impact."</p>
+        </div>
+      </div>
+      <div class="approach-intro-visual reveal" style="transition-delay:.1s;">
+        <img src="assets/images/h21.jpg" alt="Our training approach in action" />
+        <div class="approach-badge">
+          <div class="num">7</div>
+          <div class="txt">Step<br>Methodology</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STEPS ══════════ -->
+<section class="approach-steps">
+  <div class="container">
+    <div class="steps-header reveal">
+      <p class="section-label">Our Methodology</p>
+      <h2 class="section-title">A <em>7-Step</em> Framework for Lasting Impact</h2>
+      <p style="color:var(--mid-grey);font-size:1rem;line-height:1.8;margin-top:16px;">Every engagement we undertake follows a proven, structured framework — ensuring that outcomes are not accidental, but intentional.</p>
+    </div>
+
+    <div class="steps-grid">
+      <!-- Step 1 -->
+      <div class="step-card reveal">
+        <div class="step-number">01</div>
+        <h3>Diagnostic Needs Assessment</h3>
+        <p>Every engagement begins with a thorough understanding of the client's current situation, challenges, and objectives.</p>
+        <ul class="step-list">
+          <li>Stakeholder consultations and interviews</li>
+          <li>Organizational or institutional reviews</li>
+          <li>Skills and capacity gap analysis</li>
+          <li>Policy and process evaluations</li>
+        </ul>
+        <span class="step-highlight">Real Root Causes Identified</span>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card reveal" style="transition-delay:.07s;">
+        <div class="step-number">02</div>
+        <h3>Strategic Solution Design</h3>
+        <p>Based on insights gathered, we design tailored interventions aligned with the client's strategic goals and operational realities.</p>
+        <ul class="step-list">
+          <li>Clear learning and performance outcomes</li>
+          <li>Customized training or consulting frameworks</li>
+          <li>Alignment with professional body requirements</li>
+          <li>Integration of evidence-based methodologies</li>
+        </ul>
+        <span class="step-highlight">Practical &amp; Outcome-Driven</span>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card reveal" style="transition-delay:.14s;">
+        <div class="step-number">03</div>
+        <h3>Collaborative Implementation</h3>
+        <p>Impact is achieved through active engagement, not passive instruction. Our delivery is highly interactive and participatory.</p>
+        <ul class="step-list">
+          <li>Facilitator-led interactive training sessions</li>
+          <li>Case studies and real-world scenarios</li>
+          <li>Group discussions and peer learning</li>
+          <li>Simulations, role plays, and practical exercises</li>
+        </ul>
+        <span class="step-highlight">Active Engagement</span>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-card reveal" style="transition-delay:.07s;">
+        <div class="step-number">04</div>
+        <h3>Professional Standards Integration</h3>
+        <p>We integrate frameworks and standards from recognised professional bodies and industry associations into our programmes.</p>
+        <ul class="step-list">
+          <li>Globally benchmarked knowledge and competencies</li>
+          <li>Professionally recognised learning pathways</li>
+          <li>Continuous Professional Development (CPD)</li>
+          <li>Enhanced credibility and certification opportunities</li>
+        </ul>
+        <span class="step-highlight">Globally Benchmarked</span>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step-card reveal" style="transition-delay:.14s;">
+        <div class="step-number">05</div>
+        <h3>Monitoring, Evaluation &amp; Impact</h3>
+        <p>We place strong emphasis on measuring the effectiveness of our interventions through continuous monitoring and structured evaluation.</p>
+        <ul class="step-list">
+          <li>Participant learning and competency development</li>
+          <li>Behavioral and performance changes</li>
+          <li>Organizational efficiency indicators</li>
+          <li>Achievement of defined project objectives</li>
+        </ul>
+        <span class="step-highlight">Evidence of Impact</span>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="step-card reveal" style="transition-delay:.21s;">
+        <div class="step-number">06</div>
+        <h3>Post-Engagement Support</h3>
+        <p>Our relationship with clients does not end after programme delivery. We provide continued support to reinforce learning and ensure sustainability.</p>
+        <ul class="step-list">
+          <li>Follow-up advisory support</li>
+          <li>Refresher sessions and reinforcement workshops</li>
+          <li>Coaching and mentorship support</li>
+          <li>Continuous improvement recommendations</li>
+        </ul>
+        <span class="step-highlight">Sustained Transformation</span>
+      </div>
+
+      <!-- Step 7 — full width -->
+      <div class="step-card reveal" style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; transition-delay:.28s;">
+        <div>
+          <div class="step-number">07</div>
+          <h3>Continuous Improvement &amp; Feedback</h3>
+          <p>We operate a learning-driven model where feedback is actively used to refine and improve our services, keeping them relevant, modern, and impactful.</p>
+          <span class="step-highlight">Relevant · Modern · Impactful</span>
+        </div>
+        <div style="padding-top: 48px;">
+          <ul class="step-list">
+            <li>Collect client and participant feedback</li>
+            <li>Review program effectiveness regularly</li>
+            <li>Update training content and methodologies</li>
+            <li>Integrate emerging trends and global best practices</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ METHODOLOGY BANNER ══════════ -->
+<div class="methodology-banner">
+  <div class="container">
+    <div class="methodology-grid">
+      <div class="method-item reveal">
+        <div class="method-icon">🔍</div>
+        <h4>Diagnose</h4>
+        <p>We never assume solutions. We identify the real root causes of performance gaps first.</p>
+      </div>
+      <div class="method-item reveal" style="transition-delay:.07s;">
+        <div class="method-icon">🎯</div>
+        <h4>Design</h4>
+        <p>Tailored interventions built around your strategic goals and operational realities.</p>
+      </div>
+      <div class="method-item reveal" style="transition-delay:.14s;">
+        <div class="method-icon">⚡</div>
+        <h4>Deliver</h4>
+        <p>Active, participatory delivery that drives genuine behavioural and performance change.</p>
+      </div>
+      <div class="method-item reveal" style="transition-delay:.21s;">
+        <div class="method-icon">📈</div>
+        <h4>Sustain</h4>
+        <p>Ongoing support, feedback loops, and continuous improvement ensure lasting impact.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CLOSING STATEMENT ══════════ -->
+<section class="closing-section">
+  <div class="container">
+    <div class="closing-inner">
+      <p class="section-label">Our Commitment</p>
+      <h2 class="section-title">Precision. Partnership.<br><em>Performance.</em></h2>
+      <p style="margin-top:20px;">At Fountain Professional Training Services, our approach is built on precision, partnership, and performance. We combine structured methodology with flexibility, ensuring that every engagement is meaningful, measurable, and aligned with long-term success.</p>
+      <blockquote class="closing-lead">
+        We do not just deliver training or consulting — we <strong>guide transformation from diagnosis to sustainable impact</strong>.
+      </blockquote>
+      <p>Whether you are an individual professional seeking growth, an organisation building capacity, or an institution looking for a trusted partner, our approach ensures every step is intentional and every outcome is real.</p>
+      <div class="closing-actions">
+        <a href="apply.html" class="btn btn-red">Start Your Transformation →</a>
+        <a href="services.html" class="btn btn-outline-red">Explore Our Services</a>
+        <a href="contact-us.html" class="btn btn-gold">Speak to an Advisor</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA STRIP ══════════ -->
+<div class="cta-strip">
+  <div class="container">
+    <div class="cta-strip-inner">
+      <div class="cta-strip-text">
+        <h3>Ready to Experience the Fountain Difference?</h3>
+        <p>Enrolment is open. Over 20 programmes await. Your transformation begins with one decision.</p>
+      </div>
+      <div class="cta-strip-btns">
+        <a href="apply.html" class="btn btn-white">Apply Now →</a>
+        <a href="contact-us.html" class="btn btn-outline-white">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain Professional Training Services" />
+          <p>Your trusted partner in Consulting, Education and Training. Empowering professionals across Nigeria and beyond with globally recognised qualifications.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="https://wa.me/2348034711642" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="certification-courses.html">Certification Courses</a></li>
+            <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+            <li><a href="mba.html">MBA</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="contact-us.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Institute Partners</h4>
+          <ul>
+            <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education and Training</a></li>
+            <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business and Administration</a></li>
+            <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education and Training</a></li>
+            <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership and Governance</a></li>
+            <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management and Leadership</a></li>
+            <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="apply.html">Apply Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <a href="mailto:info@fountainptserv.com" style="display:flex;align-items:flex-start;gap:8px;">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:2px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                info@fountainptserv.com
+              </a>
+            </li>
+            <li>
+              <a href="tel:+2348034711642" style="display:flex;align-items:flex-start;gap:8px;">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:2px;"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24a11.36 11.36 0 003.55.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.18 21 3 13.82 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.01l-2.2 2.21z"/></svg>
+                08034711642
+              </a>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:8px;color:rgba(255,255,255,.45);font-size:.85rem;line-height:1.6;">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:3px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              8 Ijaiye Street, Off Alayaki, Enilolobo Bus-Stop, Giwa Iju Ishaga Road, Lagos, Nigeria
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>&copy; 2026 Fountain Professional Training Services. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ─── CTA BAR ──────────────────────────────────────────────── */
+  var ctaSlides = document.querySelectorAll('.cta-slide');
+  var ctaDots   = document.querySelectorAll('#ctaBarDots span');
+  var ctaBar    = document.getElementById('ctaBar');
+  var ctaCur    = 0;
+
+  function goCtaSlide(n) {
+    ctaSlides[ctaCur].classList.remove('active');
+    ctaDots[ctaCur].classList.remove('active');
+    ctaCur = n % ctaSlides.length;
+    ctaSlides[ctaCur].classList.add('active');
+    ctaDots[ctaCur].classList.add('active');
+  }
+  ctaDots.forEach(function(d, i) { d.addEventListener('click', function() { goCtaSlide(i); }); });
+  setInterval(function() { goCtaSlide(ctaCur + 1); }, 4000);
+
+  document.getElementById('ctaBarClose').addEventListener('click', function() {
+    ctaBar.classList.add('hidden');
+    document.body.classList.add('bar-hidden');
+  });
+
+  /* ─── MOBILE NAV ──────────────────────────────────────────── */
+  var mobileNav  = document.getElementById('mobileNav');
+  var mobOverlay = document.getElementById('mobOverlay');
+  var menuBtn    = document.getElementById('menuBtn');
+  var menuClose  = document.getElementById('menuClose');
+
+  function openMobileNav() {
+    mobileNav.classList.add('open');
+    mobOverlay.classList.add('open');
+    mobileNav.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    mobOverlay.classList.remove('open');
+    mobileNav.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (menuBtn)    menuBtn.addEventListener('click', openMobileNav);
+  if (menuClose)  menuClose.addEventListener('click', closeMobileNav);
+  if (mobOverlay) mobOverlay.addEventListener('click', closeMobileNav);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMobileNav(); });
+
+  document.querySelectorAll('.mob-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault(); e.stopPropagation();
+      var parent = btn.closest('li');
+      if (!parent) return;
+      var isOpen = parent.classList.contains('mob-open');
+      document.querySelectorAll('.mob-links li.mob-open').forEach(function(li) { li.classList.remove('mob-open'); });
+      if (!isOpen) parent.classList.add('mob-open');
+    });
+  });
+
+  /* ─── SCROLL REVEAL ───────────────────────────────────────── */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(r) { observer.observe(r); });
+
+}());
+</script>
+</body>
+</html>

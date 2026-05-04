@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="assets/icons/fountain-professional-training-services-logo.png">
+  <title>Core Values – Fountain Professional Training Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Source+Sans+3:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --red:        #CC0000;
+      --red-dk:     #A00000;
+      --red-lt:     #E53030;
+      --gold:       #C9A227;
+      --gold-lt:    #E8C04A;
+      --gold-pale:  #FFF8E7;
+      --white:      #FFFFFF;
+      --off-white:  #F5F5F5;
+      --light-grey: #EBEBEB;
+      --mid-grey:   #6B7280;
+      --dark:       #1A1A1A;
+      --dark-2:     #111111;
+      --charcoal:   #2D2D2D;
+      --border:     rgba(0,0,0,.1);
+      --radius:     6px;
+      --shadow-sm:  0 2px 10px rgba(0,0,0,.08);
+      --shadow-md:  0 8px 30px rgba(0,0,0,.14);
+      --shadow-lg:  0 20px 60px rgba(0,0,0,.2);
+      --trans:      .25s cubic-bezier(.4,0,.2,1);
+      --font-display: 'Playfair Display', 'Times New Roman', Georgia, serif;
+      --font-body:    'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+      --font-impact:  'Bebas Neue', 'Arial Narrow', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--dark);
+      overflow-x: hidden;
+      padding-top: calc(40px + 36px + 72px);
+    }
+    body.bar-hidden { padding-top: calc(36px + 72px); }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-body); font-size: .75rem; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 14px; font-weight: 700;
+    }
+    .section-label::before {
+      content: ''; display: block; width: 28px; height: 3px;
+      background: var(--red); border-radius: 2px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem); line-height: 1.15; color: var(--dark);
+    }
+    .section-title em { font-style: italic; color: var(--red); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: 4px;
+      font-family: var(--font-body); font-size: .88rem; letter-spacing: .06em;
+      text-transform: uppercase; font-weight: 700; transition: var(--trans); cursor: pointer; border: none;
+    }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(204,0,0,.35); }
+    .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.5); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+    .btn-white { background: #fff; color: var(--red); }
+    .btn-white:hover { background: var(--gold-pale); }
+
+    /* ─── CTA BAR ──────────────────────────────────────────────────── */
+    .cta-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 2100;
+      background: var(--dark-2); height: 40px; overflow: hidden;
+      border-bottom: 2px solid var(--red); transition: transform .4s ease;
+    }
+    .cta-bar.hidden { transform: translateY(-100%); }
+    .cta-bar-inner {
+      height: 100%; max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; padding: 0 16px;
+    }
+    .cta-slides-wrap { flex: 1; overflow: hidden; height: 100%; position: relative; }
+    .cta-slide {
+      position: absolute; inset: 0; display: flex; align-items: center;
+      justify-content: center; gap: 10px;
+      opacity: 0; transform: translateY(14px);
+      transition: opacity .5s ease, transform .5s ease; pointer-events: none;
+    }
+    .cta-slide.active { opacity: 1; transform: none; pointer-events: auto; }
+    .cta-slide .cta-text {
+      font-family: var(--font-body); font-size: .82rem; letter-spacing: .06em;
+      color: rgba(255,255,255,.82); text-transform: uppercase; white-space: nowrap;
+    }
+    .cta-slide .cta-text strong { color: var(--gold-lt); }
+    .cta-slide .cta-pill {
+      display: inline-flex; align-items: center;
+      background: var(--red); color: #fff; border-radius: 100px;
+      font-family: var(--font-body); font-size: .72rem; letter-spacing: .08em;
+      text-transform: uppercase; padding: 3px 12px; font-weight: 700;
+      flex-shrink: 0; transition: var(--trans); white-space: nowrap;
+    }
+    .cta-slide .cta-pill:hover { background: var(--red-lt); }
+    .cta-bar-dots { display: flex; gap: 6px; align-items: center; margin-left: 12px; flex-shrink: 0; }
+    .cta-bar-dots span {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(255,255,255,.25); cursor: pointer; transition: var(--trans);
+    }
+    .cta-bar-dots span.active { background: var(--red); width: 14px; border-radius: 3px; }
+    .cta-bar-close {
+      margin-left: 12px; background: none; border: none;
+      color: rgba(255,255,255,.4); cursor: pointer; font-size: .95rem; line-height: 1;
+      padding: 2px 4px; transition: color var(--trans); flex-shrink: 0;
+    }
+    .cta-bar-close:hover { color: #fff; }
+
+    /* ─── TOP BAR ──────────────────────────────────────────────────── */
+    .topbar {
+      position: fixed; top: 40px; left: 0; right: 0; z-index: 1100;
+      background: var(--off-white); color: var(--mid-grey);
+      font-size: .8rem; padding: 7px 0;
+      border-bottom: 1px solid var(--border); transition: top .4s ease;
+    }
+    body.bar-hidden .topbar { top: 0; }
+    .topbar .container { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .topbar-left { display: flex; gap: 20px; align-items: center; }
+    .topbar-left a { color: var(--mid-grey); transition: color var(--trans); display: flex; align-items: center; gap: 5px; }
+    .topbar-left a:hover { color: var(--red); }
+    .topbar-social { display: flex; gap: 6px; align-items: center; }
+    .topbar-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(0,0,0,.07); color: var(--charcoal); transition: var(--trans);
+    }
+    .topbar-social a:hover { background: var(--red); color: #fff; }
+    .topbar-social svg { width: 13px; height: 13px; }
+
+    /* ─── HEADER ───────────────────────────────────────────────────── */
+    header {
+      position: fixed; top: calc(40px + 36px); left: 0; right: 0; z-index: 1000;
+      background: #fff; box-shadow: 0 2px 0 var(--border), var(--shadow-sm);
+      transition: top .4s ease;
+    }
+    body.bar-hidden header { top: 36px; }
+    nav { display: flex; align-items: center; padding: 0 24px; max-width: 1200px; margin: 0 auto; height: 72px; gap: 6px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .nav-logo-text .main { font-family: var(--font-display); font-size: .95rem; font-weight: 700; color: var(--dark); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a,
+    .nav-links > li > span {
+      display: flex; align-items: center; gap: 4px; padding: 8px 12px;
+      font-size: .84rem; font-weight: 600; color: var(--dark); cursor: pointer;
+      border-radius: 4px; transition: var(--trans); white-space: nowrap;
+      font-family: var(--font-body); letter-spacing: .02em; text-transform: uppercase;
+    }
+    .nav-links > li > a:hover,
+    .nav-links > li > span:hover,
+    .nav-links > li.active > a { color: var(--red); }
+    .nav-links > li > span .arrow { transition: transform var(--trans); }
+    .nav-links > li:hover > span .arrow { transform: rotate(180deg); }
+    .dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0;
+      background: #fff; border-radius: var(--radius);
+      box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+      border-top: 3px solid var(--red);
+      min-width: 240px; padding: 6px; opacity: 0; pointer-events: none;
+      transform: translateY(8px); transition: var(--trans); z-index: 100;
+    }
+    .nav-links > li:hover .dropdown { opacity: 1; pointer-events: all; transform: none; }
+    .dropdown a {
+      display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+      font-size: .84rem; border-radius: 4px; transition: var(--trans); color: var(--charcoal);
+    }
+    .dropdown a:hover { background: rgba(204,0,0,.06); color: var(--red); padding-left: 16px; }
+    .nav-cta { margin-left: 10px; padding: 9px 20px; font-size: .78rem; white-space: nowrap; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; border: none; background: none;
+    }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: var(--trans); }
+
+    /* ─── RED DIVIDER BAR ──────────────────────────────────────────── */
+    .red-bar {
+      height: 6px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--red-lt) 40%, var(--gold) 100%);
+    }
+
+    /* ─── PAGE HERO ────────────────────────────────────────────────── */
+    .page-hero {
+      position: relative; width: 100%; height: 72vh; min-height: 480px;
+      overflow: hidden; background: var(--dark-2); display: flex; align-items: center;
+    }
+    .page-hero-bg { position: absolute; inset: 0; }
+    .page-hero-bg img {
+      width: 100%; height: 100%; object-fit: cover;
+      transform: scale(1.04);
+      animation: heroZoom 10s ease forwards;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.04); }
+      to   { transform: scale(1); }
+    }
+    .page-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, rgba(10,10,10,.88) 0%, rgba(10,10,10,.55) 55%, rgba(204,0,0,.18) 100%);
+    }
+    .page-hero-stripe {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 7px;
+      background: linear-gradient(to bottom, var(--red), var(--gold)); z-index: 5;
+    }
+    .page-hero-content { position: relative; z-index: 4; width: 100%; }
+    .page-hero-inner { max-width: 760px; padding-left: 24px; }
+    .page-hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-body); font-size: .75rem; letter-spacing: .28em;
+      text-transform: uppercase; color: var(--gold-lt); margin-bottom: 20px;
+      background: rgba(204,0,0,.3); padding: 6px 14px; border-left: 3px solid var(--gold);
+      animation: fadeUp .7s ease .2s both;
+    }
+    .page-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem); line-height: 1.06;
+      color: #fff; margin-bottom: 20px; font-weight: 900;
+      animation: fadeUp .7s ease .35s both;
+    }
+    .page-hero-title em { font-style: italic; color: var(--gold-lt); }
+    .page-hero-desc {
+      font-size: 1.05rem; color: rgba(255,255,255,.78); line-height: 1.8;
+      max-width: 580px; margin-bottom: 32px;
+      animation: fadeUp .7s ease .5s both;
+    }
+    .page-hero-breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .8rem; color: rgba(255,255,255,.5);
+      animation: fadeUp .7s ease .65s both;
+    }
+    .page-hero-breadcrumb a { color: rgba(255,255,255,.5); transition: color var(--trans); }
+    .page-hero-breadcrumb a:hover { color: var(--gold-lt); }
+    .page-hero-breadcrumb .sep { color: rgba(255,255,255,.3); }
+    .page-hero-breadcrumb .current { color: var(--gold-lt); font-weight: 600; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ─── INTRO BAND ───────────────────────────────────────────────── */
+    .cv-intro {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+    .cv-intro .section-label { justify-content: center; }
+    .cv-intro .section-title { margin-bottom: 24px; }
+    .cv-intro-lead {
+      font-size: 1.06rem; color: var(--mid-grey);
+      line-height: 1.88; max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* ─── VALUES GRID ──────────────────────────────────────────────── */
+    .cv-grid-section { padding: 0 0 96px; }
+
+    .cv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .cv-card {
+      background: var(--white);
+      padding: 40px 32px;
+      border-top: 4px solid transparent;
+      position: relative;
+      overflow: hidden;
+      transition: var(--trans);
+    }
+    .cv-card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s ease;
+    }
+    .cv-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-5px);
+      border-top-color: var(--red);
+      z-index: 1;
+    }
+    .cv-card:hover::before { transform: scaleX(1); }
+
+    .cv-card-number {
+      font-family: var(--font-impact);
+      font-size: 4rem; line-height: 1;
+      color: var(--red); opacity: .12;
+      position: absolute; top: 18px; right: 22px;
+      transition: var(--trans);
+    }
+    .cv-card:hover .cv-card-number { opacity: .22; }
+
+    .cv-card-icon {
+      font-size: 2rem;
+      margin-bottom: 18px;
+      display: block;
+    }
+    .cv-card-title {
+      font-family: var(--font-display);
+      font-size: 1.18rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .cv-card-desc {
+      font-size: .92rem; color: var(--mid-grey);
+      line-height: 1.78;
+    }
+
+    /* ─── FEATURED HIGHLIGHT ───────────────────────────────────────── */
+    .cv-highlight {
+      background: var(--dark-2);
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .cv-highlight::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+    }
+    .cv-highlight-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .cv-highlight-text .section-label { color: var(--gold-lt); }
+    .cv-highlight-text .section-label::before { background: var(--gold-lt); }
+    .cv-highlight-text .section-title { color: #fff; margin-bottom: 24px; }
+    .cv-highlight-text .section-title em { color: var(--gold-lt); }
+    .cv-highlight-text p {
+      font-size: 1rem; color: rgba(255,255,255,.72);
+      line-height: 1.85;
+    }
+
+    .cv-highlight-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .cv-stat {
+      background: rgba(255,255,255,.05);
+      padding: 32px 24px;
+      text-align: center;
+      transition: var(--trans);
+      border-top: 3px solid transparent;
+    }
+    .cv-stat:hover { background: rgba(255,255,255,.09); border-top-color: var(--gold); }
+    .cv-stat .val {
+      font-family: var(--font-impact);
+      font-size: 2.8rem; color: var(--gold-lt); line-height: 1;
+      margin-bottom: 8px;
+    }
+    .cv-stat .lbl {
+      font-size: .8rem; color: rgba(255,255,255,.5);
+      text-transform: uppercase; letter-spacing: .08em;
+    }
+
+    /* ─── CLOSING STATEMENT ────────────────────────────────────────── */
+    .cv-closing {
+      padding: 80px 0;
+      background: var(--off-white);
+    }
+    .cv-closing-inner {
+      max-width: 860px; margin: 0 auto;
+      text-align: center;
+    }
+    .cv-closing-inner .section-label { justify-content: center; }
+    .cv-closing-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-style: italic; line-height: 1.8;
+      color: var(--charcoal); margin: 28px 0 36px;
+    }
+    .cv-closing-quote strong { color: var(--red); font-style: normal; }
+
+    /* ─── CTA STRIP ────────────────────────────────────────────────── */
+    .cv-cta-strip {
+      background: var(--red);
+      padding: 56px 0;
+      text-align: center;
+    }
+    .cv-cta-strip h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: #fff; margin-bottom: 14px;
+    }
+    .cv-cta-strip p {
+      color: rgba(255,255,255,.8); font-size: 1rem;
+      margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto;
+    }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────── */
+    footer { background: var(--dark-2); color: rgba(255,255,255,.55); border-top: 4px solid var(--red); }
+    .footer-top { padding: 64px 0 44px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr; gap: 36px; }
+    .footer-brand img { height: 48px; margin-bottom: 14px; }
+    .footer-brand p { font-size: .86rem; line-height: 1.8; color: rgba(255,255,255,.45); max-width: 280px; }
+    .footer-social { display: flex; gap: 8px; margin-top: 16px; }
+    .footer-social a { width: 32px; height: 32px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; transition: var(--trans); color: rgba(255,255,255,.55); }
+    .footer-social a:hover { background: var(--red); color: #fff; }
+    .footer-social svg { width: 14px; height: 14px; }
+    .footer-col h4 { font-family: var(--font-body); font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #fff; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--red); display: inline-block; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: .85rem; color: rgba(255,255,255,.45); transition: color var(--trans); }
+    .footer-col ul li a:hover { color: var(--gold-lt); padding-left: 4px; }
+    .footer-contact-list li { margin-bottom: 12px !important; }
+    .footer-contact-list li a { padding-left: 0 !important; line-height: 1.5; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 18px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: .8rem; color: rgba(255,255,255,.28); }
+    .footer-bottom a { color: rgba(255,255,255,.35); transition: color var(--trans); }
+    .footer-bottom a:hover { color: var(--gold-lt); }
+
+    /* ─── MOBILE NAV ────────────────────────────────────────────────── */
+    .mobile-nav {
+      display: none; position: fixed; top: 0; right: 0;
+      width: 300px; height: 100%; background: #fff; z-index: 3000;
+      flex-direction: column; overflow-y: auto;
+      box-shadow: -4px 0 20px rgba(0,0,0,.2);
+    }
+    .mobile-nav.open { display: flex; }
+    .mob-overlay {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,.5); z-index: 2999;
+    }
+    .mob-overlay.open { display: block; }
+    .mob-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 3px solid var(--red); flex-shrink: 0; }
+    .mob-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark); line-height: 1; padding: 4px 8px; }
+    .mob-links { flex: 1; }
+    .mob-links li { border-bottom: 1px solid var(--light-grey); }
+    .mob-links li a, .mob-toggle {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 20px; font-size: .95rem; font-weight: 600; color: var(--dark);
+      cursor: pointer; width: 100%; background: none; border: none;
+      text-align: left; font-family: var(--font-body); text-transform: uppercase; letter-spacing: .04em;
+    }
+    .mob-links li a:hover, .mob-toggle:hover { color: var(--red); }
+    .mob-sub { display: none; background: var(--off-white); }
+    li.mob-open > .mob-sub { display: block; }
+    .mob-sub a { display: block; padding: 10px 20px 10px 32px; font-size: .87rem; color: var(--mid-grey); text-transform: none; font-weight: 400; }
+    .mob-sub a:hover { color: var(--red); }
+    .mob-toggle .mob-arrow { display: inline-block; transition: transform .25s ease; }
+    li.mob-open > .mob-toggle .mob-arrow { transform: rotate(45deg); }
+    .mob-cta { padding: 20px; border-top: 1px solid var(--light-grey); flex-shrink: 0; }
+
+    /* ─── SCROLL ANIMATIONS ────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .cv-grid { grid-template-columns: repeat(2, 1fr); }
+      .cv-highlight-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 768px) {
+      .topbar { display: none !important; }
+      body { padding-top: calc(40px + 72px); }
+      body.bar-hidden { padding-top: 72px; }
+      header { top: 40px; }
+      body.bar-hidden header { top: 0; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .cv-grid { grid-template-columns: 1fr; }
+      .cv-highlight-stats { grid-template-columns: 1fr 1fr; }
+      .cv-card { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ CTA BAR ══════════ -->
+<div class="cta-bar" id="ctaBar">
+  <div class="cta-bar-inner">
+    <div class="cta-slides-wrap">
+      <div class="cta-slide active">
+        <span class="cta-text">🎓 <strong>Enrolment Now Open</strong> — Certification, Diploma, MBA &amp; Membership</span>
+        <a href="apply.html" class="cta-pill">Apply Now</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">🏆 <strong>15+ Years</strong> of Transforming Professionals Across Nigeria</span>
+        <a href="about-us.html" class="cta-pill">Learn More</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">🌍 <strong>6 International Partners</strong> — Qualifications Recognised Across 70+ Countries</span>
+        <a href="certification-courses.html" class="cta-pill">Explore</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">📞 Speak to an Advisor — <strong>08034711642</strong> or <strong>info@fountainptserv.com</strong></span>
+        <a href="tel:08034711642" class="cta-pill">Call Now</a>
+      </div>
+    </div>
+    <div class="cta-bar-dots" id="ctaBarDots">
+      <span class="active"></span><span></span><span></span><span></span>
+    </div>
+    <button class="cta-bar-close" id="ctaBarClose" aria-label="Dismiss">&#x2715;</button>
+  </div>
+</div>
+
+<!-- ══════════ TOP BAR ══════════ -->
+<div class="topbar" id="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="mailto:info@fountainptserv.com">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        info@fountainptserv.com
+      </a>
+      <a href="tel:+2348034711642">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24a11.36 11.36 0 003.55.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.18 21 3 13.82 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.01l-2.2 2.21z"/></svg>
+        08034711642
+      </a>
+      <a href="contact-us.html">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        8 Ijaiye Street, Off Alayaki, Enilolobo Bus-Stop, Giwa Iju Ishaga Road, Lagos, Nigeria
+      </a>
+    </div>
+    <div class="topbar-social">
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#" aria-label="Twitter/X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://wa.me/2348034711642" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header id="mainHeader">
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS Logo" />
+      <div class="nav-logo-text">
+        <span class="main">Fountain</span>
+        <span class="main">Professional Training Services</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="active">
+        <span>About Us <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="about-us.html">Who We Are</a></li>
+          <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+          <li><a href="core-values.html">Core Values</a></li>
+          <li><a href="why-choose-us.html">Why Choose Us</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Programmes <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="certification-courses.html">Certification Courses</a></li>
+          <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+          <li><a href="mba.html">MBA</a></li>
+          <li><a href="membership.html">Membership</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Institute Partnership <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business &amp; Administration</a></li>
+          <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership &amp; Governance</a></li>
+          <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management &amp; Leadership</a></li>
+          <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Services <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="our-approach.html">Our Approach</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="iws.html">Industries We Serve</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Resources <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </li>
+      <li><a href="contact-us.html">Contact</a></li>
+    </ul>
+    <a href="apply.html" class="btn btn-red nav-cta">Apply Now</a>
+    <button class="hamburger" id="menuBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ══════════ MOBILE NAV ══════════ -->
+<div class="mob-overlay" id="mobOverlay"></div>
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mob-header">
+    <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS" height="42" />
+    <button class="mob-close" id="menuClose">&#x2715;</button>
+  </div>
+  <ul class="mob-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <button class="mob-toggle" type="button">About <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="about-us.html">Who We Are</a></li>
+        <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+        <li><a href="core-values.html">Core Values</a></li>
+        <li><a href="why-choose-us.html">Why Choose Us</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Programmes <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="certification-courses.html">Certification Courses</a></li>
+        <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+        <li><a href="mba.html">MBA</a></li>
+        <li><a href="membership.html">Membership</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Partnerships <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education and Training</a></li>
+        <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business and Administration</a></li>
+        <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education and Training</a></li>
+        <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership and Governance</a></li>
+        <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management and Leadership</a></li>
+        <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Services <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="our-approach.html">Our Approach</a></li>
+        <li><a href="services.html">Our Services</a></li>
+        <li><a href="iws.html">Industries We Serve</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Resources <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="faq.html">FAQs</a></li>
+      </ul>
+    </li>
+    <li><a href="contact-us.html">Contact Us</a></li>
+  </ul>
+  <div class="mob-cta">
+    <a href="apply.html" class="btn btn-red" style="width:100%;justify-content:center;">Apply Now →</a>
+  </div>
+</nav>
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<!-- Using h21.jpg ("Globally Recognised Qualifications") — ideal for values/identity content -->
+<section class="page-hero">
+  <div class="page-hero-bg">
+    <img src="assets/images/h12.jpg" alt="Core Values — Fountain Professional Training Services" />
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-stripe"></div>
+  <div class="page-hero-content">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div class="page-hero-eyebrow">About Us · Who We Are</div>
+        <h1 class="page-hero-title">Our <em>Core</em><br><em>Values</em></h1>
+        <p class="page-hero-desc">The guiding principles that define how we operate, how we serve, and how we continue to grow as a trusted partner in professional training and consulting.</p>
+        <nav class="page-hero-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="sep">›</span>
+          <a href="about-us.html">About Us</a>
+          <span class="sep">›</span>
+          <span class="current">Core Values</span>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="red-bar"></div>
+
+<!-- ══════════ INTRO ══════════ -->
+<section class="cv-intro">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Our Foundation</span>
+      <h2 class="section-title">Principles That Drive <em>Everything We Do</em></h2>
+      <p class="cv-intro-lead">At Fountain Professional Training Services, our core values are the foundation of our identity and the guiding principles behind every decision, interaction, and service we deliver. They reflect our commitment to excellence, our responsibility to our clients, and our vision of creating lasting impact across individuals, organisations, and institutions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ VALUES GRID ══════════ -->
+<section class="cv-grid-section">
+  <div class="container">
+    <div class="cv-grid">
+
+      <!-- 1. Excellence -->
+      <div class="cv-card reveal">
+        <span class="cv-card-number">01</span>
+        <span class="cv-card-icon">🏆</span>
+        <h3 class="cv-card-title">Excellence</h3>
+        <p class="cv-card-desc">We are unwavering in our pursuit of excellence. Every programme we design and every solution we provide is driven by quality, precision, and measurable outcomes. We continuously evaluate and improve our processes to deliver exceptional value that exceeds expectations.</p>
+      </div>
+
+      <!-- 2. Integrity -->
+      <div class="cv-card reveal" style="transition-delay:.06s">
+        <span class="cv-card-number">02</span>
+        <span class="cv-card-icon">⚖️</span>
+        <h3 class="cv-card-title">Integrity</h3>
+        <p class="cv-card-desc">Integrity is at the core of our operations. We uphold the principles of honesty, transparency, accountability, and ethical conduct in all our engagements — building lasting relationships based on trust and consistent delivery on our promises.</p>
+      </div>
+
+      <!-- 3. Innovation & Creativity -->
+      <div class="cv-card reveal" style="transition-delay:.12s">
+        <span class="cv-card-number">03</span>
+        <span class="cv-card-icon">💡</span>
+        <h3 class="cv-card-title">Innovation &amp; Creativity</h3>
+        <p class="cv-card-desc">We embrace innovation by adopting modern methodologies, emerging technologies, and creative approaches to problem-solving. Our solutions are forward-thinking, adaptable, and aligned with global best practices, ensuring relevance in dynamic environments.</p>
+      </div>
+
+      <!-- 4. Empowerment & Capacity Building -->
+      <div class="cv-card reveal" style="transition-delay:.18s">
+        <span class="cv-card-number">04</span>
+        <span class="cv-card-icon">🚀</span>
+        <h3 class="cv-card-title">Empowerment &amp; Capacity Building</h3>
+        <p class="cv-card-desc">We are passionate about unlocking potential. We empower individuals and organisations with practical knowledge, relevant skills, and the confidence to excel — building long-term capacity that enables sustainable growth, leadership development, and self-reliance.</p>
+      </div>
+
+      <!-- 5. Client-Centred Excellence -->
+      <div class="cv-card reveal" style="transition-delay:.24s">
+        <span class="cv-card-number">05</span>
+        <span class="cv-card-icon">🎯</span>
+        <h3 class="cv-card-title">Client-Centred Excellence</h3>
+        <p class="cv-card-desc">Our clients are at the heart of everything we do. We take a personalised approach to understanding their needs, challenges, and goals — ensuring our solutions are relevant, impactful, and aligned with their strategic objectives. Their success is our effectiveness.</p>
+      </div>
+
+      <!-- 6. Professionalism & Accountability -->
+      <div class="cv-card reveal" style="transition-delay:.30s">
+        <span class="cv-card-number">06</span>
+        <span class="cv-card-icon">📋</span>
+        <h3 class="cv-card-title">Professionalism &amp; Accountability</h3>
+        <p class="cv-card-desc">We maintain a culture of professionalism characterised by competence, discipline, reliability, and respect. Our team delivers services with diligence and precision, taking full responsibility for outcomes through clear standards and a results-driven mindset.</p>
+      </div>
+
+      <!-- 7. Collaboration & Partnership -->
+      <div class="cv-card reveal" style="transition-delay:.36s">
+        <span class="cv-card-number">07</span>
+        <span class="cv-card-icon">🤝</span>
+        <h3 class="cv-card-title">Collaboration &amp; Partnership</h3>
+        <p class="cv-card-desc">We believe meaningful impact is achieved through collaboration. We foster strong partnerships with our clients, stakeholders, and industry experts — working together to co-create solutions that drive success through teamwork, open communication, and shared responsibility.</p>
+      </div>
+
+      <!-- 8. Continuous Learning & Development -->
+      <div class="cv-card reveal" style="transition-delay:.42s">
+        <span class="cv-card-number">08</span>
+        <span class="cv-card-icon">📚</span>
+        <h3 class="cv-card-title">Continuous Learning &amp; Development</h3>
+        <p class="cv-card-desc">We are committed to lifelong learning. We continuously update our knowledge, refine our expertise, and adapt to global trends and industry advancements — ensuring our services remain relevant, competitive, and capable of addressing evolving challenges.</p>
+      </div>
+
+      <!-- 9. Impact & Sustainability -->
+      <div class="cv-card reveal" style="transition-delay:.48s">
+        <span class="cv-card-number">09</span>
+        <span class="cv-card-icon">🌱</span>
+        <h3 class="cv-card-title">Impact &amp; Sustainability</h3>
+        <p class="cv-card-desc">We are driven by results that matter. Our focus is on creating measurable impact that leads to sustainable growth and long-term success — improving performance, strengthening systems, and delivering lasting value across every intervention we design.</p>
+      </div>
+
+      <!-- 10. Inclusiveness & Respect -->
+      <div class="cv-card reveal" style="transition-delay:.54s">
+        <span class="cv-card-number">10</span>
+        <span class="cv-card-icon">🌍</span>
+        <h3 class="cv-card-title">Inclusiveness &amp; Respect</h3>
+        <p class="cv-card-desc">We respect diversity and promote inclusiveness in all our engagements. We value different perspectives, cultures, and ideas — recognising that they enrich learning and drive innovation. We create environments where everyone feels valued, heard, and empowered to contribute.</p>
+      </div>
+
+      <!-- 11. Ethical Leadership -->
+      <div class="cv-card reveal" style="transition-delay:.60s">
+        <span class="cv-card-number">11</span>
+        <span class="cv-card-icon">🧭</span>
+        <h3 class="cv-card-title">Ethical Leadership</h3>
+        <p class="cv-card-desc">We promote responsible leadership built on strong moral principles. We encourage decision-making that reflects fairness, accountability, and social responsibility — ensuring our influence contributes positively to individuals, organisations, and society at large.</p>
+      </div>
+
+      <!-- 12. Reliability & Consistency -->
+      <div class="cv-card reveal" style="transition-delay:.66s">
+        <span class="cv-card-number">12</span>
+        <span class="cv-card-icon">🔒</span>
+        <h3 class="cv-card-title">Reliability &amp; Consistency</h3>
+        <p class="cv-card-desc">We are dependable in all that we do. Our clients trust us to deliver consistent, high-quality services within agreed timelines. We are committed to maintaining standards that reinforce our reputation as a reliable partner in training and consulting.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ HIGHLIGHT BAND ══════════ -->
+<section class="cv-highlight">
+  <div class="container">
+    <div class="cv-highlight-inner">
+      <div class="cv-highlight-text reveal">
+        <span class="section-label">Our Track Record</span>
+        <h2 class="section-title">Values <em>In Action</em> — Measured by Real Results</h2>
+        <p>These core values are not just statements — they are embedded in our culture and reflected in our actions. Every programme we deliver, every client we serve, and every partnership we build is a direct expression of these principles. They define how we operate and how we continue to grow.</p>
+      </div>
+      <div class="cv-highlight-stats reveal" style="transition-delay:.15s">
+        <div class="cv-stat">
+          <div class="val">2,000+</div>
+          <div class="lbl">Graduates Empowered</div>
+        </div>
+        <div class="cv-stat">
+          <div class="val">15+</div>
+          <div class="lbl">Years of Excellence</div>
+        </div>
+        <div class="cv-stat">
+          <div class="val">6</div>
+          <div class="lbl">Global Partners</div>
+        </div>
+        <div class="cv-stat">
+          <div class="val">20+</div>
+          <div class="lbl">Programmes Offered</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CLOSING STATEMENT ══════════ -->
+<section class="cv-closing">
+  <div class="container">
+    <div class="cv-closing-inner reveal">
+      <span class="section-label">Our Commitment</span>
+      <p class="cv-closing-quote">
+        These core values are not just statements — they are embedded in our culture and reflected in our actions. They define <strong>how we operate</strong>, <strong>how we serve</strong>, and <strong>how we continue to grow</strong> as a trusted partner in professional training and consulting.
+      </p>
+      <a href="about-us.html" class="btn btn-red">Learn More About Us →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA STRIP ══════════ -->
+<section class="cv-cta-strip">
+  <div class="container">
+    <h2>Ready to Experience These Values First-Hand?</h2>
+    <p>Join a community of professionals who are transformed through excellence, integrity, and innovation.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="apply.html" class="btn btn-white">Apply Now →</a>
+      <a href="contact-us.html" class="btn btn-outline-white">Speak to an Advisor</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain Professional Training Services" />
+          <p>Your trusted partner in Consulting, Education and Training. Empowering professionals across Nigeria and beyond with globally recognised qualifications.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="https://wa.me/2348034711642" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="certification-courses.html">Certification Courses</a></li>
+            <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+            <li><a href="mba.html">MBA</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="contact-us.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Institute Partners</h4>
+          <ul>
+            <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education and Training</a></li>
+            <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business and Administration</a></li>
+            <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education and Training</a></li>
+            <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership and Governance</a></li>
+            <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management and Leadership</a></li>
+            <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="apply.html">Apply Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <a href="mailto:info@fountainptserv.com" style="display:flex;align-items:flex-start;gap:8px;">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:2px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                info@fountainptserv.com
+              </a>
+            </li>
+            <li>
+              <a href="tel:+2348034711642" style="display:flex;align-items:flex-start;gap:8px;">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:2px;"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24a11.36 11.36 0 003.55.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.18 21 3 13.82 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.01l-2.2 2.21z"/></svg>
+                08034711642
+              </a>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:8px;color:rgba(255,255,255,.45);font-size:.85rem;line-height:1.6;">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:3px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              8 Ijaiye Street, Off Alayaki, Enilolobo Bus-Stop, Giwa Iju Ishaga Road, Lagos, Nigeria
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>&copy; 2026 Fountain Professional Training Services. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ─── CTA BAR ──────────────────────────────────────────────── */
+  var ctaSlides = document.querySelectorAll('.cta-slide');
+  var ctaDots   = document.querySelectorAll('#ctaBarDots span');
+  var ctaBar    = document.getElementById('ctaBar');
+  var ctaCur    = 0;
+
+  function goCtaSlide(n) {
+    ctaSlides[ctaCur].classList.remove('active');
+    ctaDots[ctaCur].classList.remove('active');
+    ctaCur = n % ctaSlides.length;
+    ctaSlides[ctaCur].classList.add('active');
+    ctaDots[ctaCur].classList.add('active');
+  }
+  ctaDots.forEach(function(d, i) { d.addEventListener('click', function() { goCtaSlide(i); }); });
+  setInterval(function() { goCtaSlide(ctaCur + 1); }, 4000);
+
+  document.getElementById('ctaBarClose').addEventListener('click', function() {
+    ctaBar.classList.add('hidden');
+    document.body.classList.add('bar-hidden');
+  });
+
+  /* ─── MOBILE NAV ──────────────────────────────────────────── */
+  var mobileNav  = document.getElementById('mobileNav');
+  var mobOverlay = document.getElementById('mobOverlay');
+  var menuBtn    = document.getElementById('menuBtn');
+  var menuClose  = document.getElementById('menuClose');
+
+  function openMobileNav() {
+    mobileNav.classList.add('open'); mobOverlay.classList.add('open');
+    mobileNav.setAttribute('aria-hidden', 'false');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    mobileNav.classList.remove('open'); mobOverlay.classList.remove('open');
+    mobileNav.setAttribute('aria-hidden', 'true');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  if (menuBtn)    menuBtn.addEventListener('click', openMobileNav);
+  if (menuClose)  menuClose.addEventListener('click', closeMobileNav);
+  if (mobOverlay) mobOverlay.addEventListener('click', closeMobileNav);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMobileNav(); });
+
+  /* ─── MOBILE SUB-MENU ACCORDIONS ─────────────────────────── */
+  document.querySelectorAll('.mob-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault(); e.stopPropagation();
+      var parent = btn.closest('li');
+      if (!parent) return;
+      var isOpen = parent.classList.contains('mob-open');
+      document.querySelectorAll('.mob-links li.mob-open').forEach(function(li) { li.classList.remove('mob-open'); });
+      if (!isOpen) parent.classList.add('mob-open');
+    });
+  });
+
+  /* ─── SCROLL REVEAL ───────────────────────────────────────── */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(r) { observer.observe(r); });
+
+}());
+</script>
+</body>
+</html>

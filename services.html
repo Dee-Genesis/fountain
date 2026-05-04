@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="assets/icons/fountain-professional-training-services-logo.png">
+  <title>Our Services – Fountain Professional Training Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Source+Sans+3:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --red:        #CC0000;
+      --red-dk:     #A00000;
+      --red-lt:     #E53030;
+      --gold:       #C9A227;
+      --gold-lt:    #E8C04A;
+      --gold-pale:  #FFF8E7;
+      --white:      #FFFFFF;
+      --off-white:  #F5F5F5;
+      --light-grey: #EBEBEB;
+      --mid-grey:   #6B7280;
+      --dark:       #1A1A1A;
+      --dark-2:     #111111;
+      --charcoal:   #2D2D2D;
+      --border:     rgba(0,0,0,.1);
+      --radius:     6px;
+      --shadow-sm:  0 2px 10px rgba(0,0,0,.08);
+      --shadow-md:  0 8px 30px rgba(0,0,0,.14);
+      --shadow-lg:  0 20px 60px rgba(0,0,0,.2);
+      --trans:      .25s cubic-bezier(.4,0,.2,1);
+      --font-display: 'Playfair Display', 'Times New Roman', Georgia, serif;
+      --font-body:    'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+      --font-impact:  'Bebas Neue', 'Arial Narrow', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--dark);
+      overflow-x: hidden;
+      padding-top: calc(40px + 36px + 72px);
+    }
+    body.bar-hidden { padding-top: calc(36px + 72px); }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-body); font-size: .75rem; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 14px; font-weight: 700;
+    }
+    .section-label::before {
+      content: ''; display: block; width: 28px; height: 3px;
+      background: var(--red); border-radius: 2px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem); line-height: 1.15; color: var(--dark);
+    }
+    .section-title em { font-style: italic; color: var(--red); }
+    .section-title.white { color: #fff; }
+    .section-title.white em { color: var(--gold-lt); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: 4px;
+      font-family: var(--font-body); font-size: .88rem; letter-spacing: .06em;
+      text-transform: uppercase; font-weight: 700; transition: var(--trans); cursor: pointer; border: none;
+    }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(204,0,0,.35); }
+    .btn-outline-red { background: transparent; color: var(--red); border: 2px solid var(--red); }
+    .btn-outline-red:hover { background: var(--red); color: #fff; }
+    .btn-gold { background: var(--gold); color: #fff; }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); }
+    .btn-white { background: #fff; color: var(--dark); }
+    .btn-white:hover { background: var(--gold); color: #fff; }
+    .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.5); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+
+    /* ─── CTA BAR ──────────────────────────────────────────────────── */
+    .cta-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 2100;
+      background: var(--dark-2);
+      height: 40px; overflow: hidden;
+      border-bottom: 2px solid var(--red);
+      transition: transform .4s ease;
+    }
+    .cta-bar.hidden { transform: translateY(-100%); }
+    .cta-bar-inner {
+      height: 100%; max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; padding: 0 16px;
+    }
+    .cta-slides-wrap { flex: 1; overflow: hidden; height: 100%; position: relative; }
+    .cta-slide {
+      position: absolute; inset: 0; display: flex; align-items: center;
+      justify-content: center; gap: 10px;
+      opacity: 0; transform: translateY(14px);
+      transition: opacity .5s ease, transform .5s ease; pointer-events: none;
+    }
+    .cta-slide.active { opacity: 1; transform: none; pointer-events: auto; }
+    .cta-slide .cta-text {
+      font-family: var(--font-body); font-size: .82rem; letter-spacing: .06em;
+      color: rgba(255,255,255,.82); text-transform: uppercase; white-space: nowrap;
+    }
+    .cta-slide .cta-text strong { color: var(--gold-lt); }
+    .cta-slide .cta-pill {
+      display: inline-flex; align-items: center;
+      background: var(--red); color: #fff; border-radius: 100px;
+      font-family: var(--font-body); font-size: .72rem; letter-spacing: .08em;
+      text-transform: uppercase; padding: 3px 12px; font-weight: 700;
+      flex-shrink: 0; transition: var(--trans); white-space: nowrap;
+    }
+    .cta-slide .cta-pill:hover { background: var(--red-lt); }
+    .cta-bar-dots { display: flex; gap: 6px; align-items: center; margin-left: 12px; flex-shrink: 0; }
+    .cta-bar-dots span {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(255,255,255,.25); cursor: pointer; transition: var(--trans);
+    }
+    .cta-bar-dots span.active { background: var(--red); width: 14px; border-radius: 3px; }
+    .cta-bar-close {
+      margin-left: 12px; background: none; border: none;
+      color: rgba(255,255,255,.4); cursor: pointer; font-size: .95rem; line-height: 1;
+      padding: 2px 4px; transition: color var(--trans); flex-shrink: 0;
+    }
+    .cta-bar-close:hover { color: #fff; }
+
+    /* ─── TOP BAR ──────────────────────────────────────────────────── */
+    .topbar {
+      position: fixed; top: 40px; left: 0; right: 0; z-index: 1100;
+      background: var(--off-white); color: var(--mid-grey);
+      font-size: .8rem; padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      transition: top .4s ease;
+    }
+    body.bar-hidden .topbar { top: 0; }
+    .topbar .container { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .topbar-left { display: flex; gap: 20px; align-items: center; }
+    .topbar-left a { color: var(--mid-grey); transition: color var(--trans); display: flex; align-items: center; gap: 5px; }
+    .topbar-left a:hover { color: var(--red); }
+    .topbar-social { display: flex; gap: 6px; align-items: center; }
+    .topbar-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(0,0,0,.07); color: var(--charcoal); transition: var(--trans);
+    }
+    .topbar-social a:hover { background: var(--red); color: #fff; }
+    .topbar-social svg { width: 13px; height: 13px; }
+
+    /* ─── HEADER ───────────────────────────────────────────────────── */
+    header {
+      position: fixed;
+      top: calc(40px + 36px);
+      left: 0; right: 0; z-index: 1000;
+      background: #fff;
+      box-shadow: 0 2px 0 var(--border), var(--shadow-sm);
+      transition: top .4s ease;
+    }
+    body.bar-hidden header { top: 36px; }
+
+    nav { display: flex; align-items: center; padding: 0 24px; max-width: 1200px; margin: 0 auto; height: 72px; gap: 6px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .nav-logo-text .main { font-family: var(--font-display); font-size: .95rem; font-weight: 700; color: var(--dark); }
+    .nav-logo-text .sub { font-size: .7rem; color: var(--mid-grey); letter-spacing: .04em; }
+
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a,
+    .nav-links > li > span {
+      display: flex; align-items: center; gap: 4px; padding: 8px 12px;
+      font-size: .84rem; font-weight: 600; color: var(--dark); cursor: pointer;
+      border-radius: 4px; transition: var(--trans); white-space: nowrap;
+      font-family: var(--font-body); letter-spacing: .02em; text-transform: uppercase;
+    }
+    .nav-links > li > a:hover,
+    .nav-links > li > span:hover,
+    .nav-links > li.active > a { color: var(--red); }
+    .nav-links > li > span .arrow { transition: transform var(--trans); }
+    .nav-links > li:hover > span .arrow { transform: rotate(180deg); }
+    .dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0;
+      background: #fff; border-radius: var(--radius);
+      box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+      border-top: 3px solid var(--red);
+      min-width: 240px; padding: 6px; opacity: 0; pointer-events: none;
+      transform: translateY(8px); transition: var(--trans); z-index: 100;
+    }
+    .nav-links > li:hover .dropdown { opacity: 1; pointer-events: all; transform: none; }
+    .dropdown a {
+      display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+      font-size: .84rem; border-radius: 4px; transition: var(--trans); color: var(--charcoal);
+    }
+    .dropdown a:hover { background: rgba(204,0,0,.06); color: var(--red); padding-left: 16px; }
+    .nav-cta { margin-left: 10px; padding: 9px 20px; font-size: .78rem; white-space: nowrap; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; border: none; background: none;
+    }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: var(--trans); }
+
+    /* ─── RED DIVIDER BAR ──────────────────────────────────────────── */
+    .red-bar {
+      height: 6px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--red-lt) 40%, var(--gold) 100%);
+    }
+
+    /* ─── PAGE HERO ────────────────────────────────────────────────── */
+    .page-hero {
+      position: relative;
+      height: 62vh; min-height: 480px;
+      overflow: hidden; background: var(--dark-2);
+      display: flex; align-items: center;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+    }
+    .page-hero-bg img {
+      width: 100%; height: 100%; object-fit: cover;
+      transform: scale(1.04);
+      animation: heroZoom 8s ease forwards;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.04); }
+      to   { transform: scale(1); }
+    }
+    .page-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, rgba(10,10,10,.88) 0%, rgba(10,10,10,.55) 55%, rgba(204,0,0,.18) 100%);
+    }
+    /* Left accent stripe */
+    .page-hero-stripe {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 7px;
+      background: linear-gradient(to bottom, var(--red), var(--gold));
+      z-index: 5;
+    }
+    .page-hero-content {
+      position: relative; z-index: 4; width: 100%;
+    }
+    .page-hero-inner {
+      max-width: 780px; padding-left: 24px;
+    }
+    .page-hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-body); font-size: .75rem; letter-spacing: .28em;
+      text-transform: uppercase; color: var(--gold-lt); margin-bottom: 20px;
+      background: rgba(204,0,0,.3); padding: 6px 14px; border-left: 3px solid var(--gold);
+      animation: fadeUp .7s ease .2s both;
+    }
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5.5vw, 4.5rem); line-height: 1.06;
+      color: #fff; margin-bottom: 22px; font-weight: 900;
+      animation: fadeUp .7s ease .35s both;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--gold-lt); }
+    .page-hero-desc {
+      font-size: 1.06rem; color: rgba(255,255,255,.78); line-height: 1.8;
+      max-width: 600px; margin-bottom: 36px;
+      animation: fadeUp .7s ease .5s both;
+    }
+    .page-hero-actions {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      animation: fadeUp .7s ease .65s both;
+    }
+    /* Breadcrumb */
+    .page-hero-breadcrumb {
+      position: absolute; bottom: 28px; left: 0; right: 0; z-index: 6;
+    }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-size: .78rem; letter-spacing: .08em;
+      text-transform: uppercase; color: rgba(255,255,255,.45);
+    }
+    .breadcrumb a { color: rgba(255,255,255,.45); transition: color var(--trans); }
+    .breadcrumb a:hover { color: var(--gold-lt); }
+    .breadcrumb .sep { color: rgba(255,255,255,.25); }
+    .breadcrumb .current { color: var(--gold-lt); font-weight: 700; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ─── INTRO BAND ───────────────────────────────────────────────── */
+    .services-intro {
+      background: var(--dark-2); padding: 64px 0;
+      border-bottom: 4px solid var(--red);
+      position: relative; overflow: hidden;
+    }
+    .services-intro::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+    }
+    .intro-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .intro-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1.2; color: #fff; margin-bottom: 20px; font-weight: 700;
+    }
+    .intro-text h2 em { font-style: italic; color: var(--gold-lt); }
+    .intro-text p {
+      font-size: 1rem; color: rgba(255,255,255,.68); line-height: 1.88; margin-bottom: 14px;
+    }
+    .intro-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .intro-pillar {
+      background: rgba(255,255,255,.05); border-left: 4px solid var(--red);
+      padding: 16px 18px;
+    }
+    .intro-pillar h4 {
+      font-family: var(--font-body); font-size: .78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em; color: var(--gold-lt); margin-bottom: 5px;
+    }
+    .intro-pillar p { font-size: .82rem; color: rgba(255,255,255,.52); line-height: 1.62; }
+
+    /* ─── SERVICES MAIN ────────────────────────────────────────────── */
+    .services-main { padding: 100px 0; background: var(--white); }
+    .services-main-header {
+      text-align: center; margin-bottom: 70px;
+    }
+    .services-main-header p.lead {
+      font-size: 1.04rem; color: var(--mid-grey); line-height: 1.85; max-width: 680px; margin: 16px auto 0;
+    }
+
+    /* Service rows — alternate layout */
+    .svc-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: start; margin-bottom: 72px; padding-bottom: 72px;
+      border-bottom: 1px solid var(--border);
+    }
+    .svc-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .svc-row.reverse .svc-content { order: 1; }
+    .svc-row.reverse .svc-visual { order: 0; }
+
+    .svc-num {
+      font-family: var(--font-impact); font-size: 5rem; color: rgba(204,0,0,.12);
+      line-height: 1; margin-bottom: -12px;
+    }
+    .svc-content h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--dark); margin-bottom: 14px; font-weight: 700;
+    }
+    .svc-content h2 em { font-style: italic; color: var(--red); }
+    .svc-content > p {
+      font-size: .96rem; color: var(--mid-grey); line-height: 1.88; margin-bottom: 22px;
+    }
+    .svc-sub-label {
+      font-family: var(--font-body); font-size: .72rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .svc-sub-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--red); }
+    .svc-list {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-bottom: 20px;
+    }
+    .svc-list li {
+      font-size: .84rem; color: var(--charcoal); line-height: 1.55;
+      display: flex; align-items: flex-start; gap: 7px;
+    }
+    .svc-list li::before {
+      content: ''; display: block; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--red); margin-top: 5px; flex-shrink: 0;
+    }
+    .svc-list.single-col { grid-template-columns: 1fr; }
+    .svc-outcome {
+      background: var(--off-white); border-left: 4px solid var(--gold);
+      padding: 14px 18px; margin-top: 18px;
+    }
+    .svc-outcome strong {
+      font-family: var(--font-body); font-size: .72rem; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--gold); font-weight: 700; display: block; margin-bottom: 5px;
+    }
+    .svc-outcome p { font-size: .84rem; color: var(--mid-grey); line-height: 1.6; }
+
+    /* Visual panel */
+    .svc-visual {
+      background: var(--dark-2); padding: 36px 30px;
+      position: relative; overflow: hidden;
+    }
+    .svc-visual::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+    }
+    .svc-visual-label {
+      font-family: var(--font-body); font-size: .7rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold-lt); margin-bottom: 18px; font-weight: 700;
+    }
+    .svc-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+    .svc-tag {
+      background: rgba(204,0,0,.18); color: rgba(255,255,255,.82);
+      border: 1px solid rgba(204,0,0,.3);
+      font-size: .76rem; padding: 5px 13px; letter-spacing: .05em; font-weight: 600;
+    }
+    .svc-icon-large {
+      font-size: 3.5rem; margin-bottom: 16px; display: block;
+    }
+    .svc-visual-value {
+      border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px; margin-top: 8px;
+    }
+    .svc-visual-value h4 {
+      font-family: var(--font-body); font-size: .76rem; letter-spacing: .14em;
+      text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 12px;
+    }
+    .value-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+    .value-item .vi-dot { width: 8px; height: 8px; background: var(--gold); flex-shrink: 0; margin-top: 4px; }
+    .value-item p { font-size: .82rem; color: rgba(255,255,255,.6); line-height: 1.55; }
+
+    /* ─── DELIVERY METHOD ──────────────────────────────────────────── */
+    .delivery { padding: 90px 0; background: var(--dark-2); position: relative; overflow: hidden; }
+    .delivery::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+    }
+    .delivery-header { text-align: center; margin-bottom: 60px; }
+    .delivery-header h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.6rem); color: #fff; }
+    .delivery-header h2 em { font-style: italic; color: var(--gold-lt); }
+    .delivery-header p { font-size: 1rem; color: rgba(255,255,255,.6); max-width: 580px; margin: 16px auto 0; line-height: 1.8; }
+    .delivery-steps {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+    }
+    .delivery-step {
+      background: rgba(255,255,255,.04); padding: 30px 20px;
+      text-align: center; position: relative; transition: var(--trans);
+    }
+    .delivery-step:hover { background: rgba(255,255,255,.09); }
+    .delivery-step::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: var(--red); transform: scaleX(0); transform-origin: left; transition: var(--trans);
+    }
+    .delivery-step:hover::after { transform: scaleX(1); }
+    .ds-num {
+      font-family: var(--font-impact); font-size: 2.6rem; color: rgba(204,0,0,.4); line-height: 1; margin-bottom: 10px;
+    }
+    .ds-icon { font-size: 1.6rem; margin-bottom: 10px; }
+    .ds-title {
+      font-family: var(--font-body); font-size: .82rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em; color: #fff; margin-bottom: 8px;
+    }
+    .ds-desc { font-size: .8rem; color: rgba(255,255,255,.48); line-height: 1.62; }
+
+    /* ─── PARTNERSHIPS STRIP ───────────────────────────────────────── */
+    .partnerships-strip { padding: 80px 0; background: var(--off-white); }
+    .partnerships-strip-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center; }
+    .ps-left h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 2.8vw, 2.2rem); color: var(--dark); margin-bottom: 14px; }
+    .ps-left h2 em { font-style: italic; color: var(--red); }
+    .ps-left p { font-size: .94rem; color: var(--mid-grey); line-height: 1.82; margin-bottom: 22px; }
+    .ps-items { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .ps-item { background: #fff; padding: 20px 18px; border-top: 3px solid var(--red); transition: var(--trans); }
+    .ps-item:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .ps-item h4 { font-family: var(--font-body); font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--dark); margin-bottom: 6px; }
+    .ps-item p { font-size: .8rem; color: var(--mid-grey); line-height: 1.6; }
+
+    /* ─── STATS BANNER ─────────────────────────────────────────────── */
+    .stats-banner { background: var(--red); padding: 52px 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { text-align: center; padding: 16px; border-right: 1px solid rgba(255,255,255,.2); }
+    .stat-item:last-child { border-right: none; }
+    .stat-item .val { font-family: var(--font-impact); font-size: 3.2rem; color: #fff; line-height: 1; }
+    .stat-item .lbl { font-size: .82rem; color: rgba(255,255,255,.75); margin-top: 8px; text-transform: uppercase; letter-spacing: .06em; }
+
+    /* ─── CTA FULL ──────────────────────────────────────────────────── */
+    .cta-full { padding: 100px 0; background: var(--dark-2); position: relative; overflow: hidden; }
+    .cta-full::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+    }
+    .cta-full-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .cta-full-text h2 {
+      font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.6rem); color: #fff; margin-bottom: 16px;
+    }
+    .cta-full-text h2 em { font-style: italic; color: var(--gold-lt); }
+    .cta-full-text p { font-size: 1rem; color: rgba(255,255,255,.65); line-height: 1.82; margin-bottom: 28px; }
+    .cta-full-text .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .cta-contact-box { background: rgba(204,0,0,.15); border: 1px solid rgba(204,0,0,.3); padding: 36px 30px; }
+    .cta-contact-box h3 { font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-bottom: 22px; }
+    .cta-contact-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+    .cta-contact-item .ci-icon { width: 40px; height: 40px; background: rgba(204,0,0,.2); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .cta-contact-item .ci-label { font-family: var(--font-body); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-lt); font-weight: 700; margin-bottom: 3px; }
+    .cta-contact-item .ci-val { font-size: .88rem; color: rgba(255,255,255,.75); }
+    .cta-contact-item a.ci-val:hover { color: var(--gold-lt); }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────── */
+    footer { background: var(--dark-2); color: rgba(255,255,255,.55); border-top: 4px solid var(--red); }
+    .footer-top { padding: 64px 0 44px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr; gap: 36px; }
+    .footer-brand img { height: 48px; margin-bottom: 14px; }
+    .footer-brand p { font-size: .86rem; line-height: 1.8; color: rgba(255,255,255,.45); max-width: 280px; }
+    .footer-social { display: flex; gap: 8px; margin-top: 16px; }
+    .footer-social a { width: 32px; height: 32px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; transition: var(--trans); color: rgba(255,255,255,.55); }
+    .footer-social a:hover { background: var(--red); color: #fff; }
+    .footer-social svg { width: 14px; height: 14px; }
+    .footer-col h4 { font-family: var(--font-body); font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #fff; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--red); display: inline-block; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: .85rem; color: rgba(255,255,255,.45); transition: color var(--trans); }
+    .footer-col ul li a:hover { color: var(--gold-lt); padding-left: 4px; }
+    .footer-contact-list li { margin-bottom: 12px !important; }
+    .footer-contact-list li a { padding-left: 0 !important; line-height: 1.5; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 18px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: .8rem; color: rgba(255,255,255,.28); }
+    .footer-bottom a { color: rgba(255,255,255,.35); transition: color var(--trans); }
+    .footer-bottom a:hover { color: var(--gold-lt); }
+
+    /* ─── MOBILE NAV ───────────────────────────────────────────────── */
+    .mobile-nav {
+      display: none; position: fixed; top: 0; right: 0;
+      width: 300px; height: 100%; background: #fff;
+      z-index: 3000; flex-direction: column; overflow-y: auto;
+      box-shadow: -4px 0 20px rgba(0,0,0,.2);
+    }
+    .mobile-nav.open { display: flex; }
+    .mob-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); z-index: 2999; }
+    .mob-overlay.open { display: block; }
+    .mob-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 3px solid var(--red); flex-shrink: 0; }
+    .mob-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark); line-height: 1; padding: 4px 8px; }
+    .mob-links { flex: 1; }
+    .mob-links li { border-bottom: 1px solid var(--light-grey); }
+    .mob-links li a, .mob-toggle { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; font-size: .95rem; font-weight: 600; color: var(--dark); cursor: pointer; width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); text-transform: uppercase; letter-spacing: .04em; }
+    .mob-links li a:hover, .mob-toggle:hover { color: var(--red); }
+    .mob-sub { display: none; background: var(--off-white); }
+    li.mob-open > .mob-sub { display: block; }
+    .mob-sub a { display: block; padding: 10px 20px 10px 32px; font-size: .87rem; color: var(--mid-grey); text-transform: none; font-weight: 400; }
+    .mob-sub a:hover { color: var(--red); }
+    .mob-toggle .mob-arrow { display: inline-block; transition: transform .25s ease; }
+    li.mob-open > .mob-toggle .mob-arrow { transform: rotate(45deg); }
+    .mob-cta { padding: 20px; border-top: 1px solid var(--light-grey); flex-shrink: 0; }
+
+    /* ─── SCROLL ANIMATIONS ────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .intro-grid { grid-template-columns: 1fr; gap: 40px; }
+      .svc-row { grid-template-columns: 1fr; gap: 40px; }
+      .svc-row.reverse .svc-content { order: 0; }
+      .svc-row.reverse .svc-visual { order: 1; }
+      .delivery-steps { grid-template-columns: repeat(3, 1fr); }
+      .partnerships-strip-inner { grid-template-columns: 1fr; gap: 40px; }
+      .ps-items { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid .stat-item:nth-child(2) { border-right: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .cta-full-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      .topbar { display: none !important; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; margin-left: auto; }
+      header { top: 40px !important; }
+      body { padding-top: calc(40px + 72px) !important; }
+      body.bar-hidden { padding-top: 72px !important; }
+      body.bar-hidden header { top: 0 !important; }
+      .page-hero { height: 70vh; }
+      .delivery-steps { grid-template-columns: 1fr 1fr; }
+      .ps-items { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .svc-list { grid-template-columns: 1fr; }
+      .cta-bar .cta-pill { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ CTA BAR ══════════ -->
+<div class="cta-bar" id="ctaBar">
+  <div class="cta-bar-inner">
+    <div class="cta-slides-wrap">
+      <div class="cta-slide active">
+        <span class="cta-text">🚀 Enrolment is <strong>Open Now</strong> — Transform Your Career with a Globally Recognised Qualification</span>
+        <a href="apply.html" class="cta-pill">Apply Today</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">🎓 <strong>Certification · Diploma · MBA · Membership</strong> — Over 20 Programmes to Choose From</span>
+        <a href="certification-courses.html" class="cta-pill">Explore All</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">🌍 <strong>6 International Partners</strong> — Qualifications Recognised Across 70+ Countries</span>
+        <a href="index.html#partnerships" class="cta-pill">Learn More</a>
+      </div>
+      <div class="cta-slide">
+        <span class="cta-text">📞 Speak to an Advisor — <strong>08034711642</strong> or <strong>info@fountainptserv.com</strong></span>
+        <a href="tel:08034711642" class="cta-pill">Call Now</a>
+      </div>
+    </div>
+    <div class="cta-bar-dots" id="ctaBarDots">
+      <span class="active"></span><span></span><span></span><span></span>
+    </div>
+    <button class="cta-bar-close" id="ctaBarClose" aria-label="Dismiss">&#x2715;</button>
+  </div>
+</div>
+
+<!-- ══════════ TOP BAR ══════════ -->
+<div class="topbar" id="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="mailto:info@fountainptserv.com">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        info@fountainptserv.com
+      </a>
+      <a href="tel:+2348034711642">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24a11.36 11.36 0 003.55.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.18 21 3 13.82 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.01l-2.2 2.21z"/></svg>
+        08034711642
+      </a>
+      <a href="contact-us.html">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        8 Ijaiye Street, Lagos, Nigeria
+      </a>
+    </div>
+    <div class="topbar-social">
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#" aria-label="Twitter/X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://wa.me/2348034711642" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header id="mainHeader">
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS Logo" />
+      <div class="nav-logo-text">
+        <span class="main">Fountain</span>
+        <span class="main">Professional Training Services</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <span>About Us <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="about-us.html">Who We Are</a></li>
+          <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+          <li><a href="core-values.html">Core Values</a></li>
+          <li><a href="why-choose-us.html">Why Choose Us</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Programmes <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="certification-courses.html">Certification Courses</a></li>
+          <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+          <li><a href="mba.html">MBA</a></li>
+          <li><a href="membership.html">Membership</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Institute Partnership <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business &amp; Administration</a></li>
+          <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership &amp; Governance</a></li>
+          <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management &amp; Leadership</a></li>
+          <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+        </ul>
+      </li>
+      <li class="active">
+        <span>Services <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="our-approach.html">Our Approach</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="iws.html">Industries We Serve</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Resources <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </li>
+      <li><a href="contact-us.html">Contact</a></li>
+    </ul>
+    <a href="apply.html" class="btn btn-red nav-cta">Apply Now</a>
+    <button class="hamburger" id="menuBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mob-overlay" id="mobOverlay"></div>
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mob-header">
+    <img src="assets/icons/fountain-professional-training-services-logo.png" height="36" alt="Logo" />
+    <button class="mob-close" id="menuClose" aria-label="Close menu">&#x2715;</button>
+  </div>
+  <ul class="mob-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <button class="mob-toggle" type="button">About <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="about-us.html">Who We Are</a></li>
+        <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+        <li><a href="core-values.html">Core Values</a></li>
+        <li><a href="why-choose-us.html">Why Choose Us</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Programmes <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="certification-courses.html">Certification Courses</a></li>
+        <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+        <li><a href="mba.html">MBA</a></li>
+        <li><a href="membership.html">Membership</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Partnerships <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="https://aietglobal.us" target="_blank">AIET Global</a></li>
+        <li><a href="https://cibiaglobal.org" target="_blank">CIBIA Global</a></li>
+        <li><a href="https://cietglobal.us" target="_blank">CIET Global</a></li>
+        <li><a href="https://cilgglobal.org" target="_blank">CILG Global</a></li>
+        <li><a href="https://cimlglobal.us" target="_blank">CIML Global</a></li>
+        <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Services <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="our-approach.html">Our Approach</a></li>
+        <li><a href="services.html">Our Services</a></li>
+        <li><a href="iws.html">Industries We Serve</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Resources <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="faq.html">FAQs</a></li>
+      </ul>
+    </li>
+    <li><a href="contact-us.html">Contact Us</a></li>
+  </ul>
+  <div class="mob-cta">
+    <a href="apply.html" class="btn btn-red" style="width:100%;justify-content:center;">Apply Now →</a>
+  </div>
+</nav>
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<section class="page-hero">
+  <div class="page-hero-bg">
+    <!-- Using h1.jpg from the homepage hero – the leadership/classroom image -->
+    <img src="assets/images/h1.jpg" alt="Fountain Professional Training Services – Our Services" />
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-stripe"></div>
+  <div class="page-hero-content">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div class="page-hero-eyebrow">Consulting · Training · Development</div>
+        <h1>Our <em>Services</em> —<br>Transforming Potential<br>into Performance</h1>
+        <p class="page-hero-desc">A robust, integrated portfolio of training, consulting, and capacity development solutions designed for individuals, organisations, and institutions in a knowledge-driven economy.</p>
+        <div class="page-hero-actions">
+          <a href="contact-us.html" class="btn btn-red">Enquire About a Service →</a>
+          <a href="apply.html" class="btn btn-outline-white">Enrol Today</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-hero-breadcrumb">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">›</span>
+        <a href="#">Services</a>
+        <span class="sep">›</span>
+        <span class="current">Our Services</span>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ INTRO BAND ══════════ -->
+<section class="services-intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-text reveal">
+        <p class="section-label" style="color:var(--gold-lt);">Who We Are</p>
+        <h2>Built on <em>Excellence,</em><br>Innovation &amp; Strategic<br>Collaboration</h2>
+        <p>At Fountain Professional Training Services, we deliver a robust and integrated portfolio of training, consulting, and capacity development solutions designed to meet the evolving demands of individuals, organisations, and institutions in a knowledge-driven economy.</p>
+        <p>We actively partner with recognised professional bodies, industry regulators, and academic institutions to ensure that our programmes meet global standards, enhance professional recognition, and deliver real career and organisational value.</p>
+        <a href="contact-us.html" class="btn btn-gold" style="margin-top:10px;">Get in Touch →</a>
+      </div>
+      <div class="intro-pillars reveal" style="transition-delay:.1s;">
+        <div class="intro-pillar">
+          <h4>🤝 Strategic Partnerships</h4>
+          <p>Active collaboration with professional bodies, industry regulators, and academic institutions worldwide.</p>
+        </div>
+        <div class="intro-pillar">
+          <h4>🌍 Global Standards</h4>
+          <p>Industry-aligned certifications and internationally relevant frameworks positioning you competitively.</p>
+        </div>
+        <div class="intro-pillar">
+          <h4>📐 Holistic Approach</h4>
+          <p>Combining theoretical depth, practical application, and continuous support for sustainable outcomes.</p>
+        </div>
+        <div class="intro-pillar">
+          <h4>🏆 Measurable Impact</h4>
+          <p>Every programme is outcome-driven and designed to deliver real, lasting career and organisational value.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MAIN SERVICES ══════════ -->
+<section class="services-main" id="services">
+  <div class="container">
+    <div class="services-main-header reveal">
+      <p class="section-label">What We Offer</p>
+      <h2 class="section-title">Our <em>Complete</em> Service Portfolio</h2>
+      <p class="lead">Eight comprehensive service lines covering every dimension of professional growth, organisational performance, and institutional excellence.</p>
+    </div>
+
+    <!-- Service 1 -->
+    <div class="svc-row reveal">
+      <div class="svc-content">
+        <div class="svc-num">01</div>
+        <h2>Professional Training <em>&amp; Development</em></h2>
+        <p>Structured learning experiences that are practical, engaging, and aligned with current industry standards. Developed in collaboration with subject-matter experts and aligned with the frameworks of recognised professional bodies.</p>
+        <p class="svc-sub-label">Key Focus Areas</p>
+        <ul class="svc-list">
+          <li>Leadership and Executive Development</li>
+          <li>Strategic Management and Organisational Leadership</li>
+          <li>Project and Program Management</li>
+          <li>Human Resource and Talent Management</li>
+          <li>Business Development and Entrepreneurship</li>
+          <li>Financial and Managerial Competence</li>
+          <li>Communication, Negotiation &amp; Interpersonal Effectiveness</li>
+          <li>Customer Experience and Service Excellence</li>
+          <li>Productivity, Time Management &amp; Workplace Efficiency</li>
+        </ul>
+        <div class="svc-outcome">
+          <strong>Outcome</strong>
+          <p>Participants gain not only knowledge but recognised competencies that enhance employability, career progression, and professional credibility.</p>
+        </div>
+      </div>
+      <div class="svc-visual">
+        <div class="svc-icon-large">🎯</div>
+        <div class="svc-visual-label">Distinct Value</div>
+        <div class="svc-tags">
+          <span class="svc-tag">Competency-Based</span>
+          <span class="svc-tag">Outcome-Driven</span>
+          <span class="svc-tag">Global Best Practices</span>
+          <span class="svc-tag">Local Relevance</span>
+          <span class="svc-tag">CPD-Aligned</span>
+        </div>
+        <div class="svc-visual-value">
+          <h4>Programme Features</h4>
+          <div class="value-item"><div class="vi-dot"></div><p>Certification pathways linked to professional bodies where applicable</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Practical, case-based, and experiential learning approach</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Integration of global best practices with local relevance</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="svc-row reverse reveal">
+      <div class="svc-content">
+        <div class="svc-num">02</div>
+        <h2>Management <em>Consulting</em></h2>
+        <p>Designed to support organisations in achieving strategic clarity, operational excellence, and sustainable growth. We engage deeply with organisations to understand their structure, challenges, and long-term vision — providing tailored solutions that are practical, implementable, and results-oriented.</p>
+        <p class="svc-sub-label">Core Areas of Expertise</p>
+        <ul class="svc-list">
+          <li>Organisational Development &amp; Institutional Strengthening</li>
+          <li>Strategic Planning, Execution &amp; Performance Tracking</li>
+          <li>Corporate Governance &amp; Policy Framework Development</li>
+          <li>Business Process Re-engineering &amp; Operational Efficiency</li>
+          <li>Change Management &amp; Organisational Transformation</li>
+          <li>Risk Assessment, Compliance &amp; Control Systems</li>
+          <li>Leadership Advisory and Executive Support</li>
+        </ul>
+        <div class="svc-outcome">
+          <strong>Outcome</strong>
+          <p>Enhanced organisational performance, improved efficiency, stronger governance structures, and long-term resilience.</p>
+        </div>
+      </div>
+      <div class="svc-visual">
+        <div class="svc-icon-large">📊</div>
+        <div class="svc-visual-label">Our Approach</div>
+        <div class="svc-tags">
+          <span class="svc-tag">Analytical Rigour</span>
+          <span class="svc-tag">Practical Insight</span>
+          <span class="svc-tag">Strategy Design</span>
+          <span class="svc-tag">Implementation</span>
+          <span class="svc-tag">Sustainability</span>
+        </div>
+        <div class="svc-visual-value">
+          <h4>What Sets Us Apart</h4>
+          <div class="value-item"><div class="vi-dot"></div><p>Strategies are not only well-designed but effectively implemented and sustained</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Deep organisational engagement before proposing any solution</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Measurable KPIs built into every consulting engagement</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="svc-row reveal">
+      <div class="svc-content">
+        <div class="svc-num">03</div>
+        <h2>Educational <em>Consulting</em></h2>
+        <p>Comprehensive educational consulting aimed at improving academic quality, institutional effectiveness, and global competitiveness. We work with educational institutions, training providers, and professional learning organisations to develop systems and programmes that meet international standards.</p>
+        <p class="svc-sub-label">Key Services</p>
+        <ul class="svc-list">
+          <li>Curriculum Design, Review &amp; Modernisation</li>
+          <li>Academic Programme Development &amp; Structuring</li>
+          <li>Accreditation and Regulatory Compliance Support</li>
+          <li>Quality Assurance and Continuous Improvement Systems</li>
+          <li>Institutional Capacity Building &amp; Staff Development</li>
+          <li>Training for Educators and Academic Leaders</li>
+          <li>Professional Programme Integration with Professional Bodies</li>
+        </ul>
+        <div class="svc-outcome">
+          <strong>Outcome</strong>
+          <p>Institutions achieve enhanced credibility, improved learning outcomes, and stronger alignment with global education and industry standards.</p>
+        </div>
+      </div>
+      <div class="svc-visual">
+        <div class="svc-icon-large">🎓</div>
+        <div class="svc-visual-label">Strategic Advantage</div>
+        <div class="svc-tags">
+          <span class="svc-tag">Global Certifications</span>
+          <span class="svc-tag">Accreditation</span>
+          <span class="svc-tag">QA Systems</span>
+          <span class="svc-tag">CPD Pathways</span>
+        </div>
+        <div class="svc-visual-value">
+          <h4>Partnership Leverage</h4>
+          <div class="value-item"><div class="vi-dot"></div><p>Partnerships with professional bodies enable institutions to embed globally recognised certifications</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Access to internationally validated programme frameworks</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Alignment with both local regulatory expectations and global standards</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 4 -->
+    <div class="svc-row reverse reveal">
+      <div class="svc-content">
+        <div class="svc-num">04</div>
+        <h2>Corporate Training <em>Solutions</em></h2>
+        <p>Fully customised corporate training solutions designed to align workforce capabilities with organisational strategy. Our programmes are tailored to address specific performance gaps, industry demands, and organisational objectives.</p>
+        <p class="svc-sub-label">Our Solutions Include</p>
+        <ul class="svc-list">
+          <li>Customised In-House Training Programs</li>
+          <li>Executive Leadership Retreats &amp; Strategic Sessions</li>
+          <li>Team Building &amp; High-Performance Culture Workshops</li>
+          <li>Employee Development and Upskilling Initiatives</li>
+          <li>Graduate Trainee and Onboarding Programs</li>
+        </ul>
+        <p class="svc-sub-label" style="margin-top:18px;">Flexible Delivery Models</p>
+        <ul class="svc-list single-col">
+          <li>Onsite instructor-led training</li>
+          <li>Virtual and digital learning platforms</li>
+          <li>Hybrid learning experiences</li>
+        </ul>
+        <div class="svc-outcome">
+          <strong>Outcome</strong>
+          <p>Improved workforce capability, enhanced productivity, and stronger alignment between people and organisational goals.</p>
+        </div>
+      </div>
+      <div class="svc-visual">
+        <div class="svc-icon-large">🏢</div>
+        <div class="svc-visual-label">Added Value Through Partnerships</div>
+        <div class="svc-tags">
+          <span class="svc-tag">In-House</span>
+          <span class="svc-tag">Virtual</span>
+          <span class="svc-tag">Hybrid</span>
+          <span class="svc-tag">CPD-Credited</span>
+          <span class="svc-tag">Certifiable</span>
+        </div>
+        <div class="svc-visual-value">
+          <h4>Corporate Advantage</h4>
+          <div class="value-item"><div class="vi-dot"></div><p>Programs can be aligned with professional body standards, offering recognised certification pathways</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Scalable solutions for teams of any size — from SMEs to large enterprises</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Continuous Professional Development (CPD) credits where applicable</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 5 -->
+    <div class="svc-row reveal">
+      <div class="svc-content">
+        <div class="svc-num">05</div>
+        <h2>Capacity Building <em>&amp; Development</em></h2>
+        <p>Capacity-building initiatives designed to create long-term impact by strengthening both human capital and institutional systems. We work across sectors to deliver programmes that are sustainable, scalable, and aligned with development priorities.</p>
+        <p class="svc-sub-label">Focus Areas</p>
+        <ul class="svc-list single-col">
+          <li>Public Sector and Government Capacity Development</li>
+          <li>Non-Profit and Development Sector Strengthening</li>
+          <li>SME Growth, Innovation, and Sustainability Programs</li>
+          <li>Youth Empowerment, Employability &amp; Entrepreneurship Development</li>
+        </ul>
+        <div class="svc-outcome">
+          <strong>Outcome</strong>
+          <p>Stronger institutions, empowered individuals, and sustainable socio-economic development.</p>
+        </div>
+      </div>
+      <div class="svc-visual">
+        <div class="svc-icon-large">🌱</div>
+        <div class="svc-visual-label">Sectors Served</div>
+        <div class="svc-tags">
+          <span class="svc-tag">Public Sector</span>
+          <span class="svc-tag">Non-Profit</span>
+          <span class="svc-tag">SMEs</span>
+          <span class="svc-tag">Youth Empowerment</span>
+          <span class="svc-tag">Entrepreneurship</span>
+        </div>
+        <div class="svc-visual-value">
+          <h4>Long-Term Impact</h4>
+          <div class="value-item"><div class="vi-dot"></div><p>Sustainable, scalable programmes aligned with national development priorities</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Cross-sector collaboration for maximum reach and effectiveness</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Empowering individuals and communities beyond the classroom</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 6 -->
+    <div class="svc-row reverse reveal">
+      <div class="svc-content">
+        <div class="svc-num">06</div>
+        <h2>Research, Policy <em>&amp; Advisory</em></h2>
+        <p>Evidence-based research and strategic advisory services that support informed decision-making and effective policy development across sectors and institutions.</p>
+        <p class="svc-sub-label">Our Expertise Includes</p>
+        <ul class="svc-list single-col">
+          <li>Policy Research, Analysis, and Development</li>
+          <li>Organisational and Sectoral Assessments</li>
+          <li>Monitoring and Evaluation (M&amp;E) Systems</li>
+          <li>Data Analysis, Reporting, and Insights</li>
+          <li>Strategic Advisory for Programs, Projects, and Reforms</li>
+        </ul>
+        <div class="svc-outcome">
+          <strong>Outcome</strong>
+          <p>Data-driven strategies, improved policy frameworks, and enhanced programme effectiveness.</p>
+        </div>
+      </div>
+      <div class="svc-visual">
+        <div class="svc-icon-large">🔍</div>
+        <div class="svc-visual-label">Advisory Strengths</div>
+        <div class="svc-tags">
+          <span class="svc-tag">Evidence-Based</span>
+          <span class="svc-tag">M&amp;E Systems</span>
+          <span class="svc-tag">Policy Design</span>
+          <span class="svc-tag">Data Analytics</span>
+        </div>
+        <div class="svc-visual-value">
+          <h4>Research Approach</h4>
+          <div class="value-item"><div class="vi-dot"></div><p>Rigorous data collection and analysis underpinning every recommendation</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Sector-specific expertise in education, business, and governance</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Actionable insights translated directly into implementable strategies</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 7 -->
+    <div class="svc-row reveal">
+      <div class="svc-content">
+        <div class="svc-num">07</div>
+        <h2>Coaching, Mentorship <em>&amp; Professional Pathways</em></h2>
+        <p>Structured coaching and mentorship programmes designed to support leadership development, career advancement, and personal effectiveness — delivered by experienced practitioners and thought leaders.</p>
+        <p class="svc-sub-label">Our Offerings</p>
+        <ul class="svc-list single-col">
+          <li>Executive and Leadership Coaching</li>
+          <li>Career Development and Transition Support</li>
+          <li>Mentorship for Emerging Professionals</li>
+          <li>Personal Effectiveness and Productivity Coaching</li>
+        </ul>
+        <div class="svc-outcome">
+          <strong>Outcome</strong>
+          <p>Confident, capable, and future-ready professionals equipped for leadership and sustained growth.</p>
+        </div>
+      </div>
+      <div class="svc-visual">
+        <div class="svc-icon-large">🧭</div>
+        <div class="svc-visual-label">Professional Body Integration</div>
+        <div class="svc-tags">
+          <span class="svc-tag">Executive Coaching</span>
+          <span class="svc-tag">Mentorship</span>
+          <span class="svc-tag">CPD Frameworks</span>
+          <span class="svc-tag">Membership Pathways</span>
+        </div>
+        <div class="svc-visual-value">
+          <h4>Career Transformation</h4>
+          <div class="value-item"><div class="vi-dot"></div><p>Guidance on professional certification pathways and membership opportunities</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Continuous professional development frameworks aligned with global bodies</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>One-on-one coaching tailored to individual career goals and timelines</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 8 -->
+    <div class="svc-row reverse reveal">
+      <div class="svc-content">
+        <div class="svc-num">08</div>
+        <h2>Workshops, Seminars <em>&amp; Professional Events</em></h2>
+        <p>High-impact events that promote knowledge exchange, professional networking, and thought leadership. Many are delivered in collaboration with professional bodies, ensuring credibility, relevance, and recognition.</p>
+        <p class="svc-sub-label">Events Include</p>
+        <ul class="svc-list single-col">
+          <li>Industry and sector-specific seminars</li>
+          <li>Professional certification workshops</li>
+          <li>Conferences and symposiums</li>
+          <li>Public masterclasses and executive forums</li>
+        </ul>
+        <div class="svc-outcome">
+          <strong>Outcome</strong>
+          <p>Enhanced knowledge, expanded professional networks, and exposure to global best practices.</p>
+        </div>
+      </div>
+      <div class="svc-visual">
+        <div class="svc-icon-large">🎤</div>
+        <div class="svc-visual-label">Event Formats</div>
+        <div class="svc-tags">
+          <span class="svc-tag">Seminars</span>
+          <span class="svc-tag">Conferences</span>
+          <span class="svc-tag">Workshops</span>
+          <span class="svc-tag">Masterclasses</span>
+          <span class="svc-tag">Executive Forums</span>
+        </div>
+        <div class="svc-visual-value">
+          <h4>Why Attend</h4>
+          <div class="value-item"><div class="vi-dot"></div><p>Delivered in collaboration with professional bodies for recognised credibility</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Expert facilitators and keynote speakers from industry and academia</p></div>
+          <div class="value-item"><div class="vi-dot"></div><p>Networking opportunities with peers, leaders, and global partners</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ DELIVERY METHODOLOGY ══════════ -->
+<section class="delivery">
+  <div class="container">
+    <div class="delivery-header reveal">
+      <p class="section-label" style="color:var(--gold-lt);">How We Work</p>
+      <h2>Our Service <em>Delivery Methodology</em></h2>
+      <p>A structured five-stage approach that ensures consistency, quality, and measurable impact across every engagement we undertake.</p>
+    </div>
+    <div class="delivery-steps">
+      <div class="delivery-step reveal">
+        <div class="ds-num">01</div>
+        <div class="ds-icon">🔎</div>
+        <div class="ds-title">Needs Assessment</div>
+        <div class="ds-desc">In-depth analysis of client requirements, objectives, and performance gaps before any solution is proposed.</div>
+      </div>
+      <div class="delivery-step reveal" style="transition-delay:.06s;">
+        <div class="ds-num">02</div>
+        <div class="ds-icon">📐</div>
+        <div class="ds-title">Programme Design</div>
+        <div class="ds-desc">Development of customised, solution-driven interventions aligned with client goals and professional standards.</div>
+      </div>
+      <div class="delivery-step reveal" style="transition-delay:.12s;">
+        <div class="ds-num">03</div>
+        <div class="ds-icon">🚀</div>
+        <div class="ds-title">Delivery</div>
+        <div class="ds-desc">Expert-led implementation using modern, engaging methodologies — in-person, virtual, or hybrid.</div>
+      </div>
+      <div class="delivery-step reveal" style="transition-delay:.18s;">
+        <div class="ds-num">04</div>
+        <div class="ds-icon">📈</div>
+        <div class="ds-title">Evaluation</div>
+        <div class="ds-desc">Measurement of outcomes, performance indicators, and overall impact against agreed objectives.</div>
+      </div>
+      <div class="delivery-step reveal" style="transition-delay:.24s;">
+        <div class="ds-num">05</div>
+        <div class="ds-icon">🤝</div>
+        <div class="ds-title">Continuous Support</div>
+        <div class="ds-desc">Post-programme follow-up, mentoring, and improvement strategies to ensure lasting results.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PARTNERSHIPS STRIP ══════════ -->
+<section class="partnerships-strip">
+  <div class="container">
+    <div class="partnerships-strip-inner">
+      <div class="reveal">
+        <p class="section-label">Our Partners</p>
+        <h2>Globally Backed,<br><em>Locally Delivered</em></h2>
+        <p>A defining strength of Fountain PTS is our commitment to strategic collaboration. Our partnerships enable globally aligned training programmes, access to professional certifications, and the highest standards of quality and relevance.</p>
+        <a href="index.html#partnerships" class="btn btn-red" style="margin-top:8px;">View All Partners →</a>
+      </div>
+      <div class="ps-items reveal" style="transition-delay:.1s;">
+        <div class="ps-item">
+          <h4>🇺🇸 AIET Global</h4>
+          <p>American Institute of Education &amp; Training — globally recognised certifications and professional programmes.</p>
+        </div>
+        <div class="ps-item">
+          <h4>🏛️ CIML Business School</h4>
+          <p>Top 5% globally ranked business school — Diploma through MBA and DBA programmes.</p>
+        </div>
+        <div class="ps-item">
+          <h4>🌍 CIML Global</h4>
+          <p>Chartered Institute of Management &amp; Leadership — professional membership in 70+ countries.</p>
+        </div>
+        <div class="ps-item">
+          <h4>⚖️ CILG Global</h4>
+          <p>Chartered Institute of Leadership &amp; Governance — advancing governance excellence and ethical leadership.</p>
+        </div>
+        <div class="ps-item">
+          <h4>🎓 CIET Global</h4>
+          <p>Chartered Institute of Education &amp; Training — professional recognition for educators and trainers worldwide.</p>
+        </div>
+        <div class="ps-item">
+          <h4>🏦 CIBIA Global</h4>
+          <p>Chartered Institute of Business &amp; Administration — leading professionals in business excellence.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STATS BANNER ══════════ -->
+<div class="stats-banner">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal"><div class="val">2,000+</div><div class="lbl">Graduates &amp; Counting</div></div>
+      <div class="stat-item reveal" style="transition-delay:.08s;"><div class="val">6</div><div class="lbl">Global Institute Partners</div></div>
+      <div class="stat-item reveal" style="transition-delay:.16s;"><div class="val">20+</div><div class="lbl">Programmes Offered</div></div>
+      <div class="stat-item reveal" style="transition-delay:.24s;"><div class="val">15+</div><div class="lbl">Years of Excellence</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CTA ══════════ -->
+<section class="cta-full">
+  <div class="container">
+    <div class="cta-full-inner">
+      <div class="cta-full-text reveal">
+        <p class="section-label" style="color:var(--gold-lt);">Ready to Begin?</p>
+        <h2>We Are More Than a<br>Service Provider — We Are<br>Your <em>Strategic Partner</em></h2>
+        <p>Whether you are an individual seeking career advancement, a corporation building workforce capability, or an institution strengthening its systems — Fountain Professional Training Services has a solution designed for you.</p>
+        <div class="btns">
+          <a href="apply.html" class="btn btn-red">Enrol Today →</a>
+          <a href="contact-us.html" class="btn btn-outline-white">Talk to an Advisor</a>
+        </div>
+      </div>
+      <div class="cta-contact-box reveal" style="transition-delay:.1s;">
+        <h3>Get in Touch</h3>
+        <div class="cta-contact-item">
+          <div class="ci-icon">📧</div>
+          <div>
+            <div class="ci-label">Email Us</div>
+            <a href="mailto:info@fountainptserv.com" class="ci-val">info@fountainptserv.com</a>
+          </div>
+        </div>
+        <div class="cta-contact-item">
+          <div class="ci-icon">📞</div>
+          <div>
+            <div class="ci-label">Call Us</div>
+            <a href="tel:+2348034711642" class="ci-val">08034711642</a>
+          </div>
+        </div>
+        <div class="cta-contact-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-label">Visit Us</div>
+            <div class="ci-val">8 Ijaiye Street, Off Alayaki, Enilolobo Bus-Stop,<br>Giwa Iju Ishaga Road, Lagos, Nigeria</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS" />
+          <p>Fountain Professional Training Services is a professional training centre dedicated to excellence in Accounting, Business, Management Education and Professionalism — serving professionals across West Africa and beyond.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="https://wa.me/2348034711642" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Programmes</h4>
+          <ul>
+            <li><a href="certification-courses.html">Certification Courses</a></li>
+            <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+            <li><a href="mba.html">MBA</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="apply.html">Apply Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="our-approach.html">Our Approach</a></li>
+            <li><a href="iws.html">Industries We Serve</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+            <li><a href="core-values.html">Core Values</a></li>
+            <li><a href="why-choose-us.html">Why Choose Us</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <a href="mailto:info@fountainptserv.com" style="display:flex;align-items:flex-start;gap:8px;">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:2px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                info@fountainptserv.com
+              </a>
+            </li>
+            <li>
+              <a href="tel:+2348034711642" style="display:flex;align-items:flex-start;gap:8px;">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:2px;"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24a11.36 11.36 0 003.55.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.18 21 3 13.82 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.01l-2.2 2.21z"/></svg>
+                08034711642
+              </a>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:8px;color:rgba(255,255,255,.45);font-size:.85rem;line-height:1.6;">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="flex-shrink:0;margin-top:3px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              8 Ijaiye Street, Off Alayaki, Enilolobo Bus-Stop, Giwa Iju Ishaga Road, Lagos, Nigeria
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>&copy; 2026 Fountain Professional Training Services. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ─── CTA BAR ──────────────────────────────────────────────── */
+  var ctaSlides = document.querySelectorAll('.cta-slide');
+  var ctaDots   = document.querySelectorAll('#ctaBarDots span');
+  var ctaBar    = document.getElementById('ctaBar');
+  var ctaCur    = 0;
+  function goCtaSlide(n) {
+    ctaSlides[ctaCur].classList.remove('active');
+    ctaDots[ctaCur].classList.remove('active');
+    ctaCur = n % ctaSlides.length;
+    ctaSlides[ctaCur].classList.add('active');
+    ctaDots[ctaCur].classList.add('active');
+  }
+  ctaDots.forEach(function(d, i) { d.addEventListener('click', function() { goCtaSlide(i); }); });
+  setInterval(function() { goCtaSlide(ctaCur + 1); }, 4000);
+  document.getElementById('ctaBarClose').addEventListener('click', function() {
+    ctaBar.classList.add('hidden');
+    document.body.classList.add('bar-hidden');
+  });
+
+  /* ─── MOBILE NAV ──────────────────────────────────────────── */
+  var mobileNav  = document.getElementById('mobileNav');
+  var mobOverlay = document.getElementById('mobOverlay');
+  var menuBtn    = document.getElementById('menuBtn');
+  var menuClose  = document.getElementById('menuClose');
+  function openMobileNav() { mobileNav.classList.add('open'); mobOverlay.classList.add('open'); mobileNav.setAttribute('aria-hidden','false'); menuBtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeMobileNav() { mobileNav.classList.remove('open'); mobOverlay.classList.remove('open'); mobileNav.setAttribute('aria-hidden','true'); menuBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  if (menuBtn) menuBtn.addEventListener('click', openMobileNav);
+  if (menuClose) menuClose.addEventListener('click', closeMobileNav);
+  if (mobOverlay) mobOverlay.addEventListener('click', closeMobileNav);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMobileNav(); });
+
+  /* ─── MOBILE SUB-MENUS ────────────────────────────────────── */
+  document.querySelectorAll('.mob-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault(); e.stopPropagation();
+      var parent = btn.closest('li');
+      if (!parent) return;
+      var isOpen = parent.classList.contains('mob-open');
+      document.querySelectorAll('.mob-links li.mob-open').forEach(function(li) { li.classList.remove('mob-open'); });
+      if (!isOpen) parent.classList.add('mob-open');
+    });
+  });
+
+  /* ─── SCROLL REVEAL ───────────────────────────────────────── */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(r) { observer.observe(r); });
+
+}());
+</script>
+</body>
+</html>

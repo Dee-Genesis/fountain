@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="assets/icons/fountain-professional-training-services-logo.png">
+<title>Professional Membership — Fountain Professional Training Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Source+Sans+3:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<style>
+/* ─── DESIGN TOKENS ─── */
+:root {
+  --red:        #CC0000;
+  --red-dk:     #A00000;
+  --red-lt:     #E53030;
+  --gold:       #C9A227;
+  --gold-lt:    #E8C04A;
+  --gold-pale:  #FFF8E7;
+  --white:      #FFFFFF;
+  --off-white:  #F5F5F5;
+  --light-grey: #EBEBEB;
+  --mid-grey:   #6B7280;
+  --dark:       #1A1A1A;
+  --dark-2:     #111111;
+  --charcoal:   #2D2D2D;
+  --border:     rgba(0,0,0,.1);
+  --radius:     6px;
+  --shadow-sm:  0 2px 10px rgba(0,0,0,.08);
+  --shadow-md:  0 8px 30px rgba(0,0,0,.14);
+  --shadow-lg:  0 20px 60px rgba(0,0,0,.2);
+  --trans:      .25s cubic-bezier(.4,0,.2,1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+  --font-impact:  'Bebas Neue', 'Arial Narrow', sans-serif;
+
+  /* Institution colours */
+  --aiet:   #1B6CA8;
+  --cbs:    #7B2D8B;
+  --ciml:   #CC0000;
+  --cilg:   #1E7E34;
+  --ciet:   #D97706;
+  --cibia:  #0891B2;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);background:var(--white);color:var(--dark);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+ul{list-style:none}
+button{cursor:pointer;font-family:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ─── BUTTONS ─── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 26px;border-radius:4px;font-family:var(--font-body);font-size:.84rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;transition:var(--trans);cursor:pointer;border:none;white-space:nowrap}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-dk);transform:translateY(-2px);box-shadow:0 8px 24px rgba(204,0,0,.35)}
+.btn-outline-red{background:transparent;color:var(--red);border:2px solid var(--red)}
+.btn-outline-red:hover{background:var(--red);color:#fff}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-lt);transform:translateY(-2px)}
+.btn-outline-white{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5)}
+.btn-outline-white:hover{background:rgba(255,255,255,.12);border-color:#fff}
+.btn-dark{background:var(--dark);color:#fff}
+.btn-dark:hover{background:var(--charcoal)}
+
+/* ─── TOPBAR ─── */
+.topbar{background:var(--dark-2);color:rgba(255,255,255,.65);font-size:.78rem;padding:8px 0;border-bottom:2px solid var(--red)}
+.topbar .container{display:flex;justify-content:space-between;align-items:center}
+.topbar-left{display:flex;gap:18px;align-items:center}
+.topbar-left a{color:rgba(255,255,255,.65);transition:color var(--trans);display:flex;align-items:center;gap:5px}
+.topbar-left a:hover{color:var(--gold-lt)}
+.topbar-social{display:flex;gap:6px;align-items:center}
+.topbar-social a{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.08);color:rgba(255,255,255,.65);transition:var(--trans)}
+.topbar-social a:hover{background:var(--red);color:#fff}
+.topbar-social svg{width:13px;height:13px}
+
+/* ─── HEADER ─── */
+#mainHeader{background:#fff;border-bottom:3px solid var(--red);position:sticky;top:0;z-index:900;box-shadow:var(--shadow-sm)}
+#mainHeader nav{max-width:1200px;margin:0 auto;padding:0 24px;height:70px;display:flex;align-items:center;gap:6px}
+.nav-logo{display:flex;align-items:center;gap:10px;margin-right:auto}
+.nav-logo img{height:46px;width:auto}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.2}
+.nav-logo-text .main{font-family:var(--font-display);font-size:.92rem;font-weight:700;color:var(--dark)}
+.nav-logo-text .sub{font-size:.68rem;color:var(--mid-grey);letter-spacing:.04em}
+.nav-links{display:flex;align-items:center;gap:0}
+.nav-links > li{position:relative}
+.nav-links > li > a,.nav-links > li > span{display:flex;align-items:center;gap:4px;padding:8px 11px;font-size:.8rem;font-weight:600;color:var(--dark);cursor:pointer;border-radius:4px;transition:var(--trans);white-space:nowrap;font-family:var(--font-body);letter-spacing:.02em;text-transform:uppercase}
+.nav-links > li > a:hover,.nav-links > li > span:hover,.nav-links > li.active > a,.nav-links > li.active > span{color:var(--red)}
+.nav-links > li > span .arrow{transition:transform var(--trans)}
+.nav-links > li:hover > span .arrow{transform:rotate(180deg)}
+.dropdown{position:absolute;top:calc(100% + 4px);left:0;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);border:1px solid var(--border);border-top:3px solid var(--red);min-width:240px;padding:6px;opacity:0;pointer-events:none;transform:translateY(8px);transition:var(--trans);z-index:100}
+.nav-links > li:hover .dropdown{opacity:1;pointer-events:all;transform:none}
+.dropdown a{display:flex;align-items:center;gap:8px;padding:10px 12px;font-size:.82rem;border-radius:4px;transition:var(--trans);color:var(--charcoal)}
+.dropdown a:hover{background:rgba(204,0,0,.06);color:var(--red);padding-left:16px}
+.nav-cta{margin-left:10px;font-size:.78rem}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border:none;background:none;margin-left:8px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px;transition:var(--trans)}
+
+/* ─── MOBILE NAV ─── */
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2999}
+.mob-overlay.open{display:block}
+.mobile-nav{display:none;position:fixed;top:0;right:0;width:300px;height:100%;background:#fff;z-index:3000;flex-direction:column;overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,.2)}
+.mobile-nav.open{display:flex}
+.mob-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:3px solid var(--red);flex-shrink:0}
+.mob-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--dark);line-height:1;padding:4px 8px}
+.mob-links{flex:1}
+.mob-links li{border-bottom:1px solid var(--light-grey)}
+.mob-links li a,.mob-toggle{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;font-size:.92rem;font-weight:600;color:var(--dark);cursor:pointer;width:100%;background:none;border:none;text-align:left;font-family:var(--font-body);text-transform:uppercase;letter-spacing:.04em}
+.mob-links li a:hover,.mob-toggle:hover{color:var(--red)}
+.mob-sub{display:none;background:var(--off-white)}
+li.mob-open > .mob-sub{display:block}
+.mob-sub a{display:block;padding:10px 20px 10px 32px;font-size:.86rem;color:var(--mid-grey);text-transform:none;font-weight:400}
+.mob-sub a:hover{color:var(--red)}
+.mob-toggle .mob-arrow{display:inline-block;transition:transform .25s}
+li.mob-open > .mob-toggle .mob-arrow{transform:rotate(45deg)}
+.mob-cta{padding:20px;border-top:1px solid var(--light-grey);flex-shrink:0}
+
+/* ─── PAGE HERO ─── */
+.page-hero{background:var(--dark-2);position:relative;overflow:hidden;padding:4.5rem 0 3.5rem}
+.page-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(204,0,0,.2) 0%,transparent 55%),repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.012) 20px,rgba(255,255,255,.012) 21px)}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--red),var(--gold),var(--red))}
+.page-hero .container{position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem}
+.breadcrumb a,.breadcrumb span{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);transition:color var(--trans)}
+.breadcrumb a:hover{color:var(--gold-lt)}
+.breadcrumb .sep{color:rgba(255,255,255,.18)}
+.breadcrumb .cur{color:var(--gold-lt)}
+.hero-tag{font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+.hero-tag::before{content:'';display:block;width:28px;height:2px;background:var(--gold)}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.4rem);color:#fff;line-height:1.08;margin-bottom:1rem;font-weight:900}
+.page-hero h1 em{font-style:italic;color:var(--gold-lt)}
+.page-hero .lead{font-size:1rem;color:rgba(255,255,255,.68);line-height:1.8;max-width:640px;margin-bottom:2rem}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);padding-top:1.5rem}
+.hero-stat .val{font-family:var(--font-impact);font-size:2.2rem;color:var(--gold-lt);line-height:1}
+.hero-stat .lbl{font-size:.72rem;color:rgba(255,255,255,.45);margin-top:3px;text-transform:uppercase;letter-spacing:.06em}
+
+/* ─── FILTER BAR ─── */
+.filter-bar{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:70px;z-index:800;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.filter-bar-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:stretch;overflow-x:auto;gap:0;scrollbar-width:none}
+.filter-bar-inner::-webkit-scrollbar{display:none}
+.filter-tab{display:flex;align-items:center;gap:7px;padding:14px 16px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mid-grey);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all var(--trans);border-top:none;border-left:none;border-right:none;background:none;font-family:var(--font-body);flex-shrink:0}
+.filter-tab:hover{color:var(--dark);border-bottom-color:var(--gold-lt)}
+.filter-tab.active{color:var(--red);border-bottom-color:var(--red)}
+.filter-tab .tab-dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.4;flex-shrink:0;transition:opacity var(--trans)}
+.filter-tab.active .tab-dot{opacity:1}
+.tab-count{background:rgba(204,0,0,.1);color:var(--red);font-size:.62rem;font-weight:800;padding:1px 6px;border-radius:20px;min-width:20px;text-align:center}
+.filter-tab:not(.active) .tab-count{background:rgba(0,0,0,.06);color:var(--mid-grey)}
+
+/* ─── LAYOUT ─── */
+.membership-layout{padding:3rem 0 5rem}
+.membership-layout .container{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:start}
+
+/* ─── SIDEBAR ─── */
+.sidebar{position:sticky;top:130px;align-self:start}
+.sidebar-section{margin-bottom:2rem}
+.sidebar-label{font-size:.6rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,0,0,.3);margin-bottom:.85rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.inst-pill-list{display:flex;flex-direction:column;gap:.3rem}
+.inst-pill{display:flex;align-items:center;gap:.6rem;padding:.65rem .85rem;border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all var(--trans);background:#fff}
+.inst-pill:hover{border-color:var(--red);background:rgba(204,0,0,.03)}
+.inst-pill.active{border-color:var(--red);background:rgba(204,0,0,.05)}
+.inst-pill-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.inst-pill-name{font-size:.75rem;font-weight:600;color:var(--dark);line-height:1.2;flex:1}
+.inst-pill.active .inst-pill-name{color:var(--red)}
+.inst-pill-count{font-size:.65rem;font-weight:700;color:var(--mid-grey);background:var(--off-white);padding:1px 7px;border-radius:20px}
+.inst-pill.active .inst-pill-count{background:rgba(204,0,0,.1);color:var(--red)}
+.sidebar-info-box{background:var(--dark);padding:1.25rem;border-radius:var(--radius);margin-top:.5rem}
+.sidebar-info-box h4{font-family:var(--font-display);font-size:.95rem;color:#fff;margin-bottom:.5rem}
+.sidebar-info-box p{font-size:.76rem;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:.9rem}
+.sidebar-info-box a{font-size:.76rem;color:var(--gold-lt);font-weight:600;display:flex;align-items:center;gap:4px;transition:color var(--trans)}
+.sidebar-info-box a:hover{color:#fff}
+
+/* ─── WHAT IS MEMBERSHIP BOX ─── */
+.membership-intro{background:var(--gold-pale);border:1.5px solid rgba(201,162,39,.25);border-radius:var(--radius);padding:1.5rem;margin-bottom:2.5rem}
+.membership-intro h3{font-family:var(--font-display);font-size:1.1rem;color:var(--dark);margin-bottom:.6rem}
+.membership-intro p{font-size:.84rem;color:var(--mid-grey);line-height:1.7}
+.membership-benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1rem}
+.benefit-item{display:flex;align-items:flex-start;gap:.5rem;font-size:.78rem;color:var(--dark)}
+.benefit-item svg{flex-shrink:0;margin-top:2px;color:var(--gold)}
+
+/* ─── INSTITUTION BLOCK ─── */
+.inst-block{margin-bottom:4rem;scroll-margin-top:140px}
+.inst-block.hidden{display:none}
+.inst-block-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:2px solid var(--border)}
+.inst-block-header-left{}
+.inst-badge{display:inline-flex;align-items:center;gap:7px;background:var(--dark);color:rgba(255,255,255,.6);font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:4px 11px;border-radius:2px;margin-bottom:.6rem}
+.inst-badge .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.inst-heading{font-family:var(--font-display);font-size:1.7rem;color:var(--dark);margin-bottom:.3rem;line-height:1.1}
+.inst-heading em{font-style:italic;color:var(--red)}
+.visit-link{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mid-grey);border:1.5px solid var(--border);padding:8px 14px;border-radius:4px;transition:all var(--trans);white-space:nowrap;flex-shrink:0;margin-top:6px}
+.visit-link:hover{color:var(--red);border-color:var(--red)}
+
+/* ─── MEMBERSHIP CARDS ─── */
+.membership-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.mem-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:all var(--trans);position:relative}
+.mem-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.mem-card-top{padding:1.25rem 1.25rem .9rem}
+.mem-card-grade{display:flex;align-items:center;gap:7px;margin-bottom:.6rem}
+.mem-card-grade .grade-badge{font-size:.55rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:3px 9px;border-radius:2px;color:#fff}
+.mem-card-letters{font-family:var(--font-impact);font-size:1.3rem;letter-spacing:.06em}
+.mem-card h3{font-size:.96rem;font-weight:700;color:var(--dark);margin-bottom:.5rem;line-height:1.25}
+.mem-card-desc{font-size:.8rem;color:var(--mid-grey);line-height:1.65;margin-bottom:.75rem}
+.mem-card-reqs{margin-top:.75rem}
+.req-heading{font-size:.6rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,0,0,.3);margin-bottom:.5rem}
+.req-list{display:flex;flex-direction:column;gap:.35rem}
+.req-item{display:flex;align-items:flex-start;gap:.45rem;font-size:.76rem;color:var(--mid-grey);line-height:1.45}
+.req-item svg{flex-shrink:0;margin-top:2px}
+.mem-card-footer{border-top:1px solid var(--border);padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--off-white);margin-top:auto}
+.learn-link{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mid-grey);display:flex;align-items:center;gap:4px;transition:color var(--trans)}
+.learn-link:hover{color:var(--red)}
+.apply-btn{display:inline-flex;align-items:center;gap:5px;background:var(--red);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 14px;border-radius:3px;transition:all var(--trans);white-space:nowrap}
+.apply-btn:hover{background:var(--red-dk);transform:translateY(-1px);box-shadow:0 4px 12px rgba(204,0,0,.35)}
+.apply-btn svg{width:11px;height:11px}
+
+/* Institution accent colours */
+.inst-aiet .mem-card:hover{border-color:rgba(27,108,168,.35)}
+.inst-cbs .mem-card:hover{border-color:rgba(123,45,139,.35)}
+.inst-ciml .mem-card:hover{border-color:rgba(204,0,0,.3)}
+.inst-cilg .mem-card:hover{border-color:rgba(30,126,52,.35)}
+.inst-ciet .mem-card:hover{border-color:rgba(217,119,6,.35)}
+.inst-cibia .mem-card:hover{border-color:rgba(8,145,178,.35)}
+.inst-aiet .inst-badge{border-left:3px solid var(--aiet)}
+.inst-cbs .inst-badge{border-left:3px solid var(--cbs)}
+.inst-ciml .inst-badge{border-left:3px solid var(--ciml)}
+.inst-cilg .inst-badge{border-left:3px solid var(--cilg)}
+.inst-ciet .inst-badge{border-left:3px solid var(--ciet)}
+.inst-cibia .inst-badge{border-left:3px solid var(--cibia)}
+
+/* grade badge colours */
+.badge-student{background:#475569}
+.badge-affiliate{background:#64748b}
+.badge-graduate{background:#4b5563}
+.badge-associate{background:#1B6CA8}
+.badge-member{background:#1E7E34}
+.badge-fellow{background:#C9A227}
+.badge-dfellow{background:var(--dark-2)}
+
+/* Results bar */
+.results-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.results-count{font-size:.8rem;color:var(--mid-grey)}
+.results-count strong{color:var(--dark)}
+.clear-filter{font-size:.76rem;font-weight:700;color:var(--red);cursor:pointer;background:none;border:none;font-family:var(--font-body);transition:color var(--trans);display:none}
+.clear-filter:hover{color:var(--red-dk)}
+.clear-filter.visible{display:block}
+
+/* ─── CTA BAND ─── */
+.cta-band{background:var(--dark-2);padding:4rem 0;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--red),var(--gold))}
+.cta-band .container{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.cta-band h2{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.4rem);color:#fff;line-height:1.15}
+.cta-band h2 em{font-style:italic;color:var(--gold-lt)}
+.cta-band p{font-size:.92rem;color:rgba(255,255,255,.6);margin-top:.6rem;line-height:1.7;max-width:580px}
+.cta-band-btns{display:flex;gap:12px;flex-shrink:0}
+
+/* ─── FOOTER ─── */
+footer{background:var(--dark-2);color:rgba(255,255,255,.55);border-top:4px solid var(--red)}
+.footer-top{padding:56px 0 36px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+.footer-brand img{height:44px;margin-bottom:12px}
+.footer-brand p{font-size:.84rem;line-height:1.7;color:rgba(255,255,255,.4)}
+.footer-col h4{font-family:var(--font-body);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:1rem}
+.footer-col ul{display:flex;flex-direction:column;gap:.55rem}
+.footer-col a{font-size:.82rem;color:rgba(255,255,255,.45);transition:color var(--trans)}
+.footer-col a:hover{color:var(--gold-lt)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-top:1px solid rgba(255,255,255,.08);font-size:.75rem;color:rgba(255,255,255,.3);flex-wrap:wrap;gap:10px}
+.footer-bottom a{color:rgba(255,255,255,.3);transition:color var(--trans)}
+.footer-bottom a:hover{color:var(--gold-lt)}
+
+/* ─── REVEAL ANIMATIONS ─── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  .membership-layout .container{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+}
+@media(max-width:600px){
+  .membership-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .cta-band .container{grid-template-columns:1fr}
+  .cta-band-btns{flex-direction:column}
+  .hero-stats{gap:20px}
+  .membership-benefits-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="mailto:info@fountainptserv.com">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        info@fountainptserv.com
+      </a>
+      <a href="tel:+2348034711642">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.18 21 3 13.82 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.01l-2.2 2.21z"/></svg>
+        08034711642
+      </a>
+    </div>
+    <div class="topbar-social">
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="#" aria-label="Twitter/X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── HEADER ─── -->
+<header id="mainHeader">
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS Logo" />
+      <div class="nav-logo-text">
+        <span class="main">Fountain</span>
+        <span class="main">Professional Training Services</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <span>About Us <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="about-us.html">Who We Are</a></li>
+          <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+          <li><a href="core-values.html">Core Values</a></li>
+          <li><a href="why-choose-us.html">Why Choose Us</a></li>
+        </ul>
+      </li>
+      <li class="active">
+        <span>Programmes <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="certification-courses.html">Certification Courses</a></li>
+          <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+          <li><a href="mba.html">MBA</a></li>
+          <li><a href="membership.html">Membership</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Institute Partnership <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business &amp; Administration</a></li>
+          <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership &amp; Governance</a></li>
+          <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management &amp; Leadership</a></li>
+          <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Services <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="our-approach.html">Our Approach</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="iws.html">Industries We Serve</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Resources <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </li>
+      <li><a href="contact-us.html">Contact</a></li>
+    </ul>
+    <a href="apply.html" class="btn btn-red nav-cta">Apply Now →</a>
+    <button class="hamburger" id="menuBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ─── MOBILE NAV ─── -->
+<div class="mob-overlay" id="mobOverlay"></div>
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mob-header">
+    <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS" height="40" />
+    <button class="mob-close" id="menuClose">&#x2715;</button>
+  </div>
+  <ul class="mob-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <button class="mob-toggle" type="button">About <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="about-us.html">Who We Are</a></li>
+        <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+        <li><a href="core-values.html">Core Values</a></li>
+        <li><a href="why-choose-us.html">Why Choose Us</a></li>
+      </ul>
+    </li>
+    <li class="mob-open">
+      <button class="mob-toggle" type="button">Programmes <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="certification-courses.html">Certification Courses</a></li>
+        <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+        <li><a href="mba.html">MBA</a></li>
+        <li><a href="membership.html">Membership</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Partnerships <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="https://aietglobal.us" target="_blank">AIET</a></li>
+        <li><a href="https://cibiaglobal.org" target="_blank">CIBIA</a></li>
+        <li><a href="https://cietglobal.us" target="_blank">CIET</a></li>
+        <li><a href="https://cilgglobal.org" target="_blank">CILG</a></li>
+        <li><a href="https://cimlglobal.us" target="_blank">CIML</a></li>
+        <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Services <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="our-approach.html">Our Approach</a></li>
+        <li><a href="services.html">Our Services</a></li>
+        <li><a href="iws.html">Industries We Serve</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Resources <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="faq.html">FAQs</a></li>
+      </ul>
+    </li>
+    <li><a href="contact-us.html">Contact Us</a></li>
+  </ul>
+  <div class="mob-cta">
+    <a href="apply.html" class="btn btn-red" style="width:100%;justify-content:center;">Apply Now →</a>
+  </div>
+</nav>
+
+
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="cur">Membership</span>
+    </nav>
+    <div class="hero-tag">Professional Membership</div>
+    <h1>Join a Global Network of <em>Certified Professionals</em></h1>
+    <p class="lead">Gain internationally recognised post-nominal letters, access to global professional networks, CPD support, and career advancement opportunities across our 6 partner institutions.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val">6</div><div class="lbl">Partner Institutions</div></div>
+      <div class="hero-stat"><div class="val">20+</div><div class="lbl">Membership Grades</div></div>
+      <div class="hero-stat"><div class="val">70+</div><div class="lbl">Countries Recognised</div></div>
+      <div class="hero-stat"><div class="val">CPD</div><div class="lbl">Continuous Development</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="filterBar">
+  <div class="filter-bar-inner">
+    <button class="filter-tab active" data-inst="all">
+      <span class="tab-dot"></span> All Institutions <span class="tab-count">20</span>
+    </button>
+    <button class="filter-tab" data-inst="aiet">
+      <span class="tab-dot" style="color:var(--aiet)"></span> AIET <span class="tab-count">4</span>
+    </button>
+    <button class="filter-tab" data-inst="cbs">
+      <span class="tab-dot" style="color:var(--cbs)"></span> CIML Business School <span class="tab-count">2</span>
+    </button>
+    <button class="filter-tab" data-inst="ciml">
+      <span class="tab-dot" style="color:var(--ciml)"></span> CIML <span class="tab-count">5</span>
+    </button>
+    <button class="filter-tab" data-inst="cilg">
+      <span class="tab-dot" style="color:var(--cilg)"></span> CILG <span class="tab-count">4</span>
+    </button>
+    <button class="filter-tab" data-inst="ciet">
+      <span class="tab-dot" style="color:var(--ciet)"></span> CIET <span class="tab-count">3</span>
+    </button>
+    <button class="filter-tab" data-inst="cibia">
+      <span class="tab-dot" style="color:var(--cibia)"></span> CIBIA <span class="tab-count">2</span>
+    </button>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="membership-layout">
+  <div class="container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Filter by Institution</div>
+        <div class="inst-pill-list">
+          <div class="inst-pill active" data-inst="all">
+            <span class="inst-pill-dot" style="background:var(--red)"></span>
+            <span class="inst-pill-name">All Institutions</span>
+            <span class="inst-pill-count">20</span>
+          </div>
+          <div class="inst-pill" data-inst="aiet">
+            <span class="inst-pill-dot" style="background:var(--aiet)"></span>
+            <span class="inst-pill-name">American Inst. of Education &amp; Training</span>
+            <span class="inst-pill-count">4</span>
+          </div>
+          <div class="inst-pill" data-inst="cbs">
+            <span class="inst-pill-dot" style="background:var(--cbs)"></span>
+            <span class="inst-pill-name">CIML Business School</span>
+            <span class="inst-pill-count">2</span>
+          </div>
+          <div class="inst-pill" data-inst="ciml">
+            <span class="inst-pill-dot" style="background:var(--ciml)"></span>
+            <span class="inst-pill-name">Chartered Inst. of Management &amp; Leadership</span>
+            <span class="inst-pill-count">5</span>
+          </div>
+          <div class="inst-pill" data-inst="cilg">
+            <span class="inst-pill-dot" style="background:var(--cilg)"></span>
+            <span class="inst-pill-name">Chartered Inst. of Leadership &amp; Governance</span>
+            <span class="inst-pill-count">4</span>
+          </div>
+          <div class="inst-pill" data-inst="ciet">
+            <span class="inst-pill-dot" style="background:var(--ciet)"></span>
+            <span class="inst-pill-name">Chartered Inst. of Education &amp; Training</span>
+            <span class="inst-pill-count">3</span>
+          </div>
+          <div class="inst-pill" data-inst="cibia">
+            <span class="inst-pill-dot" style="background:var(--cibia)"></span>
+            <span class="inst-pill-name">Chartered Inst. of Business &amp; Administration</span>
+            <span class="inst-pill-count">2</span>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-info-box">
+        <h4>Not Sure Which Grade?</h4>
+        <p>Our advisors will help you identify the right membership level for your qualifications and experience.</p>
+        <a href="contact-us.html">Speak to an Advisor →</a>
+        <a href="apply.html" style="margin-top:.6rem;color:var(--gold-lt)">Start Application →</a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="membership-main">
+
+      <div class="membership-intro reveal">
+        <h3>What is Professional Membership?</h3>
+        <p>Membership of a chartered professional body is a globally recognised mark of competence, integrity, and professional standing. Members earn designatory letters (e.g. ACIML, MCILG, FCIET) to use after their name, signalling to employers, clients, and peers that they meet the highest standards in their field.</p>
+        <div class="membership-benefits-grid">
+          <div class="benefit-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Post-nominal designatory letters
+          </div>
+          <div class="benefit-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Global professional network access
+          </div>
+          <div class="benefit-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            CPD programmes & resources
+          </div>
+          <div class="benefit-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Digital membership certificates
+          </div>
+          <div class="benefit-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Career development & advisory support
+          </div>
+          <div class="benefit-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Grade upgrade pathway
+          </div>
+        </div>
+      </div>
+
+      <div class="results-bar">
+        <span class="results-count">Showing <strong id="visibleCount">20</strong> membership grades</span>
+        <button class="clear-filter" id="clearFilter">Clear filter ✕</button>
+      </div>
+
+      <!-- ═══════ AIET ═══════ -->
+      <div class="inst-block inst-aiet" id="block-aiet">
+        <div class="inst-block-header">
+          <div class="inst-block-header-left">
+            <div class="inst-badge"><span class="badge-dot"></span> USA-Based Institute · aietglobal.us</div>
+            <h2 class="inst-heading">American Institute of <em>Education &amp; Training</em></h2>
+            <p style="font-size:.84rem;color:var(--mid-grey);margin-top:.3rem;line-height:1.6;max-width:540px">AIET raises well-trained professionals at every level. Membership is open to educators, trainers, and allied professionals; applications are accepted by CV/experience without examination.</p>
+          </div>
+          <a href="https://aietglobal.us/app.html" target="_blank" class="visit-link">Visit AIET <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="membership-grid">
+
+          <div class="mem-card reveal" data-inst="aiet">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge badge-student" style="background:var(--aiet)20;color:var(--aiet);border:1px solid var(--aiet)40">Student</span>
+                <span class="mem-card-letters" style="color:var(--aiet)">Stud.AIET</span>
+              </div>
+              <h3>Student Membership</h3>
+              <p class="mem-card-desc">For individuals currently enrolled in an AIET programme or an approved education/training qualification. Ideal starting point for emerging educators and trainers.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--aiet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Currently enrolled in an approved AIET or related course</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--aiet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Confirmation of enrolment letter required</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://aietglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://aietglobal.us/app.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="aiet">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:var(--aiet)20;color:var(--aiet);border:1px solid var(--aiet)40">Associate</span>
+                <span class="mem-card-letters" style="color:var(--aiet)">AAIET</span>
+              </div>
+              <h3>Associate Member</h3>
+              <p class="mem-card-desc">For education and training professionals who are establishing their careers. Provides access to AIET's global network, resources, and CPD activities.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--aiet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> AIET Diploma or a relevant academic qualification</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--aiet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Application via CV/experience route (no exam required)</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://aietglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://aietglobal.us/app.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="aiet">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:var(--aiet)20;color:var(--aiet);border:1px solid var(--aiet)40">Member</span>
+                <span class="mem-card-letters" style="color:var(--aiet)">MAIET</span>
+              </div>
+              <h3>Full Member</h3>
+              <p class="mem-card-desc">Full membership for qualified education and training professionals with relevant experience. Grants use of designatory letters and full institutional benefits.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--aiet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Bachelor's degree in Education/Training or related field</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--aiet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Relevant professional experience in education/training</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--aiet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Submission of CV to contact@aietglobal.us</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://aietglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://aietglobal.us/app.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="aiet">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge badge-fellow" style="background:#C9A22720;color:#8a6c10;border:1px solid #C9A22740">Fellow</span>
+                <span class="mem-card-letters" style="color:#8a6c10">FAIET</span>
+              </div>
+              <h3>Fellow</h3>
+              <p class="mem-card-desc">The highest grade, recognising senior educators, trainers, and leaders who have made outstanding contributions to education and training. Includes induction ceremony (online or onsite).</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Senior professional standing in education/training</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Notable contributions to the profession</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Submit CV to contact@aietglobal.us for review</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://aietglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://aietglobal.us/app.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /AIET -->
+
+      <!-- ═══════ CIML BUSINESS SCHOOL ═══════ -->
+      <div class="inst-block inst-cbs" id="block-cbs">
+        <div class="inst-block-header">
+          <div class="inst-block-header-left">
+            <div class="inst-badge"><span class="badge-dot"></span> Internationally Ranked · cbsedu.us</div>
+            <h2 class="inst-heading">CIML <em>Business School</em></h2>
+            <p style="font-size:.84rem;color:var(--mid-grey);margin-top:.3rem;line-height:1.6;max-width:540px">Globally ranked institution delivering world-class business education. CBS graduates and professionals can pursue two membership routes linked to degree programmes.</p>
+          </div>
+          <a href="https://cbsedu.us" target="_blank" class="visit-link">Visit CBS <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="membership-grid">
+
+          <div class="mem-card reveal" data-inst="cbs">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:var(--cbs)20;color:var(--cbs);border:1px solid var(--cbs)40">Student</span>
+                <span class="mem-card-letters" style="color:var(--cbs)">Stud.CBS</span>
+              </div>
+              <h3>Student Membership</h3>
+              <p class="mem-card-desc">For students actively enrolled in a CBS certificate, diploma, or degree programme. Provides access to online learning tools, business simulations, and peer communities.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cbs)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Active enrolment in a CBS programme</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cbs)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Distance learning — flexible self-paced access</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cbsedu.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://cbsedu.us/app.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="cbs">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:var(--cbs)20;color:var(--cbs);border:1px solid var(--cbs)40">Alumni</span>
+                <span class="mem-card-letters" style="color:var(--cbs)">Alum.CBS</span>
+              </div>
+              <h3>Alumni Membership</h3>
+              <p class="mem-card-desc">For graduates of CIML Business School programmes. Stay connected to the global CBS community, access continuing education, and leverage alumni networks for career advancement.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cbs)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Successful completion of any CBS programme</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cbs)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Certificate of graduation as proof of completion</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cbsedu.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://cbsedu.us/app.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /CBS -->
+
+      <!-- ═══════ CIML ═══════ -->
+      <div class="inst-block inst-ciml" id="block-ciml">
+        <div class="inst-block-header">
+          <div class="inst-block-header-left">
+            <div class="inst-badge"><span class="badge-dot"></span> 70+ Countries · cimlglobal.us</div>
+            <h2 class="inst-heading">Chartered Institute of <em>Management &amp; Leadership</em></h2>
+            <p style="font-size:.84rem;color:var(--mid-grey);margin-top:.3rem;line-height:1.6;max-width:540px">A premier professional membership organisation delivering management and leadership credentials recognised across more than 70 countries. CIML offers a clearly defined progression route from Affiliate to Distinguished Fellow.</p>
+          </div>
+          <a href="https://cimlglobal.us" target="_blank" class="visit-link">Visit CIML <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="membership-grid">
+
+          <div class="mem-card reveal" data-inst="ciml">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:#CC000020;color:var(--red);border:1px solid #CC000040">Student</span>
+                <span class="mem-card-letters" style="color:var(--red)">Stud.CIML</span>
+              </div>
+              <h3>Student Membership</h3>
+              <p class="mem-card-desc">For those registered in a Management or related degree at an accredited institution. Entry point to the CIML community while completing academic qualifications. Use letters <strong>Stud.CIML</strong>.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Enrolled in a full-time or part-time Management/related degree</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Letter confirming course registration</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cimlglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://cimlglobal.us/app.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="ciml">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:#CC000020;color:var(--red);border:1px solid #CC000040">Graduate</span>
+                <span class="mem-card-letters" style="color:var(--red)">Grad.CIML</span>
+              </div>
+              <h3>Graduate Member</h3>
+              <p class="mem-card-desc">Admitted on academic qualifications alone. Ideal for recent graduates in Management or related disciplines. Use letters <strong>Grad.CIML</strong>.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> CIML Diploma in Business Management and Leadership, or</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Bachelor's degree in Management or related subject</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Qualification transcripts required</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cimlglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://cimlglobal.us/app.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="ciml">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:#CC000020;color:var(--red);border:1px solid #CC000040">Associate</span>
+                <span class="mem-card-letters" style="color:var(--red)">ACIML</span>
+              </div>
+              <h3>Associate Member</h3>
+              <p class="mem-card-desc">For professionals building experience in Management/Leadership. Transition to Full Membership expected within five years. Use letters <strong>ACIML</strong>.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> CIML Advanced Diploma in Business Mgmt & Leadership, or</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Bachelor's degree in Management or related area</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Two referees required; qualification transcripts</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cimlglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://cimlglobal.us/app.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="ciml">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:#CC000020;color:var(--red);border:1px solid #CC000040">Member</span>
+                <span class="mem-card-letters" style="color:var(--red)">MCIML</span>
+              </div>
+              <h3>Full Member</h3>
+              <p class="mem-card-desc">Full professional recognition for experienced management and leadership practitioners. Demonstrates mastery in leadership practice. Use letters <strong>MCIML</strong>.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 4 years post-graduation experience in Management/Leadership</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> CIML Advanced Diploma or Bachelor's degree in Management</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Demonstrated professional standing & two referees</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cimlglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://cimlglobal.us/app.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="ciml">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge badge-fellow" style="background:#C9A22720;color:#8a6c10;border:1px solid #C9A22740">Fellow</span>
+                <span class="mem-card-letters" style="color:#8a6c10">FCIML / DFCIML</span>
+              </div>
+              <h3>Fellow &amp; Distinguished Fellow</h3>
+              <p class="mem-card-desc">Senior professional recognition for those with outstanding contributions to Management and Leadership. Distinguished Fellows may use <strong>DFCIML</strong> after their name.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> CIML Executive Diploma in Business Leadership or Master's degree</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 10 yrs research in Mgmt/Leadership OR 15 yrs responsible work</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Two referees; one must be a Fellow of CIML or similar body</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cimlglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://cimlglobal.us/app.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /CIML -->
+
+      <!-- ═══════ CILG ═══════ -->
+      <div class="inst-block inst-cilg" id="block-cilg">
+        <div class="inst-block-header">
+          <div class="inst-block-header-left">
+            <div class="inst-badge"><span class="badge-dot"></span> Governance Excellence · cilgglobal.org</div>
+            <h2 class="inst-heading">Chartered Institute of <em>Leadership &amp; Governance</em></h2>
+            <p style="font-size:.84rem;color:var(--mid-grey);margin-top:.3rem;line-height:1.6;max-width:540px">An internationally recognised professional body advancing governance excellence and ethical leadership. CILG operates a structured four-grade membership framework with post-nominals ACILG, MCILG, and FCILG.</p>
+          </div>
+          <a href="https://cilgglobal.org">Visit CILG <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="membership-grid">
+
+          <div class="mem-card reveal" data-inst="cilg">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:var(--cilg)20;color:var(--cilg);border:1px solid var(--cilg)40">Affiliate</span>
+                <span class="mem-card-letters" style="color:var(--cilg)">Aff.CILG</span>
+              </div>
+              <h3>Affiliate Membership</h3>
+              <p class="mem-card-desc">The entry point into CILG. Designed for students, emerging leaders, and young professionals aspiring to build a foundation in leadership and governance.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cilg)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Interest in leadership and governance</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cilg)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> No prior experience required — open entry</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cilgglobal.org">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="/#" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="cilg">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:var(--cilg)20;color:var(--cilg);border:1px solid var(--cilg)40">Associate</span>
+                <span class="mem-card-letters" style="color:var(--cilg)">ACILG</span>
+              </div>
+              <h3>Associate Member</h3>
+              <p class="mem-card-desc">For professionals who have begun establishing themselves in leadership or governance roles and seek formal recognition. Use post-nominals <strong>ACILG</strong>.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cilg)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Relevant qualification in leadership, governance or related field</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cilg)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Some professional experience in leadership or governance role</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cilgglobal.org">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="/#" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="cilg">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:var(--cilg)20;color:var(--cilg);border:1px solid var(--cilg)40">Member</span>
+                <span class="mem-card-letters" style="color:var(--cilg)">MCILG</span>
+              </div>
+              <h3>Full Member</h3>
+              <p class="mem-card-desc">Recognises professionals with high-level expertise, experience, and ethical standing in leadership or governance. Seasoned practitioners with proven team-leading ability. Use <strong>MCILG</strong>.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cilg)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Advanced qualification in leadership, governance or management</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cilg)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Demonstrable leadership/governance experience at senior level</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cilg)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Eligible to vote and hold office within CILG</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cilgglobal.org">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="/#" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="cilg">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge badge-fellow" style="background:#C9A22720;color:#8a6c10;border:1px solid #C9A22740">Fellow</span>
+                <span class="mem-card-letters" style="color:#8a6c10">FCILG / HonFCILG</span>
+              </div>
+              <h3>Fellow &amp; Honorary Fellow</h3>
+              <p class="mem-card-desc">The highest grade, awarded to those who have led the development of thinking and practice in Leadership and Governance. Honorary Fellows are appointed by the Board for exceptional contribution. Use <strong>FCILG</strong>.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Senior professional standing in leadership/governance</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Significant contribution to the development of the field</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Eligible for election to CILG Global Council (USA)</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cilgglobal.org">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="/#" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /CILG -->
+
+      <!-- ═══════ CIET ═══════ -->
+      <div class="inst-block inst-ciet" id="block-ciet">
+        <div class="inst-block-header">
+          <div class="inst-block-header-left">
+            <div class="inst-badge"><span class="badge-dot"></span> Education &amp; Training Excellence · cietglobal.us</div>
+            <h2 class="inst-heading">Chartered Institute of <em>Education &amp; Training</em></h2>
+            <p style="font-size:.84rem;color:var(--mid-grey);margin-top:.3rem;line-height:1.6;max-width:540px">CIET advances professional competence in education through rigorous credentialing. Membership unlocks a global professional community, CPD programmes, research archives, and expert collaboration for educators and trainers worldwide.</p>
+          </div>
+          <a href="https://cietglobal.us" target="_blank" class="visit-link">Visit CIET <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="membership-grid">
+
+          <div class="mem-card reveal" data-inst="ciet">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:var(--ciet)20;color:var(--ciet);border:1px solid var(--ciet)40">Associate</span>
+                <span class="mem-card-letters" style="color:var(--ciet)">ACIET</span>
+              </div>
+              <h3>Associate Member</h3>
+              <p class="mem-card-desc">For education professionals and trainers in the early-to-mid stages of their career. Full access to CIET's global professional community, credentialing programmes, and research archives.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ciet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Relevant qualification in education or training</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ciet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Professional engagement in education, training, or allied fields</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cietglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://cietglobal.us/ap.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="ciet">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:var(--ciet)20;color:var(--ciet);border:1px solid var(--ciet)40">Member</span>
+                <span class="mem-card-letters" style="color:var(--ciet)">MCIET</span>
+              </div>
+              <h3>Full Member</h3>
+              <p class="mem-card-desc">Full recognition for established education and training practitioners. Demonstrate commitment to upholding the highest standards of ethical practice and professional integrity in education.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ciet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Degree or CIET professional certification</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ciet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Substantial professional experience in education/training</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ciet)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Active CPD participation required annually</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cietglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://cietglobal.us/ap.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="ciet">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge badge-fellow" style="background:#C9A22720;color:#8a6c10;border:1px solid #C9A22740">Fellow</span>
+                <span class="mem-card-letters" style="color:#8a6c10">FCIET</span>
+              </div>
+              <h3>Fellow</h3>
+              <p class="mem-card-desc">The senior grade, for those who have demonstrated sustained leadership in education, contributed to educational policy, or achieved distinguished academic standing. Certified Educational Leadership &amp; Policy Specialist (CELPS) pathway also available.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Bachelor's in Education + 7 yrs experience, or Master's + 4 yrs</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Demonstrable contribution to education leadership or policy</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Opportunity to shape CIET's global educational standards</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cietglobal.us" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="https://cietglobal.us/ap.html" target="_blank" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /CIET -->
+
+      <!-- ═══════ CIBIA ═══════ -->
+      <div class="inst-block inst-cibia" id="block-cibia">
+        <div class="inst-block-header">
+          <div class="inst-block-header-left">
+            <div class="inst-badge"><span class="badge-dot"></span> Business &amp; Administration · cibiaglobal.org</div>
+            <h2 class="inst-heading">Chartered Institute of <em>Business &amp; Administration</em></h2>
+            <p style="font-size:.84rem;color:var(--mid-grey);margin-top:.3rem;line-height:1.6;max-width:540px">A chartered professional body advancing business and administrative excellence with qualifications trusted by employers worldwide. CIBIA frameworks cover Business Intelligence, Analytics, and Administration.</p>
+          </div>
+          <a href="https://cibiaglobal.org" target="_blank" class="visit-link">Visit CIBIA <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="membership-grid">
+
+          <div class="mem-card reveal" data-inst="cibia">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge" style="background:var(--cibia)20;color:var(--cibia);border:1px solid var(--cibia)40">Associate</span>
+                <span class="mem-card-letters" style="color:var(--cibia)">ACIBIA</span>
+              </div>
+              <h3>Associate Member</h3>
+              <p class="mem-card-desc">For business and administration professionals building their careers. Access CIBIA's global network, certification verification framework, and CPD tools. Use designatory letters <strong>ACIBIA</strong>.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cibia)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Relevant qualification in business, administration, or analytics</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cibia)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Professional engagement in business or administrative roles</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--cibia)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Agreement to CIBIA code of professional conduct</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cibiaglobal.org" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="/#" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+          <div class="mem-card reveal" data-inst="cibia">
+            <div class="mem-card-top">
+              <div class="mem-card-grade">
+                <span class="grade-badge badge-fellow" style="background:#C9A22720;color:#8a6c10;border:1px solid #C9A22740">Chartered Member / Fellow</span>
+                <span class="mem-card-letters" style="color:#8a6c10">MCIBIA / FCIBIA</span>
+              </div>
+              <h3>Chartered Member &amp; Fellow</h3>
+              <p class="mem-card-desc">Full chartered recognition and senior fellowship for those who have achieved distinguished standing in business, administration, or analytics. Demonstrates the highest professional credibility globally.</p>
+              <div class="mem-card-reqs">
+                <div class="req-heading">Requirements</div>
+                <div class="req-list">
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Substantial experience in business, administration, or analytics</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Evidence of measurable impact and professional contributions</div>
+                  <div class="req-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6c10" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> CIBIA programme completion or recognised equivalent qualification</div>
+                </div>
+              </div>
+            </div>
+            <div class="mem-card-footer">
+              <a href="https://cibiaglobal.org" target="_blank" class="learn-link">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              <a href="/#" class="apply-btn">Apply Now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /CIBIA -->
+
+    </div><!-- /membership-main -->
+  </div>
+</div><!-- /layout -->
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="container">
+    <div>
+      <h2>Ready to Join a Global <em>Professional Body</em>?</h2>
+      <p>Apply for membership today through Fountain Professional Training Services and benefit from our guided application support, direct links to all six partner institutions, and dedicated advisory team.</p>
+    </div>
+    <div class="cta-band-btns">
+      <a href="apply.html" class="btn btn-red">Apply Now →</a>
+      <a href="contact-us.html" class="btn btn-outline-white">Speak to an Advisor</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain Professional Training Services" />
+          <p>Your trusted partner in Consulting, Education and Training. Empowering professionals across Nigeria and beyond with globally recognised qualifications.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Programmes</h4>
+          <ul>
+            <li><a href="certification-courses.html">Certification Courses</a></li>
+            <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+            <li><a href="mba.html">MBA</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="apply.html">Apply Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Institute Partners</h4>
+          <ul>
+                     <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education and Training</a></li>
+            <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business and Administration</a></li>
+            <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education and Training</a></li>
+            <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership and Governance</a></li>
+            <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management and Leadership</a></li>
+            <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:info@fountainptserv.com">info@fountainptserv.com</a></li>
+            <li><a href="tel:+2348034711642">08034711642</a></li>
+            <li><a href="contact-us.html">Contact Form</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>&copy; 2026 Fountain Professional Training Services. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+/* ─── MOBILE NAV ─── */
+var menuBtn   = document.getElementById('menuBtn');
+var menuClose = document.getElementById('menuClose');
+var mobileNav = document.getElementById('mobileNav');
+var overlay   = document.getElementById('mobOverlay');
+function openMenu(){ mobileNav.classList.add('open'); overlay.classList.add('open'); mobileNav.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+function closeMenu(){ mobileNav.classList.remove('open'); overlay.classList.remove('open'); mobileNav.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+if(menuBtn)   menuBtn.addEventListener('click', openMenu);
+if(menuClose) menuClose.addEventListener('click', closeMenu);
+if(overlay)   overlay.addEventListener('click', closeMenu);
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMenu(); });
+document.querySelectorAll('.mob-toggle').forEach(function(btn){
+  btn.addEventListener('click', function(e){
+    e.preventDefault(); e.stopPropagation();
+    var parent = btn.closest('li');
+    if(!parent) return;
+    var isOpen = parent.classList.contains('mob-open');
+    document.querySelectorAll('.mob-links li.mob-open').forEach(function(li){ li.classList.remove('mob-open'); });
+    if(!isOpen) parent.classList.add('mob-open');
+  });
+});
+
+/* ─── SCROLL REVEAL ─── */
+var revealObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(function(r){ revealObs.observe(r); });
+
+/* ─── FILTER ─── */
+var currentInst = 'all';
+var allCards    = Array.from(document.querySelectorAll('.mem-card'));
+var allBlocks   = Array.from(document.querySelectorAll('.inst-block'));
+var countEl     = document.getElementById('visibleCount');
+var clearBtn    = document.getElementById('clearFilter');
+
+function applyFilters(){
+  var visible = 0;
+  allCards.forEach(function(card){
+    var show = currentInst === 'all' || card.dataset.inst === currentInst;
+    card.style.display = show ? '' : 'none';
+    if(show) visible++;
+  });
+  allBlocks.forEach(function(block){
+    var instKey = block.id.replace('block-','');
+    if(currentInst !== 'all' && instKey !== currentInst){ block.classList.add('hidden'); return; }
+    var vis = block.querySelectorAll('.mem-card:not([style*="none"])');
+    block.classList.toggle('hidden', vis.length === 0);
+  });
+  countEl.textContent = visible;
+  clearBtn.classList.toggle('visible', currentInst !== 'all');
+}
+
+document.querySelectorAll('.filter-tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.filter-tab').forEach(function(t){ t.classList.remove('active'); });
+    tab.classList.add('active');
+    currentInst = tab.dataset.inst;
+    document.querySelectorAll('.inst-pill').forEach(function(p){ p.classList.toggle('active', p.dataset.inst === currentInst); });
+    applyFilters();
+    if(currentInst !== 'all'){
+      var block = document.getElementById('block-'+currentInst);
+      if(block) setTimeout(function(){ block.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+    } else {
+      window.scrollTo({top:document.getElementById('filterBar').offsetTop - 80, behavior:'smooth'});
+    }
+  });
+});
+
+document.querySelectorAll('.inst-pill').forEach(function(pill){
+  pill.addEventListener('click', function(){
+    currentInst = pill.dataset.inst;
+    document.querySelectorAll('.inst-pill').forEach(function(p){ p.classList.remove('active'); });
+    pill.classList.add('active');
+    document.querySelectorAll('.filter-tab').forEach(function(t){ t.classList.toggle('active', t.dataset.inst === currentInst); });
+    applyFilters();
+    if(currentInst !== 'all'){
+      var block = document.getElementById('block-'+currentInst);
+      if(block) setTimeout(function(){ block.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+    }
+  });
+});
+
+if(clearBtn){
+  clearBtn.addEventListener('click', function(){
+    currentInst = 'all';
+    document.querySelectorAll('.filter-tab').forEach(function(t){ t.classList.toggle('active', t.dataset.inst==='all'); });
+    document.querySelectorAll('.inst-pill').forEach(function(p){ p.classList.toggle('active', p.dataset.inst==='all'); });
+    applyFilters();
+  });
+}
+
+applyFilters();
+
+}());
+</script>
+</body>
+</html>

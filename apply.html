@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply Now — Fountain Professional Training Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Source+Sans+3:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+/* ─── DESIGN TOKENS (Fountain) ─── */
+:root {
+  --red:        #CC0000;
+  --red-dk:     #A00000;
+  --red-lt:     #E53030;
+  --gold:       #C9A227;
+  --gold-lt:    #E8C04A;
+  --gold-pale:  #FFF8E7;
+  --white:      #FFFFFF;
+  --off-white:  #F5F5F5;
+  --light-grey: #EBEBEB;
+  --mid-grey:   #6B7280;
+  --dark:       #1A1A1A;
+  --dark-2:     #111111;
+  --charcoal:   #2D2D2D;
+  --green:      #1E7E34;
+  --border:     rgba(0,0,0,.1);
+  --radius:     4px;
+  --shadow-sm:  0 2px 10px rgba(0,0,0,.08);
+  --shadow-md:  0 8px 30px rgba(0,0,0,.14);
+  --trans:      .25s cubic-bezier(.4,0,.2,1);
+  --font-display: 'Playfair Display', 'Times New Roman', Georgia, serif;
+  --font-body:    'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+  --font-impact:  'Bebas Neue', 'Arial Narrow', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);background:var(--white);color:var(--dark);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+ul{list-style:none}
+button{cursor:pointer;font-family:inherit}
+input,select,textarea{font-family:var(--font-body)}
+
+/* ─── TOP BAR ─── */
+.topbar{background:var(--dark-2);color:rgba(255,255,255,.7);font-size:.78rem;padding:7px 0;border-bottom:2px solid var(--red)}
+.topbar .inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
+.topbar a{color:rgba(255,255,255,.7);transition:color var(--trans)}
+.topbar a:hover{color:var(--gold-lt)}
+.topbar-left{display:flex;gap:20px;align-items:center}
+
+/* ─── HEADER ─── */
+.site-header{background:#fff;border-bottom:3px solid var(--red);position:sticky;top:0;z-index:900;box-shadow:var(--shadow-sm)}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;margin-right:auto}
+.logo-wordmark{display:flex;flex-direction:column;line-height:1.15}
+.logo-wordmark .top{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--dark)}
+.logo-wordmark .sub{font-size:.65rem;color:var(--mid-grey);letter-spacing:.04em;text-transform:uppercase}
+.header-actions{display:flex;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--radius);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;transition:var(--trans);cursor:pointer;border:none}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-dk)}
+.btn-outline{background:transparent;color:var(--dark);border:2px solid var(--dark)}
+.btn-outline:hover{background:var(--dark);color:#fff}
+
+/* ─── PAGE HERO ─── */
+.page-hero{background:var(--dark-2);position:relative;overflow:hidden;padding:3.5rem 0 2.5rem}
+.page-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(204,0,0,.15) 0%,transparent 60%),repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.015) 20px,rgba(255,255,255,.015) 21px)}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold),var(--red))}
+.page-hero .inner{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.25rem}
+.breadcrumb a,.breadcrumb span{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);transition:color var(--trans)}
+.breadcrumb a:hover{color:var(--gold-lt)}
+.breadcrumb .sep{color:rgba(255,255,255,.2)}
+.breadcrumb .cur{color:var(--gold-lt)}
+.page-hero-tag{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.75rem;margin-bottom:.85rem}
+.page-hero-tag::before{content:'';display:block;width:24px;height:2px;background:var(--gold)}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);color:#fff;line-height:1.1;margin-bottom:.75rem}
+.page-hero h1 em{font-style:italic;color:var(--gold-lt)}
+.page-hero p{font-size:.92rem;color:rgba(255,255,255,.7);line-height:1.75;max-width:560px}
+
+/* ─── INSTITUTION SELECTOR BAR ─── */
+.inst-selector-bar{background:var(--off-white);border-bottom:1px solid var(--border);padding:0}
+.inst-selector-bar .inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:stretch;overflow-x:auto;gap:0}
+.inst-tab{display:flex;align-items:center;gap:8px;padding:14px 18px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mid-grey);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all var(--trans);border:none;background:none;font-family:var(--font-body)}
+.inst-tab:hover{color:var(--dark);border-bottom-color:var(--gold)}
+.inst-tab.active{color:var(--red);border-bottom-color:var(--red)}
+.inst-tab .dot{width:8px;height:8px;border-radius:50%;background:var(--mid-grey);flex-shrink:0;transition:background var(--trans)}
+.inst-tab.active .dot{background:var(--red)}
+
+/* ─── APP LAYOUT ─── */
+.app-layout{display:grid;grid-template-columns:260px 1fr;max-width:1200px;margin:0 auto;min-height:70vh;border-left:1px solid var(--border);border-right:1px solid var(--border)}
+
+/* ─── SIDEBAR ─── */
+.step-sidebar{background:var(--dark);padding:2rem 0;position:sticky;top:71px;height:fit-content;align-self:start}
+.sidebar-inst-badge{padding:0 1.5rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:1.25rem}
+.sidebar-inst-name{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.3rem}
+.sidebar-inst-label{font-family:var(--font-display);font-size:.95rem;color:#fff;line-height:1.2}
+.sidebar-inst-label em{font-style:italic;color:var(--gold-lt)}
+.step-list{padding:0 1.25rem;display:flex;flex-direction:column;gap:.2rem}
+.step-item{display:flex;align-items:flex-start;gap:.75rem;padding:.8rem .75rem;border-left:3px solid transparent;cursor:pointer;transition:all .2s;position:relative}
+.step-item.active{border-left-color:var(--gold);background:rgba(201,162,39,.07)}
+.step-item.done{border-left-color:var(--green)}
+.step-num{width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;color:rgba(255,255,255,.3);flex-shrink:0;transition:all .2s}
+.step-item.active .step-num{border-color:var(--gold);background:var(--gold);color:var(--dark)}
+.step-item.done .step-num{border-color:var(--green);background:var(--green);color:#fff}
+.step-text-lbl{font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:.12rem;transition:color .2s}
+.step-item.active .step-text-lbl{color:var(--gold)}
+.step-item.done .step-text-lbl{color:var(--green)}
+.step-text-name{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.5);line-height:1.2;transition:color .2s}
+.step-item.active .step-text-name{color:#fff}
+.step-item.done .step-text-name{color:rgba(255,255,255,.65)}
+.step-check{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--green);font-size:.85rem;opacity:0;transition:opacity .2s}
+.step-item.done .step-check{opacity:1}
+.sidebar-help{padding:1.5rem 1.5rem 0;border-top:1px solid rgba(255,255,255,.06);margin-top:1.5rem}
+.sidebar-help p{font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.6}
+.sidebar-help a{color:var(--gold-lt);transition:color var(--trans)}
+.sidebar-help a:hover{color:#fff}
+
+/* ─── FORM AREA ─── */
+.form-area{background:var(--off-white);padding:2.5rem 3rem;border-left:1px solid var(--border)}
+.form-panel{display:none;animation:fadeUp .3s ease}
+.form-panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.form-panel-head{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.panel-tag{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:.65rem;margin-bottom:.65rem}
+.panel-tag::before{content:'';display:block;width:20px;height:2px;background:var(--red)}
+.form-panel-head h2{font-family:var(--font-display);font-size:clamp(1.5rem,2.5vw,2.1rem);color:var(--dark);line-height:1.1}
+.form-panel-head h2 em{font-style:italic;color:var(--red)}
+.form-panel-head p{font-size:.88rem;color:var(--mid-grey);line-height:1.65;margin-top:.4rem}
+
+.form-section-label{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.38);margin-bottom:1.1rem;margin-top:2rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.55rem}
+.form-section-label:first-of-type{margin-top:0}
+.form-section-label::before{content:'';width:14px;height:2px;background:var(--gold);display:block}
+
+.form-row{display:grid;gap:1.1rem;margin-bottom:1.1rem}
+.form-row.cols-2{grid-template-columns:1fr 1fr}
+.form-row.cols-3{grid-template-columns:1fr 1fr 1fr}
+.form-row.cols-1{grid-template-columns:1fr}
+
+.field{display:flex;flex-direction:column;gap:.38rem}
+.field label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.5)}
+.field label .req{color:var(--red)}
+.field input,.field select,.field textarea{background:#fff;border:1.5px solid rgba(0,0,0,.12);padding:.8rem .9rem;font-size:.9rem;color:var(--dark);transition:border-color .2s,box-shadow .2s;outline:none;width:100%;border-radius:var(--radius)}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .9rem center;padding-right:2.5rem;appearance:none;-webkit-appearance:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(204,0,0,.07)}
+.field textarea{resize:vertical;min-height:96px}
+.field-hint{font-size:.73rem;color:rgba(0,0,0,.38);margin-top:.18rem;line-height:1.4}
+
+.radio-group{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.3rem}
+.radio-opt{display:flex;align-items:center;gap:.45rem;background:#fff;border:1.5px solid rgba(0,0,0,.1);padding:.55rem .9rem;cursor:pointer;transition:all .2s;font-size:.83rem;color:rgba(0,0,0,.6);user-select:none;border-radius:var(--radius)}
+.radio-opt:hover{border-color:var(--red);color:var(--red)}
+.radio-opt input{width:13px;height:13px;accent-color:var(--red);flex-shrink:0}
+.radio-opt.selected{border-color:var(--red);background:rgba(204,0,0,.04);color:var(--red);font-weight:600}
+
+/* ─── INST-SPECIFIC PANELS ─── */
+.inst-section{display:none}
+.inst-section.active{display:block}
+
+/* ─── FILE UPLOAD ─── */
+.file-upload-zone{border:2px dashed rgba(0,0,0,.14);background:#fff;padding:1.75rem;text-align:center;cursor:pointer;transition:all .22s;position:relative;border-radius:var(--radius)}
+.file-upload-zone:hover{border-color:var(--red);background:rgba(204,0,0,.02)}
+.file-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.file-upload-zone .fui{font-size:1.8rem;margin-bottom:.55rem}
+.file-upload-zone p{font-size:.83rem;color:rgba(0,0,0,.5);line-height:1.5}
+.file-upload-zone strong{color:var(--red);font-weight:600}
+.file-upload-zone .ftypes{font-size:.7rem;color:rgba(0,0,0,.3);margin-top:.3rem}
+.file-name-display{margin-top:.6rem;font-size:.78rem;color:var(--red);font-weight:600}
+
+/* ─── REVIEW ─── */
+.review-block{background:#fff;border:1px solid var(--border);margin-bottom:1.25rem;border-radius:var(--radius);overflow:hidden}
+.review-block-head{background:var(--dark);padding:.75rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.review-block-head h4{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff}
+.review-edit-btn{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-lt);cursor:pointer;background:none;border:none;font-family:var(--font-body);transition:color .2s}
+.review-edit-btn:hover{color:#fff}
+.review-grid{display:grid;grid-template-columns:1fr 1fr}
+.review-item{padding:.9rem 1.25rem;border-bottom:1px solid var(--border)}
+.review-item:nth-last-child(-n+2){border-bottom:none}
+.review-item-lbl{font-size:.57rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.38);margin-bottom:.22rem}
+.review-item-val{font-size:.86rem;color:var(--dark);font-weight:500}
+.review-item-val.highlight{color:var(--red);font-weight:700}
+
+/* ─── DECLARATION ─── */
+.declaration-box{background:#fff;border:1.5px solid var(--border);padding:1.5rem;margin-bottom:1.25rem;border-radius:var(--radius)}
+.declaration-box p{font-size:.84rem;color:rgba(0,0,0,.6);line-height:1.75;margin-bottom:1.1rem}
+.decl-check-row{display:flex;align-items:flex-start;gap:.7rem;cursor:pointer}
+.decl-check-row input{width:15px;height:15px;margin-top:.18rem;accent-color:var(--red);flex-shrink:0}
+.decl-check-row span{font-size:.85rem;color:var(--dark);line-height:1.5}
+
+/* ─── FORM NAV ─── */
+.form-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;margin-top:2rem;border-top:1px solid var(--border)}
+.btn-prev{background:transparent;color:var(--mid-grey);border:1.5px solid var(--border);padding:11px 22px;font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:var(--radius);transition:var(--trans);cursor:pointer;font-family:var(--font-body)}
+.btn-prev:hover{border-color:var(--dark);color:var(--dark)}
+.btn-next{background:var(--red);color:#fff;padding:11px 28px;font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:none;border-radius:var(--radius);transition:var(--trans);cursor:pointer;display:flex;align-items:center;gap:8px;font-family:var(--font-body)}
+.btn-next:hover{background:var(--red-dk);transform:translateY(-1px);box-shadow:0 6px 18px rgba(204,0,0,.3)}
+.btn-submit{background:var(--dark);color:#fff;padding:12px 32px;font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:none;border-radius:var(--radius);transition:var(--trans);cursor:pointer;display:flex;align-items:center;gap:10px;font-family:var(--font-body)}
+.btn-submit:hover{background:var(--red)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed}
+.btn-spinner{display:none;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.step-counter{font-size:.78rem;color:var(--mid-grey)}
+.step-counter strong{color:var(--dark)}
+
+/* ─── SUCCESS ─── */
+.success-screen{display:none;text-align:center;padding:4rem 2rem}
+.success-screen.show{display:block;animation:fadeUp .5s ease}
+.success-icon{width:72px;height:72px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.75rem;font-size:2rem}
+.success-screen h2{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);color:var(--dark);margin-bottom:.85rem;line-height:1.15}
+.success-screen h2 em{font-style:italic;color:var(--red)}
+.success-screen p{font-size:.92rem;color:var(--mid-grey);line-height:1.75;max-width:480px;margin:0 auto 1.75rem}
+.ref-box{background:var(--gold-pale);border:1.5px solid rgba(201,162,39,.3);padding:1.1rem 2rem;display:inline-block;margin-bottom:1.75rem;border-radius:var(--radius)}
+.ref-box-lbl{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,0,0,.4);margin-bottom:.3rem}
+.ref-box-num{font-family:var(--font-display);font-size:1.6rem;color:var(--dark)}
+.success-btns{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap}
+
+/* ─── TOAST ─── */
+#toast{position:fixed;top:24px;right:24px;z-index:9999;display:flex;align-items:flex-start;gap:12px;background:#fff;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.18);padding:18px 20px;max-width:360px;border-left:4px solid var(--green);transform:translateX(calc(100% + 60px));transition:transform .4s cubic-bezier(.16,1,.3,1);pointer-events:none}
+#toast.show{transform:translateX(0);pointer-events:auto}
+#toast.err{border-left-color:var(--red)}
+.toast-icon-wrap{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center}
+#toast.err .toast-icon-wrap{background:var(--red)}
+.toast-icon-wrap svg{width:16px;height:16px;stroke:#fff;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.toast-body{flex:1}
+.toast-title{font-weight:700;font-size:.83rem;color:var(--dark);margin-bottom:2px}
+.toast-msg{font-size:.76rem;color:var(--mid-grey);line-height:1.5}
+.toast-close{background:none;border:none;cursor:pointer;color:#bbb;font-size:1.1rem;line-height:1;flex-shrink:0;transition:color .2s;padding:0}
+.toast-close:hover{color:var(--dark)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  .app-layout{grid-template-columns:1fr}
+  .step-sidebar{position:static;display:flex;overflow-x:auto;padding:1rem;gap:0;border-bottom:2px solid var(--gold)}
+  .sidebar-inst-badge,.sidebar-help{display:none}
+  .step-list{flex-direction:row;padding:0;gap:.4rem;flex:1}
+  .step-item{flex-direction:column;align-items:center;text-align:center;gap:.3rem;padding:.5rem .65rem;border-left:none;border-bottom:3px solid transparent;flex:1;min-width:55px}
+  .step-item.active{border-left:none;border-bottom-color:var(--gold)}
+  .step-item.done{border-bottom-color:var(--green)}
+  .step-text-lbl{display:none}
+  .step-text-name{font-size:.6rem}
+  .step-check{display:none}
+  .form-area{padding:1.75rem 1.25rem}
+  .form-row.cols-2,.form-row.cols-3{grid-template-columns:1fr}
+  .review-grid{grid-template-columns:1fr}
+  .review-item:last-child{border-bottom:none}
+  .inst-selector-bar .inner{gap:0}
+  .inst-tab{padding:11px 12px;font-size:.68rem}
+}
+@media(max-width:640px){
+  .page-hero{padding:2.5rem 0 1.75rem}
+  .form-nav{flex-direction:column;gap:.85rem;align-items:stretch}
+  .btn-prev,.btn-next,.btn-submit{justify-content:center;text-align:center}
+  #toast{top:12px;right:12px;left:12px;max-width:none}
+}
+
+/* ─── NAVIGATION ─── */
+#mainHeader{background:#fff;border-bottom:3px solid var(--red);position:sticky;top:0;z-index:900;box-shadow:var(--shadow-sm)}
+#mainHeader nav{max-width:1200px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;gap:20px}
+.nav-logo{display:flex;align-items:center;gap:10px;margin-right:auto;text-decoration:none}
+.nav-logo img{height:40px;width:auto}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.2}
+.nav-logo-text .main{font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--dark)}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links > li{position:relative}
+.nav-links > li > a,
+.nav-links > li > span{display:flex;align-items:center;gap:4px;padding:8px 12px;font-size:.8rem;font-weight:600;letter-spacing:.04em;color:var(--dark);cursor:pointer;border-radius:var(--radius);transition:color var(--trans),background var(--trans);white-space:nowrap;user-select:none}
+.nav-links > li > a:hover,
+.nav-links > li > span:hover,
+.nav-links > li.active > span{color:var(--red)}
+.nav-links .arrow{transition:transform .2s;flex-shrink:0}
+.nav-links > li:hover .arrow{transform:rotate(180deg)}
+.dropdown{display:none;position:absolute;top:calc(100% + 6px);left:0;background:#fff;border:1px solid var(--border);border-top:3px solid var(--red);box-shadow:var(--shadow-md);min-width:220px;z-index:200;border-radius:0 0 var(--radius) var(--radius)}
+.nav-links > li:hover .dropdown{display:block}
+.dropdown li a{display:block;padding:.65rem 1.1rem;font-size:.8rem;color:var(--dark);transition:background var(--trans),color var(--trans);white-space:nowrap}
+.dropdown li a:hover{background:var(--off-white);color:var(--red)}
+.nav-cta{font-size:.78rem;white-space:nowrap;flex-shrink:0}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:6px;cursor:pointer}
+.hamburger span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px;transition:var(--trans)}
+
+/* ─── MOBILE NAV ─── */
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;opacity:0;transition:opacity .3s}
+.mob-overlay.open{display:block;opacity:1}
+.mobile-nav{position:fixed;top:0;right:0;bottom:0;width:min(320px,88vw);background:#fff;z-index:1001;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+.mobile-nav.open{transform:translateX(0)}
+.mob-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:2px solid var(--red)}
+.mob-close{background:none;border:none;font-size:1.3rem;color:var(--mid-grey);cursor:pointer;line-height:1}
+.mob-links{list-style:none;padding:.5rem 0;flex:1}
+.mob-links > li > a{display:block;padding:.85rem 1.25rem;font-size:.88rem;font-weight:600;color:var(--dark);border-bottom:1px solid var(--border)}
+.mob-toggle{width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--border);padding:.85rem 1.25rem;font-size:.88rem;font-weight:600;color:var(--dark);display:flex;justify-content:space-between;align-items:center;font-family:var(--font-body)}
+.mob-arrow{font-size:1rem;transition:transform .2s;display:inline-block}
+.mob-toggle.open .mob-arrow{transform:rotate(45deg)}
+.mob-sub{display:none;background:var(--off-white);list-style:none}
+.mob-sub.open{display:block}
+.mob-sub li a{display:block;padding:.65rem 1.75rem;font-size:.82rem;color:var(--mid-grey);border-bottom:1px solid var(--border)}
+.mob-sub li a:hover{color:var(--red)}
+.mob-cta{padding:1.25rem}
+
+@media(max-width:900px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+}
+@media(min-width:901px){
+  .mob-overlay,.mobile-nav{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── TOAST ─── -->
+<div id="toast" role="alert">
+  <div class="toast-icon-wrap">
+    <svg id="toastIco" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+  </div>
+  <div class="toast-body">
+    <div class="toast-title" id="toastTitle">Success</div>
+    <p class="toast-msg" id="toastMsg"></p>
+  </div>
+  <button class="toast-close" id="toastClose">&times;</button>
+</div>
+
+<!-- ─── TOPBAR ─── -->
+<div class="topbar">
+  <div class="inner">
+    <div class="topbar-left">
+      <a href="mailto:info@fountainptserv.com">✉ info@fountainptserv.com</a>
+      <a href="tel:+2348034711642">📞 08034711642</a>
+    </div>
+    <span style="font-size:.72rem;color:rgba(255,255,255,.4)">Applications Open — 2026 Intake</span>
+  </div>
+</div>
+
+<!-- ─── HEADER ─── -->
+<!-- ══════════ HEADER ══════════ -->
+<header id="mainHeader">
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS Logo" />
+      <div class="nav-logo-text">
+        <span class="main">Fountain</span>
+        <span class="main">Professional Training Services</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <span>About Us <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="about-us.html">Who We Are</a></li>
+          <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+          <li><a href="core-values.html">Core Values</a></li>
+          <li><a href="why-choose-us.html">Why Choose Us</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Programmes <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="certification-courses.html">Certification Courses</a></li>
+          <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+          <li><a href="mba.html">MBA</a></li>
+          <li><a href="membership.html">Membership</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Institute Partnership <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business &amp; Administration</a></li>
+          <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education &amp; Training</a></li>
+          <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership &amp; Governance</a></li>
+          <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management &amp; Leadership</a></li>
+          <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+        </ul>
+      </li>
+      <li>
+        <span>Services <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="our-approach.html">Our Approach</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="iws.html">Industries We Serve</a></li>
+        </ul>
+      </li>
+      <li class="active">
+        <span>Resources <svg class="arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" width="10"><path d="M1 1l4 4 4-4"/></svg></span>
+        <ul class="dropdown">
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </li>
+      <li><a href="contact-us.html">Contact</a></li>
+    </ul>
+    <a href="apply.html" class="btn btn-red nav-cta">Apply Now →</a>
+    <button class="hamburger" id="menuBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ══════════ MOBILE NAV ══════════ -->
+<div class="mob-overlay" id="mobOverlay"></div>
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mob-header">
+    <img src="assets/icons/fountain-professional-training-services-logo.png" alt="Fountain PTS" height="42" />
+    <button class="mob-close" id="menuClose">&#x2715;</button>
+  </div>
+  <ul class="mob-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <button class="mob-toggle" type="button">About <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="about-us.html">Who We Are</a></li>
+        <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+        <li><a href="core-values.html">Core Values</a></li>
+        <li><a href="why-choose-us.html">Why Choose Us</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Programmes <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="certification-courses.html">Certification Courses</a></li>
+        <li><a href="professional-diplomas.html">Professional Diplomas</a></li>
+        <li><a href="mba.html">MBA</a></li>
+        <li><a href="membership.html">Membership</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Partnerships <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="https://aietglobal.us" target="_blank">American Inst. of Education and Training</a></li>
+        <li><a href="https://cibiaglobal.org" target="_blank">Chartered Inst. of Business and Administration</a></li>
+        <li><a href="https://cietglobal.us" target="_blank">Chartered Inst. of Education and Training</a></li>
+        <li><a href="https://cilgglobal.org" target="_blank">Chartered Inst. of Leadership and Governance</a></li>
+        <li><a href="https://cimlglobal.us" target="_blank">Chartered Inst. of Management and Leadership</a></li>
+        <li><a href="https://cbsedu.us" target="_blank">CIML Business School</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Services <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="our-approach.html">Our Approach</a></li>
+        <li><a href="services.html">Our Services</a></li>
+        <li><a href="iws.html">Industries We Serve</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="mob-toggle" type="button">Resources <span class="mob-arrow">+</span></button>
+      <ul class="mob-sub">
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="faq.html">FAQs</a></li>
+      </ul>
+    </li>
+    <li><a href="contact-us.html">Contact Us</a></li>
+  </ul>
+  <div class="mob-cta">
+    <a href="apply.html" class="btn btn-red" style="width:100%;justify-content:center;">Apply Now →</a>
+  </div>
+</nav>
+
+<!-- ─── PAGE HERO ─── -->
+<div class="page-hero">
+  <div class="inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="cur">Apply Now</span>
+    </div>
+    <div class="page-hero-tag">2026 Admissions — Now Open</div>
+    <h1>Begin Your <em>Application</em></h1>
+    <p>Select your preferred institution below and complete the multi-step form. All applications are reviewed by the admissions team and responded to within 5–10 business days.</p>
+  </div>
+</div>
+
+<!-- ─── INSTITUTION SELECTOR ─── -->
+<div class="inst-selector-bar">
+  <div class="inner">
+    <button class="inst-tab active" data-inst="cbs" onclick="selectInstitution('cbs',this)">
+      <span class="dot"></span> CIML Business School
+    </button>
+    <button class="inst-tab" data-inst="aiet" onclick="selectInstitution('aiet',this)">
+      <span class="dot"></span> AIET Global
+    </button>
+    <button class="inst-tab" data-inst="ciet" onclick="selectInstitution('ciet',this)">
+      <span class="dot"></span> CIET Global
+    </button>
+    <button class="inst-tab" data-inst="ciml" onclick="selectInstitution('ciml',this)">
+      <span class="dot"></span> CIML Global
+    </button>
+    <button class="inst-tab" data-inst="cibia" onclick="selectInstitution('cibia',this)">
+      <span class="dot"></span> CIBIA Global
+    </button>
+    <button class="inst-tab" data-inst="cilg" onclick="selectInstitution('cilg',this)">
+      <span class="dot"></span> CILG Global
+    </button>
+  </div>
+</div>
+
+<!-- ─── MAIN APPLICATION AREA ─── -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="step-sidebar" id="stepSidebar">
+    <div class="sidebar-inst-badge">
+      <div class="sidebar-inst-name">Applying to</div>
+      <div class="sidebar-inst-label" id="sidebarInstName">CIML <em>Business School</em></div>
+    </div>
+    <div class="step-list" id="stepList">
+      <!-- Steps injected by JS -->
+    </div>
+    <div class="sidebar-help">
+      <p>Need assistance? Contact our admissions team:<br>
+      <a href="mailto:info@fountainptserv.com">info@fountainptserv.com</a><br>
+      <a href="tel:+2348034711642">08034711642</a></p>
+    </div>
+  </aside>
+
+  <!-- FORM AREA -->
+  <main class="form-area" id="formArea">
+
+    <!-- SUCCESS SCREEN -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✓</div>
+      <h2>Application <em>Submitted!</em></h2>
+      <p>Your application and documents have been successfully received. Our admissions team will review your submission and contact you within 5–10 business days.</p>
+      <div class="ref-box">
+        <div class="ref-box-lbl">Your Reference Number</div>
+        <div class="ref-box-num" id="refNumber">—</div>
+      </div>
+      <div class="success-btns">
+        <a href="index.html" class="btn btn-red">Return Home</a>
+        <a href="#" onclick="location.reload()" class="btn btn-outline">Submit Another</a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════ -->
+    <!--  STEP 1 — PROGRAMME / INSTITUTION SELECTION       -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div class="form-panel active" id="panel1">
+      <div class="form-panel-head">
+        <div class="panel-tag">Step 1 of <span id="totalSteps1">6</span></div>
+        <h2>Programme <em>Selection</em></h2>
+        <p>Choose the programme you wish to apply for at the selected institution. All fields marked <span style="color:var(--red)">*</span> are required.</p>
+      </div>
+
+      <!-- CBS -->
+      <div class="inst-section active" id="s1_cbs">
+        <div class="form-section-label">CIML Business School — Programme Details</div>
+        <div class="form-row cols-1">
+          <div class="field">
+            <label>Programme Applied For <span class="req">*</span></label>
+            <select id="cbs_program" onchange="cbsUpdateSpec()">
+              <option value="">— Select Programme —</option>
+              <option value="Diploma in Business Administration">Diploma in Business Administration</option>
+              <option value="Advanced Diploma in Business Administration">Advanced Diploma in Business Administration</option>
+              <option value="Postgraduate Diploma in Business Administration">Postgraduate Diploma in Business Administration</option>
+              <option value="Master of Business Administration (MBA)">Master of Business Administration (MBA)</option>
+              <option value="Doctor of Business Administration (DBA)">Doctor of Business Administration (DBA)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1" id="cbs_spec_row" style="display:none">
+          <div class="field">
+            <label>Specialization / Track</label>
+            <select id="cbs_spec">
+              <option value="">— Select Specialization —</option>
+              <option value="Finance & Investment">Finance & Investment</option>
+              <option value="Marketing & Brand Management">Marketing & Brand Management</option>
+              <option value="Human Resource Management">Human Resource Management</option>
+              <option value="Operations & Supply Chain">Operations & Supply Chain</option>
+              <option value="Entrepreneurship & Innovation">Entrepreneurship & Innovation</option>
+              <option value="Strategic Leadership">Strategic Leadership</option>
+              <option value="Healthcare Management">Healthcare Management</option>
+              <option value="General Management">General Management</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label>Intake Year <span class="req">*</span></label>
+            <select id="cbs_intakeYear">
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Intake Semester <span class="req">*</span></label>
+            <select id="cbs_intakeSem">
+              <option value="">— Select —</option>
+              <option value="January Intake">January Intake</option>
+              <option value="April Intake">April Intake</option>
+              <option value="July Intake">July Intake</option>
+              <option value="October Intake">October Intake</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Study Mode <span class="req">*</span></label>
+            <select id="cbs_studyMode">
+              <option value="">— Select Mode —</option>
+              <option value="Online (Self-Paced)">Online (Self-Paced)</option>
+              <option value="Online (Instructor-led)">Online (Instructor-led)</option>
+              <option value="Blended Learning">Blended Learning</option>
+              <option value="Full-Time Campus">Full-Time Campus</option>
+              <option value="Part-Time Campus">Part-Time Campus</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1">
+          <div class="field">
+            <label>How did you hear about us?</label>
+            <select id="cbs_referral">
+              <option value="">— Select Source —</option>
+              <option>Google Search</option><option>Social Media</option>
+              <option>Friend or Colleague</option><option>Fountain PTS</option>
+              <option>Partner Institution</option><option>Email Newsletter</option>
+              <option>Event or Conference</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- AIET -->
+      <div class="inst-section" id="s1_aiet">
+        <div class="form-section-label">AIET Global — Programme Details</div>
+        <div class="form-row cols-1">
+          <div class="field">
+            <label>Programme Type <span class="req">*</span></label>
+            <select id="aiet_progType" onchange="aietUpdateCourse()">
+              <option value="">— Select Programme Type —</option>
+              <option value="Certificate Programme">📜 Certificate Programme</option>
+              <option value="Professional Diploma">🎓 Professional Diploma</option>
+              <option value="Advanced Diploma">🏅 Advanced Diploma</option>
+              <option value="Postgraduate Diploma">🌟 Postgraduate Diploma</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1" id="aiet_course_row" style="display:none">
+          <div class="field">
+            <label>Course / Specialization <span class="req">*</span></label>
+            <select id="aiet_course">
+              <option value="">— Select Course —</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field"><label>Intake Year <span class="req">*</span></label>
+            <select id="aiet_year"><option value="2026">2026</option><option value="2027">2027</option></select>
+          </div>
+          <div class="field"><label>Intake <span class="req">*</span></label>
+            <select id="aiet_sem">
+              <option value="">— Select —</option>
+              <option>Winter Intake (January)</option><option>Spring Intake (April)</option>
+              <option>Summer Intake (July)</option><option>Autumn Intake (October)</option>
+            </select>
+          </div>
+          <div class="field"><label>Study Mode <span class="req">*</span></label>
+            <select id="aiet_mode">
+              <option value="">— Select —</option>
+              <option>Online (Self-Paced)</option><option>Online (Guided / Instructor-led)</option>
+              <option>Blended Learning</option><option>Onsite (Face-to-Face)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1">
+          <div class="field"><label>How did you hear about AIET?</label>
+            <select id="aiet_referral">
+              <option value="">— Select —</option>
+              <option>Google Search</option><option>Social Media</option>
+              <option>Friend or Colleague</option><option>AIET Country Director</option>
+              <option>Fountain PTS</option><option>Email Newsletter</option>
+              <option>Event or Conference</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- CIET -->
+      <div class="inst-section" id="s1_ciet">
+        <div class="form-section-label">CIET Global — Programme & Application Type</div>
+        <div class="form-row cols-1">
+          <div class="field"><label>Application Type <span class="req">*</span></label>
+            <select id="ciet_type">
+              <option value="">— Select Programme —</option>
+              <option value="Professional Certification">Professional Certification</option>
+              <option value="Membership Application">Membership Application</option>
+              <option value="Qualification Pathway">Qualification Pathway</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1">
+          <div class="field"><label>How did you hear about CIET?</label>
+            <select id="ciet_referral">
+              <option value="">— Select —</option>
+              <option>Google Search</option><option>Social Media</option>
+              <option>Friend / Colleague</option><option>Fountain PTS</option>
+              <option>Email Newsletter</option><option>Event / Conference</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- CIML Global -->
+      <div class="inst-section" id="s1_ciml">
+        <div class="form-section-label">CIML — Chartered Institute of Management & Leadership</div>
+        <div class="form-row cols-1">
+          <div class="field"><label>Application Type <span class="req">*</span></label>
+            <select id="ciml_appType" onchange="cimlShowGrade()">
+              <option value="">— Select Application Type —</option>
+              <option value="Membership Application">Membership Application</option>
+              <option value="Professional Certification">Professional Certification</option>
+              <option value="Qualification Framework">Qualification Framework</option>
+              <option value="Membership Upgrade">Membership Upgrade</option>
+              <option value="CPD Registration">CPD Registration</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1" id="ciml_grade_row" style="display:none">
+          <div class="field"><label>Membership Grade <span class="req">*</span></label>
+            <select id="ciml_grade">
+              <option value="">— Select Grade —</option>
+              <option>Affiliate Member (AffCIML) — Entry level</option>
+              <option>Associate Member (ACIML) — 3–5 years experience</option>
+              <option>Full Member (MCIML) — 7–9 years management</option>
+              <option>Fellow Member (FCIML) — 15 years leadership</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1" id="ciml_cert_row" style="display:none">
+          <div class="field"><label>Certification Track <span class="req">*</span></label>
+            <select id="ciml_cert">
+              <option value="">— Select Certification —</option>
+              <option>Chartered Management Professional (ChMP)</option>
+              <option>Chartered Manager (ChMgr)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1" id="ciml_qual_row" style="display:none">
+          <div class="field"><label>Qualification Level <span class="req">*</span></label>
+            <select id="ciml_qual">
+              <option value="">— Select Level —</option>
+              <option>Level 1 — Foundation Pathway (Certificate)</option>
+              <option>Level 2 — Intermediate Pathway (Diploma)</option>
+              <option>Level 3 — Advanced Pathway (Advanced Diploma)</option>
+              <option>Level 4 — Expert Pathway (Executive Diploma)</option>
+              <option>Level 5 — Mastery Pathway (Fellowship)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1">
+          <div class="field"><label>Preferred Study Mode</label>
+            <select id="ciml_mode">
+              <option value="">— Select —</option>
+              <option>Online / Distance Learning</option>
+              <option>Self-Study</option>
+              <option>Blended (Online + In-Person)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1">
+          <div class="field"><label>How did you hear about CIML?</label>
+            <select id="ciml_referral">
+              <option value="">— Select —</option>
+              <option>Search Engine</option><option>Social Media</option>
+              <option>Friend / Colleague</option><option>CIML Accredited Representative</option>
+              <option>Fountain PTS</option><option>Event / Conference</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- CIBIA -->
+      <div class="inst-section" id="s1_cibia">
+        <div class="form-section-label">CIBIA — Business Intelligence & Analytics</div>
+        <div class="form-row cols-1">
+          <div class="field"><label>Application Type <span class="req">*</span></label>
+            <select id="cibia_appType" onchange="cibiaShowOptions()">
+              <option value="">— Select Type —</option>
+              <option value="Professional Certification">Professional Certification</option>
+              <option value="Membership Application">Membership Application</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1" id="cibia_cert_row" style="display:none">
+          <div class="field"><label>Certification Programme <span class="req">*</span></label>
+            <select id="cibia_cert">
+              <option value="">— Select Certification —</option>
+              <option>Certified Business Leader (CBL)</option>
+              <option>Certified Business Intelligence Leader (CBIL)</option>
+              <option>Certified Analytics Professional (CAP)</option>
+              <option>Certified Data Strategist (CDS)</option>
+              <option>Certified Big Data & Cloud Specialist (CBDCS)</option>
+              <option>Certified AI & Machine Learning Specialist (CAIMLS)</option>
+              <option>Certified Data Visualization & Storytelling Professional (CDVSP)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1" id="cibia_mem_row" style="display:none">
+          <div class="field"><label>Membership Grade <span class="req">*</span></label>
+            <select id="cibia_mem">
+              <option value="">— Select Grade —</option>
+              <option>Affiliate Member — Entry level</option>
+              <option>Associate Member — Junior professionals</option>
+              <option>Full Member — Mid-senior professionals</option>
+              <option>Fellow Member — Senior leaders</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1">
+          <div class="field"><label>How did you hear about CIBIA?</label>
+            <select id="cibia_referral">
+              <option value="">— Select —</option>
+              <option>Google Search</option><option>Social Media</option>
+              <option>Friend / Colleague</option><option>Fountain PTS</option>
+              <option>Event / Conference</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- CILG -->
+      <div class="inst-section" id="s1_cilg">
+        <div class="form-section-label">CILG — Chartered Institute of Leadership & Governance</div>
+        <div class="form-row cols-1">
+          <div class="field"><label>Application Type <span class="req">*</span></label>
+            <select id="cilg_appType" onchange="cilgShowOptions()">
+              <option value="">— Select Type —</option>
+              <option value="Diploma">Diploma Programme</option>
+              <option value="Membership">Membership Application</option>
+              <option value="Professional Certification">Professional Certification</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1" id="cilg_dip_row" style="display:none">
+          <div class="field"><label>Diploma Level <span class="req">*</span></label>
+            <select id="cilg_dip">
+              <option value="">— Select Level —</option>
+              <option>Diploma in Leadership & Governance</option>
+              <option>Advanced Diploma in Leadership & Governance</option>
+              <option>Executive Diploma in Leadership & Governance</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1" id="cilg_mem_row" style="display:none">
+          <div class="field"><label>Membership Grade <span class="req">*</span></label>
+            <select id="cilg_mem">
+              <option value="">— Select Grade —</option>
+              <option>Affiliate — Entry level / Students</option>
+              <option>Associate (ACILG) — Emerging leaders</option>
+              <option>Full Member (MCILG) — Established professionals</option>
+              <option>Fellow (FCILG) — Senior experts</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1" id="cilg_cert_row" style="display:none">
+          <div class="field"><label>Certification Programme <span class="req">*</span></label>
+            <select id="cilg_cert">
+              <option value="">— Select Certification —</option>
+              <option>Certified AI Governance Professional</option>
+              <option>Certified Human Resource Manager</option>
+              <option>Certified Strategic Organizational Leadership (CSOL)</option>
+              <option>Certified Public Administration & Governance Expert (CPAGE)</option>
+              <option>Certified Project Manager (CPM)</option>
+              <option>Certified Leadership & Governance Professional (CLGP)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-1">
+          <div class="field"><label>How did you hear about CILG?</label>
+            <select id="cilg_referral">
+              <option value="">— Select —</option>
+              <option>Google Search</option><option>Social Media</option>
+              <option>Friend / Colleague</option><option>Fountain PTS</option>
+              <option>Event / Conference</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <span class="step-counter">Step <strong>1</strong> of <strong id="totalStepsNav1">6</strong></span>
+        <button class="btn-next" onclick="nextStep()">Personal Information <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════ -->
+    <!--  STEP 2 — PERSONAL INFORMATION                    -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div class="form-panel" id="panel2">
+      <div class="form-panel-head">
+        <div class="panel-tag">Step 2 of <span id="totalSteps2">6</span></div>
+        <h2>Personal <em>Information</em></h2>
+        <p>Please provide your personal details exactly as they appear on your official identification document.</p>
+      </div>
+      <div class="form-section-label">Name & Identity</div>
+      <div class="form-row cols-3">
+        <div class="field">
+          <label>Title</label>
+          <select id="title">
+            <option value="">Select</option>
+            <option>Mr.</option><option>Mrs.</option><option>Ms.</option><option>Miss</option>
+            <option>Dr.</option><option>Prof.</option><option>Rev.</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>First Name <span class="req">*</span></label>
+          <input type="text" id="firstName" placeholder="First name">
+        </div>
+        <div class="field">
+          <label>Last Name <span class="req">*</span></label>
+          <input type="text" id="lastName" placeholder="Last name">
+        </div>
+      </div>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>Middle Name</label>
+          <input type="text" id="middleName" placeholder="Middle name (optional)">
+        </div>
+        <div class="field">
+          <label>Date of Birth <span class="req">*</span></label>
+          <input type="date" id="dob">
+        </div>
+      </div>
+      <div class="form-row cols-3">
+        <div class="field">
+          <label>Gender <span class="req">*</span></label>
+          <select id="gender">
+            <option value="">Select</option>
+            <option>Male</option><option>Female</option><option>Prefer not to say</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Nationality <span class="req">*</span></label>
+          <input type="text" id="nationality" placeholder="e.g. Nigerian">
+        </div>
+        <div class="field">
+          <label>Passport / National ID No.</label>
+          <input type="text" id="passportNum" placeholder="ID / Passport number">
+        </div>
+      </div>
+      <div class="form-section-label">Contact Information</div>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>Country of Residence <span class="req">*</span></label>
+          <input type="text" id="country" placeholder="e.g. Nigeria">
+        </div>
+        <div class="field">
+          <label>State / Province</label>
+          <input type="text" id="state" placeholder="State or province">
+        </div>
+      </div>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="your@email.com">
+        </div>
+        <div class="field">
+          <label>Confirm Email <span class="req">*</span></label>
+          <input type="email" id="emailConfirm" placeholder="Confirm email address">
+        </div>
+      </div>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>Phone Number <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="+234...">
+        </div>
+        <div class="field">
+          <label>WhatsApp Number</label>
+          <input type="tel" id="whatsapp" placeholder="Leave blank if same as phone">
+          <span class="field-hint">Leave blank if same as phone number</span>
+        </div>
+      </div>
+      <div class="form-row cols-1">
+        <div class="field">
+          <label>Mailing Address <span class="req">*</span></label>
+          <textarea id="address" rows="2" placeholder="Full mailing address"></textarea>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-prev" onclick="prevStep()">← Back</button>
+        <button class="btn-next" onclick="nextStep()">Academic Background →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════ -->
+    <!--  STEP 3 — ACADEMIC BACKGROUND                     -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div class="form-panel" id="panel3">
+      <div class="form-panel-head">
+        <div class="panel-tag">Step 3 of <span id="totalSteps3">6</span></div>
+        <h2>Academic <em>Background</em></h2>
+        <p>Please provide details of your highest academic qualification. This information is used to determine programme eligibility.</p>
+      </div>
+      <div class="form-section-label">Highest Qualification</div>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>Highest Qualification <span class="req">*</span></label>
+          <select id="highestQual">
+            <option value="">— Select Qualification —</option>
+            <option>Secondary School Certificate (WAEC/NECO/O-Level)</option>
+            <option>National Diploma (ND)</option>
+            <option>Higher National Diploma (HND)</option>
+            <option>Bachelor's Degree (B.Sc / B.A / B.Ed)</option>
+            <option>Postgraduate Diploma (PGD)</option>
+            <option>Master's Degree (M.Sc / M.A / MBA)</option>
+            <option>Doctorate Degree (Ph.D / DBA / Ed.D)</option>
+            <option>Professional Certificate / Qualification</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Field / Subject of Study <span class="req">*</span></label>
+          <input type="text" id="fieldStudy" placeholder="e.g. Business Administration">
+        </div>
+      </div>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>Institution Name <span class="req">*</span></label>
+          <input type="text" id="institution1" placeholder="Name of institution">
+        </div>
+        <div class="field">
+          <label>Country of Institution <span class="req">*</span></label>
+          <input type="text" id="instCountry1" placeholder="e.g. Nigeria">
+        </div>
+      </div>
+      <div class="form-row cols-3">
+        <div class="field">
+          <label>Year of Graduation <span class="req">*</span></label>
+          <input type="number" id="gradYear" min="1970" max="2030" placeholder="e.g. 2018">
+        </div>
+        <div class="field">
+          <label>Grade / GPA / Class</label>
+          <input type="text" id="grade" placeholder="e.g. 2:1, 3.8 GPA">
+        </div>
+        <div class="field">
+          <label>Language of Instruction <span class="req">*</span></label>
+          <select id="instrLang">
+            <option value="">Select</option>
+            <option>English</option><option>French</option><option>Arabic</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-section-label">Additional Qualifications (Optional)</div>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>Additional Qualification</label>
+          <input type="text" id="qual2" placeholder="e.g. CPA, PMP, ACCA">
+        </div>
+        <div class="field">
+          <label>Awarding Body / Institution</label>
+          <input type="text" id="body2" placeholder="Awarding body name">
+        </div>
+      </div>
+      <div class="form-section-label">English Language Proficiency</div>
+      <div class="field">
+        <label>English Proficiency Method <span class="req">*</span></label>
+        <div class="radio-group" id="englishRadios">
+          <label class="radio-opt"><input type="radio" name="english" value="Native Speaker"> Native Speaker</label>
+          <label class="radio-opt"><input type="radio" name="english" value="Medium of Instruction"> Medium of Instruction</label>
+          <label class="radio-opt"><input type="radio" name="english" value="IELTS"> IELTS</label>
+          <label class="radio-opt"><input type="radio" name="english" value="TOEFL"> TOEFL</label>
+          <label class="radio-opt"><input type="radio" name="english" value="Cambridge English"> Cambridge English</label>
+          <label class="radio-opt"><input type="radio" name="english" value="Other"> Other</label>
+        </div>
+      </div>
+      <div class="form-row cols-2" style="margin-top:.8rem">
+        <div class="field">
+          <label>Test Score (if applicable)</label>
+          <input type="text" id="englishScore" placeholder="e.g. 7.0, 95">
+        </div>
+        <div class="field">
+          <label>Test Date (if applicable)</label>
+          <input type="date" id="englishDate">
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-prev" onclick="prevStep()">← Back</button>
+        <button class="btn-next" onclick="nextStep()">Experience & Goals →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════ -->
+    <!--  STEP 4 — PROFESSIONAL EXPERIENCE & GOALS         -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div class="form-panel" id="panel4">
+      <div class="form-panel-head">
+        <div class="panel-tag">Step 4 of <span id="totalSteps4">6</span></div>
+        <h2>Experience <em>& Goals</em></h2>
+        <p>Tell us about your professional background and what you hope to achieve through your studies.</p>
+      </div>
+      <div class="form-section-label">Professional Experience</div>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>Current Job Title</label>
+          <input type="text" id="jobTitle" placeholder="e.g. Senior Manager">
+        </div>
+        <div class="field">
+          <label>Current Employer / Organisation</label>
+          <input type="text" id="employer" placeholder="Company or organisation name">
+        </div>
+      </div>
+      <div class="form-row cols-3">
+        <div class="field">
+          <label>Industry / Sector</label>
+          <select id="industry">
+            <option value="">— Select —</option>
+            <option>Banking & Finance</option><option>Oil & Gas / Energy</option>
+            <option>Healthcare & Pharmaceutical</option><option>Education & Training</option>
+            <option>Technology / ICT</option><option>Government / Public Sector</option>
+            <option>Consulting</option><option>Manufacturing</option>
+            <option>Aviation & Transport</option><option>Real Estate</option>
+            <option>NGO / Non-Profit</option><option>Retail & FMCG</option>
+            <option>Legal & Professional Services</option><option>Agriculture</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Years of Work Experience</label>
+          <select id="yearsExp">
+            <option value="">— Select —</option>
+            <option>Less than 1 year</option><option>1–3 years</option>
+            <option>3–5 years</option><option>5–10 years</option>
+            <option>10–15 years</option><option>Over 15 years</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Years in Management</label>
+          <select id="mgmtExp">
+            <option value="">— Select —</option>
+            <option>None</option><option>Less than 1 year</option>
+            <option>1–3 years</option><option>3–5 years</option>
+            <option>5–10 years</option><option>Over 10 years</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-section-label">Statement of Purpose</div>
+      <div class="form-row cols-1">
+        <div class="field">
+          <label>Why do you want to pursue this programme? <span class="req">*</span></label>
+          <textarea id="motivation" rows="4" placeholder="Minimum 80 words. Explain your motivation and why you've chosen this institution..."></textarea>
+          <span class="field-hint">Minimum 80 words recommended. This helps our admissions advisors personalise your experience.</span>
+        </div>
+      </div>
+      <div class="form-row cols-1">
+        <div class="field">
+          <label>Career Goals & Aspirations <span class="req">*</span></label>
+          <textarea id="goals" rows="3" placeholder="Describe your short and long-term career goals..."></textarea>
+        </div>
+      </div>
+      <div class="form-section-label">Reference Contact</div>
+      <p style="font-size:.84rem;color:var(--mid-grey);margin-bottom:1rem;line-height:1.6">Please provide details of one professional reference — an employer, supervisor, educator, or professional colleague who can speak to your character and professional conduct.</p>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>Referee Full Name</label>
+          <input type="text" id="ref1name" placeholder="Full name">
+        </div>
+        <div class="field">
+          <label>Referee Email Address</label>
+          <input type="email" id="ref1email" placeholder="referee@email.com">
+        </div>
+      </div>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>Referee Position / Title</label>
+          <input type="text" id="ref1title" placeholder="e.g. Director, Professor">
+        </div>
+        <div class="field">
+          <label>Referee Organisation</label>
+          <input type="text" id="ref1org" placeholder="Company or institution">
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-prev" onclick="prevStep()">← Back</button>
+        <button class="btn-next" onclick="nextStep()">Supporting Documents →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════ -->
+    <!--  STEP 5 — DOCUMENTS                               -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div class="form-panel" id="panel5">
+      <div class="form-panel-head">
+        <div class="panel-tag">Step 5 of <span id="totalSteps5">6</span></div>
+        <h2>Supporting <em>Documents</em></h2>
+        <p>Upload your supporting documents below. All files should be clear and legible in PDF, JPG, or PNG format (max 5MB each). Documents can also be submitted via email after application.</p>
+      </div>
+      <div class="form-section-label">Identity & Qualification Documents</div>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>Passport / Government-Issued ID</label>
+          <div class="file-upload-zone" id="zone_id">
+            <input type="file" id="upload_id" accept=".pdf,.jpg,.jpeg,.png" onchange="showFileName(this,'zone_id')">
+            <div class="fui">🪪</div>
+            <p><strong>Click to upload</strong> or drag & drop<br>Passport or National ID Card</p>
+            <div class="ftypes">PDF, JPG, PNG — Max 5MB</div>
+            <div class="file-name-display" id="fname_id"></div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Academic Transcripts / Certificates</label>
+          <div class="file-upload-zone" id="zone_transcripts">
+            <input type="file" id="upload_transcripts" accept=".pdf,.jpg,.jpeg,.png" onchange="showFileName(this,'zone_transcripts')">
+            <div class="fui">📜</div>
+            <p><strong>Click to upload</strong> or drag & drop<br>Academic transcripts or degree certificates</p>
+            <div class="ftypes">PDF, JPG, PNG — Max 5MB</div>
+            <div class="file-name-display" id="fname_transcripts"></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row cols-2">
+        <div class="field">
+          <label>CV / Resume</label>
+          <div class="file-upload-zone" id="zone_cv">
+            <input type="file" id="upload_cv" accept=".pdf,.doc,.docx" onchange="showFileName(this,'zone_cv')">
+            <div class="fui">📋</div>
+            <p><strong>Click to upload</strong> or drag & drop<br>Curriculum Vitae or Resume</p>
+            <div class="ftypes">PDF, DOC, DOCX — Max 5MB</div>
+            <div class="file-name-display" id="fname_cv"></div>
+          </div>
+        </div>
+        <div class="field">
+          <label>English Language Certificate <span style="font-size:.65rem;color:var(--mid-grey)">(if applicable)</span></label>
+          <div class="file-upload-zone" id="zone_english">
+            <input type="file" id="upload_english" accept=".pdf,.jpg,.jpeg,.png" onchange="showFileName(this,'zone_english')">
+            <div class="fui">🗂️</div>
+            <p><strong>Click to upload</strong> or drag & drop<br>IELTS, TOEFL, or equivalent certificate</p>
+            <div class="ftypes">PDF, JPG, PNG — Max 5MB</div>
+            <div class="file-name-display" id="fname_english"></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row cols-1">
+        <div class="field">
+          <label>Reference Letter(s) <span style="font-size:.65rem;color:var(--mid-grey)">(optional)</span></label>
+          <div class="file-upload-zone" id="zone_refs">
+            <input type="file" id="upload_refs" accept=".pdf,.jpg,.jpeg,.png" onchange="showFileName(this,'zone_refs')">
+            <div class="fui">✉️</div>
+            <p><strong>Click to upload</strong> or drag & drop<br>Reference letters from employers or educators</p>
+            <div class="ftypes">PDF, JPG, PNG — Max 5MB</div>
+            <div class="file-name-display" id="fname_refs"></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-prev" onclick="prevStep()">← Back</button>
+        <button class="btn-next" onclick="nextStep()">Review & Submit →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════ -->
+    <!--  STEP 6 — REVIEW & SUBMIT                         -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div class="form-panel" id="panel6">
+      <div class="form-panel-head">
+        <div class="panel-tag">Step 6 of 6</div>
+        <h2>Review <em>& Submit</em></h2>
+        <p>Please review your application carefully before submitting. You can go back to edit any section.</p>
+      </div>
+
+      <div class="review-block">
+        <div class="review-block-head"><h4>Institution & Programme</h4><button class="review-edit-btn" onclick="goStep(1)">Edit</button></div>
+        <div class="review-grid">
+          <div class="review-item"><div class="review-item-lbl">Institution</div><div class="review-item-val highlight" id="rv_inst">—</div></div>
+          <div class="review-item"><div class="review-item-lbl">Programme</div><div class="review-item-val" id="rv_prog">—</div></div>
+          <div class="review-item"><div class="review-item-lbl">Intake / Mode</div><div class="review-item-val" id="rv_intake">—</div></div>
+          <div class="review-item"><div class="review-item-lbl">Application Type</div><div class="review-item-val" id="rv_apptype">—</div></div>
+        </div>
+      </div>
+      <div class="review-block">
+        <div class="review-block-head"><h4>Personal Information</h4><button class="review-edit-btn" onclick="goStep(2)">Edit</button></div>
+        <div class="review-grid">
+          <div class="review-item"><div class="review-item-lbl">Full Name</div><div class="review-item-val" id="rv_name">—</div></div>
+          <div class="review-item"><div class="review-item-lbl">Email</div><div class="review-item-val" id="rv_email">—</div></div>
+          <div class="review-item"><div class="review-item-lbl">Phone</div><div class="review-item-val" id="rv_phone">—</div></div>
+          <div class="review-item"><div class="review-item-lbl">Nationality / Country</div><div class="review-item-val" id="rv_nat">—</div></div>
+        </div>
+      </div>
+      <div class="review-block">
+        <div class="review-block-head"><h4>Academic Background</h4><button class="review-edit-btn" onclick="goStep(3)">Edit</button></div>
+        <div class="review-grid">
+          <div class="review-item"><div class="review-item-lbl">Highest Qualification</div><div class="review-item-val" id="rv_qual">—</div></div>
+          <div class="review-item"><div class="review-item-lbl">Institution</div><div class="review-item-val" id="rv_acad_inst">—</div></div>
+          <div class="review-item"><div class="review-item-lbl">Year of Graduation</div><div class="review-item-val" id="rv_gradyr">—</div></div>
+          <div class="review-item"><div class="review-item-lbl">English Proficiency</div><div class="review-item-val" id="rv_eng">—</div></div>
+        </div>
+      </div>
+
+      <!-- DECLARATION -->
+      <div class="declaration-box">
+        <p>I hereby confirm that all information provided in this application is accurate, complete, and truthful to the best of my knowledge. I understand that submission of false, misleading, or unverifiable information will result in immediate disqualification and may affect future applications. I consent to the processing of my personal data in accordance with the institution's data protection and privacy policy. I acknowledge that this application does not guarantee admission.</p>
+        <label class="decl-check-row">
+          <input type="checkbox" id="declarationCheck">
+          <span>I have read and agree to the above declaration and the institution's <a href="#" style="color:var(--red)">Terms & Conditions</a> and <a href="#" style="color:var(--red)">Privacy Policy</a>.</span>
+        </label>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-prev" onclick="prevStep()">← Back</button>
+        <button class="btn-submit" id="submitBtn" onclick="submitApplication()">
+          <span id="submitBtnText">Submit Application</span>
+          <div class="btn-spinner" id="submitSpinner"></div>
+          <svg id="submitArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer style="background:var(--dark-2);color:rgba(255,255,255,.55);padding:2rem 0;text-align:center;font-size:.8rem;border-top:3px solid var(--red)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px">
+    <p style="margin-bottom:.35rem"><strong style="color:#fff;font-family:var(--font-display);font-size:1rem">Fountain Professional Training Services</strong></p>
+    <p>8 Ijaiye Street, Off Alayaki, Enilolobo Bus-Stop, Lagos, Nigeria · <a href="mailto:info@fountainptserv.com" style="color:var(--gold-lt)">info@fountainptserv.com</a> · <a href="tel:+2348034711642" style="color:var(--gold-lt)">08034711642</a></p>
+    <p style="margin-top:.85rem;color:rgba(255,255,255,.28)">&copy; 2026 Fountain Professional Training Services. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+/* ═══════════════════════════════════════════════════════════
+   INSTITUTION CONFIG
+═══════════════════════════════════════════════════════════ */
+var INST = {
+  cbs:  { name:'CIML Business School',              email:'info@cbsedu.us',      ref:'CBS',  label:'CIML <em>Business School</em>' },
+  aiet: { name:'AIET — American Institute of Education & Training', email:'info@aietglobal.us', ref:'AIET', label:'AIET <em>Global</em>' },
+  ciet: { name:'CIET — Chartered Institute of Education & Training', email:'info@cietglobal.us', ref:'CIET', label:'CIET <em>Global</em>' },
+  ciml: { name:'CIML — Chartered Institute of Management & Leadership', email:'info@cimlglobal.us', ref:'CIML', label:'CIML <em>Global</em>' },
+  cibia:{ name:'CIBIA — Chartered Institute of Business Intelligence & Analytics', email:'info@cibiaglobal.org', ref:'CIBIA',label:'CIBIA <em>Global</em>' },
+  cilg: { name:'CILG — Chartered Institute of Leadership & Governance', email:'info@cilgglobal.org', ref:'CILG', label:'CILG <em>Global</em>' }
+};
+
+var AIET_COURSES = {
+  'Certificate Programme': ['Early Child Care & Education','Nursery Teachers Training','Primary Teachers Training','Montessori Teacher Training','Special Needs Education','Adult Literacy Education','Certificate in Educational Administration'],
+  'Professional Diploma': ['Professional Diploma in Education & Training','Professional Diploma in Curriculum Development','Professional Diploma in Educational Leadership'],
+  'Advanced Diploma': ['Advanced Diploma in Education & Training','Advanced Diploma in Instructional Design'],
+  'Postgraduate Diploma': ['Postgraduate Diploma in Education & Training','Postgraduate Diploma in Educational Management']
+};
+
+/* ═══════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════ */
+var currentInst = 'cbs';
+var currentStep = 1;
+var TOTAL_STEPS = 6;
+
+/* ═══════════════════════════════════════════════════════════
+   INSTITUTION SWITCH
+═══════════════════════════════════════════════════════════ */
+window.selectInstitution = function(inst, btn) {
+  currentInst = inst;
+  currentStep = 1;
+
+  // tab UI
+  document.querySelectorAll('.inst-tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+
+  // sidebar label
+  document.getElementById('sidebarInstName').innerHTML = INST[inst].label;
+
+  // show correct inst-section in step 1
+  document.querySelectorAll('.inst-section').forEach(function(s){ s.classList.remove('active'); });
+  var sec = document.getElementById('s1_' + inst);
+  if (sec) sec.classList.add('active');
+
+  // rebuild steps
+  renderSteps();
+  goStep(1);
+};
+
+/* ═══════════════════════════════════════════════════════════
+   STEP RENDERER
+═══════════════════════════════════════════════════════════ */
+var STEP_LABELS = ['Programme Selection','Personal Information','Academic Background','Experience & Goals','Supporting Documents','Review & Submit'];
+
+function renderSteps(){
+  var list = document.getElementById('stepList');
+  list.innerHTML = '';
+  for(var i=1; i<=TOTAL_STEPS; i++){
+    var s = document.createElement('div');
+    s.className = 'step-item' + (i===currentStep?' active':'') + (i<currentStep?' done':'');
+    s.setAttribute('data-step', i);
+    s.innerHTML =
+      '<div class="step-num">' + (i < currentStep ? '✓' : i) + '</div>' +
+      '<div class="step-text"><div class="step-text-lbl">Step ' + i + '</div>' +
+      '<div class="step-text-name">' + STEP_LABELS[i-1] + '</div></div>' +
+      '<span class="step-check">✓</span>';
+    (function(step){ s.onclick = function(){ if(step <= currentStep) goStep(step); }; })(i);
+    list.appendChild(s);
+  }
+  // update counters
+  document.querySelectorAll('[id^="totalSteps"]').forEach(function(el){ el.textContent = TOTAL_STEPS; });
+  document.querySelectorAll('[id^="totalStepsNav"]').forEach(function(el){ el.textContent = TOTAL_STEPS; });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════════ */
+window.goStep = function(n){
+  // hide all panels
+  document.querySelectorAll('.form-panel').forEach(function(p){ p.classList.remove('active'); });
+  var panel = document.getElementById('panel' + n);
+  if(panel) panel.classList.add('active');
+  currentStep = n;
+  renderSteps();
+  if(n === TOTAL_STEPS) buildReview();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+
+window.nextStep = function(){
+  if(!validateStep(currentStep)) return;
+  if(currentStep < TOTAL_STEPS) goStep(currentStep+1);
+};
+
+window.prevStep = function(){
+  if(currentStep > 1) goStep(currentStep-1);
+};
+
+/* ═══════════════════════════════════════════════════════════
+   VALIDATION (per step)
+═══════════════════════════════════════════════════════════ */
+function validateStep(step){
+  var ok = true;
+  function req(id,msg){
+    var el=document.getElementById(id);
+    if(!el) return;
+    if(!el.value.trim()){
+      showToast(msg||'Missing field','Please fill in all required fields.',true);
+      el.focus(); ok=false;
+    }
+  }
+  if(step===1){
+    if(currentInst==='cbs') req('cbs_program','Programme Required');
+    if(currentInst==='aiet') req('aiet_progType','Programme Type Required');
+    if(currentInst==='ciet') req('ciet_type','Application Type Required');
+    if(currentInst==='ciml') req('ciml_appType','Application Type Required');
+    if(currentInst==='cibia') req('cibia_appType','Application Type Required');
+    if(currentInst==='cilg') req('cilg_appType','Application Type Required');
+  }
+  if(step===2){
+    req('firstName','First Name Required');
+    req('lastName','Last Name Required');
+    req('dob','Date of Birth Required');
+    req('gender','Gender Required');
+    req('nationality','Nationality Required');
+    req('country','Country of Residence Required');
+    req('email','Email Required');
+    req('phone','Phone Required');
+    req('address','Address Required');
+    if(ok && document.getElementById('email').value !== document.getElementById('emailConfirm').value){
+      showToast('Email Mismatch','Your email addresses do not match.',true);
+      ok=false;
+    }
+  }
+  if(step===3){
+    req('highestQual','Highest Qualification Required');
+    req('fieldStudy','Field of Study Required');
+    req('institution1','Institution Required');
+    req('instCountry1','Country of Institution Required');
+    req('gradYear','Year of Graduation Required');
+    req('instrLang','Language of Instruction Required');
+    var eng = document.querySelector('input[name="english"]:checked');
+    if(!eng){ showToast('English Proficiency Required','Please indicate your English language proficiency.',true); ok=false; }
+  }
+  if(step===4){
+    req('motivation','Statement of Purpose Required');
+    req('goals','Career Goals Required');
+  }
+  return ok;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   REVIEW BUILDER
+═══════════════════════════════════════════════════════════ */
+function buildReview(){
+  var g = function(id){ var el=document.getElementById(id); return el ? el.value.trim() : '—'; };
+  var instName = INST[currentInst].name;
+
+  // programme info
+  var prog='—', intake='—', appType='—';
+  if(currentInst==='cbs'){
+    prog = g('cbs_program');
+    var spec = g('cbs_spec'); if(spec) prog += ' — ' + spec;
+    intake = g('cbs_intakeSem') + ' ' + g('cbs_intakeYear') + ', ' + g('cbs_studyMode');
+    appType = 'Academic Degree Programme';
+  } else if(currentInst==='aiet'){
+    prog = g('aiet_progType') + (g('aiet_course') ? ' — ' + g('aiet_course') : '');
+    intake = g('aiet_sem') + ' ' + g('aiet_year') + ', ' + g('aiet_mode');
+    appType = 'Education & Training Programme';
+  } else if(currentInst==='ciet'){
+    prog = g('ciet_type');
+    intake = 'Rolling Admissions';
+    appType = g('ciet_type');
+  } else if(currentInst==='ciml'){
+    var at = g('ciml_appType');
+    if(at==='Membership Application') prog = g('ciml_grade') || at;
+    else if(at==='Professional Certification') prog = g('ciml_cert') || at;
+    else if(at==='Qualification Framework') prog = g('ciml_qual') || at;
+    else prog = at;
+    intake = g('ciml_mode') || 'Online / Distance Learning';
+    appType = at;
+  } else if(currentInst==='cibia'){
+    var at2 = g('cibia_appType');
+    if(at2==='Professional Certification') prog = g('cibia_cert') || at2;
+    else prog = g('cibia_mem') || at2;
+    intake = 'Rolling Admissions';
+    appType = at2;
+  } else if(currentInst==='cilg'){
+    var at3 = g('cilg_appType');
+    if(at3==='Diploma') prog = g('cilg_dip') || at3;
+    else if(at3==='Membership') prog = g('cilg_mem') || at3;
+    else prog = g('cilg_cert') || at3;
+    intake = 'Rolling Admissions';
+    appType = at3;
+  }
+
+  setText('rv_inst', instName);
+  setText('rv_prog', prog);
+  setText('rv_intake', intake);
+  setText('rv_apptype', appType);
+
+  var fullName = [g('title'), g('firstName'), g('middleName'), g('lastName')].filter(Boolean).join(' ');
+  setText('rv_name', fullName);
+  setText('rv_email', g('email'));
+  setText('rv_phone', g('phone'));
+  setText('rv_nat', g('nationality') + ' / ' + g('country'));
+  setText('rv_qual', g('highestQual'));
+  setText('rv_acad_inst', g('institution1') + ', ' + g('instCountry1'));
+  setText('rv_gradyr', g('gradYear'));
+  var engEl = document.querySelector('input[name="english"]:checked');
+  setText('rv_eng', engEl ? engEl.value : '—');
+}
+
+function setText(id, val){
+  var el = document.getElementById(id);
+  if(el) el.textContent = val || '—';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SUBMIT
+═══════════════════════════════════════════════════════════ */
+window.submitApplication = function(){
+  var decl = document.getElementById('declarationCheck');
+  if(!decl.checked){
+    showToast('Declaration Required','Please read and accept the declaration before submitting.',true);
+    return;
+  }
+
+  var g = function(id){ var el=document.getElementById(id); return el ? el.value.trim() : ''; };
+  var ref = INST[currentInst].ref + '-2026-' + Math.random().toString(36).substring(2,8).toUpperCase();
+
+  var fd = new FormData();
+  fd.append('ref', ref);
+  fd.append('institution', INST[currentInst].name);
+
+  // Programme fields
+  ['cbs_program','cbs_spec','cbs_intakeYear','cbs_intakeSem','cbs_studyMode','cbs_referral',
+   'aiet_progType','aiet_course','aiet_year','aiet_sem','aiet_mode','aiet_referral',
+   'ciet_type','ciet_referral',
+   'ciml_appType','ciml_grade','ciml_cert','ciml_qual','ciml_mode','ciml_referral',
+   'cibia_appType','cibia_cert','cibia_mem','cibia_referral',
+   'cilg_appType','cilg_dip','cilg_mem','cilg_cert','cilg_referral'].forEach(function(id){
+    fd.append(id, g(id));
+  });
+
+  // Personal
+  ['title','firstName','lastName','middleName','dob','gender','nationality','passportNum',
+   'country','state','email','phone','whatsapp','address',
+   'highestQual','fieldStudy','institution1','instCountry1','gradYear','grade','instrLang',
+   'qual2','body2','englishScore','englishDate',
+   'jobTitle','employer','industry','yearsExp','mgmtExp','motivation','goals',
+   'ref1name','ref1email','ref1title','ref1org'].forEach(function(id){
+    fd.append(id, g(id));
+  });
+
+  var engEl = document.querySelector('input[name="english"]:checked');
+  fd.append('englishMethod', engEl ? engEl.value : '');
+
+  ['upload_id','upload_transcripts','upload_cv','upload_english','upload_refs'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el && el.files[0]) fd.append(id, el.files[0]);
+  });
+
+  // Determine endpoint based on institution
+  var endpoints = {
+    cbs:  'send_mail_cbs.php',
+    aiet: 'send_mail_aiet.php',
+    ciet: 'send_mail_ciet.php',
+    ciml: 'send_mail_ciml.php',
+    cibia:'send_mail_cibia.php',
+    cilg: 'send_mail_cilg.php'
+  };
+  var endpoint = endpoints[currentInst] || 'send_mail_fountain.php';
+
+  var btn = document.getElementById('submitBtn');
+  var btnText = document.getElementById('submitBtnText');
+  var spinner = document.getElementById('submitSpinner');
+  var arrow = document.getElementById('submitArrow');
+  btn.disabled = true;
+  btnText.style.display = 'none';
+  if(arrow) arrow.style.display = 'none';
+  spinner.style.display = 'inline-block';
+
+  fetch(endpoint, { method:'POST', body:fd })
+    .then(function(res){ return res.json(); })
+    .then(function(data){
+      btn.disabled = false;
+      btnText.style.display = 'inline';
+      if(arrow) arrow.style.display = 'inline';
+      spinner.style.display = 'none';
+      if(data.success){
+        document.getElementById('refNumber').textContent = ref;
+        document.querySelectorAll('.form-panel').forEach(function(p){ p.classList.remove('active'); });
+        document.querySelectorAll('.step-item').forEach(function(i){ i.classList.add('done'); });
+        var ss = document.getElementById('successScreen');
+        ss.classList.add('show');
+        ss.scrollIntoView({behavior:'smooth',block:'start'});
+        showToast('✅ Application Submitted!','Your application has been received. Ref: ' + ref, false);
+      } else {
+        showToast('Submission Failed', data.message || 'Something went wrong. Please try again or contact us directly.', true);
+      }
+    })
+    .catch(function(){
+      btn.disabled = false;
+      btnText.style.display = 'inline';
+      if(arrow) arrow.style.display = 'inline';
+      spinner.style.display = 'none';
+      showToast('Connection Error','Unable to reach the server. Please check your connection or email us directly.', true);
+    });
+};
+
+/* ═══════════════════════════════════════════════════════════
+   CONDITIONAL FIELDS
+═══════════════════════════════════════════════════════════ */
+window.cbsUpdateSpec = function(){
+  var prog = document.getElementById('cbs_program').value;
+  var specRow = document.getElementById('cbs_spec_row');
+  specRow.style.display = prog ? 'grid' : 'none';
+};
+
+window.aietUpdateCourse = function(){
+  var type = document.getElementById('aiet_progType').value;
+  var row = document.getElementById('aiet_course_row');
+  var sel = document.getElementById('aiet_course');
+  if(!type){ row.style.display='none'; return; }
+  row.style.display = 'grid';
+  var courses = AIET_COURSES[type] || [];
+  sel.innerHTML = '<option value="">— Select Course —</option>';
+  courses.forEach(function(c){ sel.innerHTML += '<option>'+c+'</option>'; });
+};
+
+window.cimlShowGrade = function(){
+  var at = document.getElementById('ciml_appType').value;
+  document.getElementById('ciml_grade_row').style.display = (at==='Membership Application'||at==='Membership Upgrade') ? 'grid':'none';
+  document.getElementById('ciml_cert_row').style.display  = (at==='Professional Certification') ? 'grid':'none';
+  document.getElementById('ciml_qual_row').style.display  = (at==='Qualification Framework') ? 'grid':'none';
+};
+
+window.cibiaShowOptions = function(){
+  var at = document.getElementById('cibia_appType').value;
+  document.getElementById('cibia_cert_row').style.display = (at==='Professional Certification') ? 'grid':'none';
+  document.getElementById('cibia_mem_row').style.display  = (at==='Membership Application') ? 'grid':'none';
+};
+
+window.cilgShowOptions = function(){
+  var at = document.getElementById('cilg_appType').value;
+  document.getElementById('cilg_dip_row').style.display  = (at==='Diploma') ? 'grid':'none';
+  document.getElementById('cilg_mem_row').style.display  = (at==='Membership') ? 'grid':'none';
+  document.getElementById('cilg_cert_row').style.display = (at==='Professional Certification') ? 'grid':'none';
+};
+
+/* ═══════════════════════════════════════════════════════════
+   FILE UPLOAD DISPLAY
+═══════════════════════════════════════════════════════════ */
+window.showFileName = function(input, zoneId){
+  var fname = document.getElementById('fname_' + zoneId.replace('zone_',''));
+  if(fname && input.files[0]) fname.textContent = '📎 ' + input.files[0].name;
+};
+
+/* ═══════════════════════════════════════════════════════════
+   RADIO LABELS
+═══════════════════════════════════════════════════════════ */
+document.querySelectorAll('.radio-opt input').forEach(function(inp){
+  inp.addEventListener('change', function(){
+    var grp = inp.closest('.radio-group');
+    if(!grp) return;
+    grp.querySelectorAll('.radio-opt').forEach(function(o){ o.classList.remove('selected'); });
+    inp.closest('.radio-opt').classList.add('selected');
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════════════════ */
+var toastTimer;
+function showToast(title, msg, isErr){
+  var t = document.getElementById('toast');
+  var ico = document.getElementById('toastIco');
+  document.getElementById('toastTitle').textContent = title;
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.toggle('err', !!isErr);
+  if(isErr){
+    ico.setAttribute('viewBox','0 0 24 24');
+    ico.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+  } else {
+    ico.setAttribute('viewBox','0 0 24 24');
+    ico.innerHTML = '<polyline points="20 6 9 17 4 12"/>';
+  }
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 5000);
+}
+
+document.getElementById('toastClose').addEventListener('click', function(){
+  document.getElementById('toast').classList.remove('show');
+});
+
+/* ═══════════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════════ */
+renderSteps();
+goStep(1);
+
+}());
+
+/* ═══════════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════════ */
+(function(){
+  var menuBtn   = document.getElementById('menuBtn');
+  var menuClose = document.getElementById('menuClose');
+  var mobileNav = document.getElementById('mobileNav');
+  var overlay   = document.getElementById('mobOverlay');
+
+  function openMenu(){
+    mobileNav.classList.add('open');
+    overlay.classList.add('open');
+    mobileNav.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu(){
+    mobileNav.classList.remove('open');
+    overlay.classList.remove('open');
+    mobileNav.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+
+  if(menuBtn)   menuBtn.addEventListener('click', openMenu);
+  if(menuClose) menuClose.addEventListener('click', closeMenu);
+  if(overlay)   overlay.addEventListener('click', closeMenu);
+
+  /* Accordion toggles in mobile nav */
+  document.querySelectorAll('.mob-toggle').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var sub = btn.nextElementSibling;
+      var isOpen = btn.classList.contains('open');
+      /* close all siblings first */
+      btn.closest('ul').querySelectorAll('.mob-toggle').forEach(function(b){
+        b.classList.remove('open');
+        if(b.nextElementSibling) b.nextElementSibling.classList.remove('open');
+      });
+      if(!isOpen){
+        btn.classList.add('open');
+        if(sub) sub.classList.add('open');
+      }
+    });
+  });
+
+  /* Sticky header shrink on scroll */
+  var header = document.getElementById('mainHeader');
+  window.addEventListener('scroll', function(){
+    header && header.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+}());
+</script>
+</body>
+</html>
