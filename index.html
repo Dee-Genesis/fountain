@@ -860,9 +860,15 @@
       body { padding-top: calc(40px + 72px) !important; }
       body.bar-hidden { padding-top: 72px !important; }
       body.bar-hidden header { top: 0 !important; }
-      /* Hide logo text on mobile — icon + hamburger only, keeps header a fixed 72px */
-      .nav-logo-text { display: none; }
-      .nav-logo img { height: 44px; }
+      /* Full title in two lines on mobile with smaller logo image */
+      .nav-logo-text { display: flex; }
+      .nav-logo-text .main { font-size: .82rem; white-space: normal; line-height: 1.3; }
+      .nav-logo-text .sub { display: block; font-size: .65rem; }
+      .nav-logo img { height: 36px; flex-shrink: 0; }
+      .nav-logo { gap: 8px; max-width: calc(100% - 60px); }
+      nav { height: auto; min-height: 72px; padding: 10px 14px; align-items: center; flex-wrap: nowrap; }
+      body { padding-top: calc(40px + 110px) !important; }
+      body.bar-hidden { padding-top: 110px !important; }
       .quick-grid { grid-template-columns: 1fr 1fr; }
       .services-grid-full { grid-template-columns: 1fr; }
       .testi-grid { grid-template-columns: 1fr; }
@@ -1038,7 +1044,6 @@
     <div class="hero-slide-content">
       <div class="container">
         <div class="hero-slide-inner">
-          <div class="hero-eyebrow">Nigeria's Premier Consulting, Education &amp; Training Centre</div>
           <h1 class="hero-title">Build Capacity.<br><em>Drive Performance.</em><br>Create Lasting Value.</h1>
           <p class="hero-desc">Fountain Professional Training Services delivers integrated solutions across consulting, training, research, coaching, and capacity development, empowering individuals, organisations, and institutions to achieve their highest potential.</p>
           <div class="hero-actions">
@@ -1080,7 +1085,6 @@
     <div class="hero-slide-content">
       <div class="container">
         <div class="hero-slide-inner">
-          <div class="hero-eyebrow">Globally Recognised Qualifications · 70+ Countries</div>
           <h1 class="hero-title">Your Credentials.<br><em>Respected</em> Worldwide.</h1>
           <p class="hero-desc">Through five distinguished international institute partnerships, every certification, diploma, and professional designation you earn through Fountain carries the prestige that employers and institutions recognise across Nigeria, West Africa, and beyond.</p>
           <div class="hero-actions">
