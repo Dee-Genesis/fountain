@@ -860,6 +860,9 @@
       body { padding-top: calc(40px + 72px) !important; }
       body.bar-hidden { padding-top: 72px !important; }
       body.bar-hidden header { top: 0 !important; }
+      /* Hide logo text on mobile — icon + hamburger only, keeps header a fixed 72px */
+      .nav-logo-text { display: none; }
+      .nav-logo img { height: 44px; }
       .quick-grid { grid-template-columns: 1fr 1fr; }
       .services-grid-full { grid-template-columns: 1fr; }
       .testi-grid { grid-template-columns: 1fr; }
